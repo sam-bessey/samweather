@@ -1,0 +1,3 @@
+([('weather',
+   '/Users/student/Desktop/Code/weather/dist/weather',
+   'EXECUTABLE')],)

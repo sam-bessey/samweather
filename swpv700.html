@@ -1,0 +1,3919 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
+        <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Arvo&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Average+Sans&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                font-family: "Average Sans", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                margin: 0;
+                padding: 0;
+                transition-duration: 0.5s;
+                transition-timing-function: ease-in-out;
+            }
+
+            .text {
+                color: black;
+            }
+
+            .titleBar {
+                height: 85px;
+                width: calc(100vw - 20px); /* -20px because of side padding*/
+                top: 0;
+                background-color: beige;
+                padding: 10px;
+            }
+
+            .section {
+                padding: 2%;
+                align-items: center;
+                background-color: transparent;
+                margin: 0;
+                text-align: center;
+                transition-duration: 0.5s;
+                transition-timing-function: ease-in-out;
+                width: 50vw;
+                height: calc(100vh - 135px);
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+
+            .sectionNow {
+                width: 50vw;
+            }
+
+            .sectionsContainer {
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-between;
+                overflow-x: hidden;
+                width: 100vw;
+                height: calc(
+                    100vh - 105px
+                ); /*this should be 100vh - height of title bar (including padding)*/
+                transition: 0.4s ease margin;
+            }
+
+            .conditionsContainer {
+                margin: 30px;
+                display: inline-flex;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .textBig {
+                font-size: 60px;
+                padding: 30px;
+            }
+
+            .iconBig {
+                width: 150px;
+                height: 150px;
+            }
+
+            .iconSmall {
+                width: 75px;
+                height: 75px;
+                padding: 10px;
+                padding-top: 13px;
+            }
+
+            .fullscreen {
+                width: 100vw;
+                height: 100vh;
+                z-index: 10;
+                text-align: center;
+                position: fixed;
+                background-color: #afbdec;
+                color: black;
+                overflow-y: scroll;
+            }
+
+            .welcome {
+                text-align: center;
+                font-size: 40px;
+                padding-top: 30vh;
+            }
+
+            .setupButton {
+                padding: 20px;
+                background-color: rgb(29 29 135 / 69%);
+                color: white;
+                border: 0;
+                border-radius: 45px;
+                font-size: 20px;
+                width: 35vw;
+                align-self: center;
+                margin-top: 50px;
+                transition: 0.1s;
+                height: 75px;
+            }
+
+            .setupButton:hover {
+                font-size: 22px;
+                color: black;
+                background-color: #7da1e0;
+            }
+            .setupButton:active {
+                scale: 0.95;
+            }
+
+            .setupButtonSecondary {
+                background-color: transparent;
+                color: rgb(29 29 135 / 69%);
+                border: 2px #4a4fa7 solid;
+            }
+
+            .setupInput {
+                border-radius: 25px;
+                background-color: #ffffff;
+                border: 0;
+                width: 55vw;
+                height: 75px;
+                font-size: 25px;
+                text-align: center;
+                transition: 0.2s;
+            }
+
+            .setupInput:focus {
+                width: 60vw;
+            }
+
+            .setupInput:active {
+                width: 50vw;
+            }
+
+            .menuButton {
+                border: none;
+                background-color: transparent;
+                padding: 0;
+                transition: 0.2s;
+            }
+
+            .menuButtonAnimated:hover {
+                rotate: 90deg;
+            }
+
+            .menuButtonContainer {
+                display: inline-flex;
+                flex-direction: row;
+                border: 0;
+                background-color: transparent;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .description {
+                font-size: 19px;
+                width: 40vw;
+                margin-top: 0;
+            }
+
+            .menuIcon {
+                font-size: 20px;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                scale: 1.5;
+                margin: 15px;
+                text-align: left;
+            }
+            .menuIconAnimated {
+                transition: 0.2s ease;
+                width: 35px;
+            }
+            .menuIconAnimated:hover {
+                padding-left: 5px;
+                padding-right: 0;
+                width: 30px;
+            }
+
+            .menu {
+                height: 100vh;
+                background-color: transparent;
+                backdrop-filter: blur(20px);
+                position: fixed;
+                z-index: 3;
+                top: 0;
+                left: 0;
+                overflow-x: hidden;
+                overflow-y: auto;
+                padding-top: 20px;
+                width: 500px;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                margin-left: 0;
+                transition-duration: 0.5s;
+                transition-property: margin-left;
+                transition-timing-function: ease-in-out;
+                padding-bottom: 20px;
+                padding-left: 20px;
+                margin-left: -520px;
+            }
+
+            .menuHeader {
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: calc(100% - 40px);
+            }
+
+            .header {
+                font-family: "Arvo", sans-serif;
+                font-size: 35px;
+            }
+
+            .detailsContainer {
+                width: fit-content;
+                display: inline-flex;
+                flex-direction: row;
+                padding: 10px;
+                align-items: center;
+                background-color: rgba(0, 0, 0, 0.169);
+                border-radius: 10px;
+                height: 75px;
+                margin: 10px;
+            }
+
+            .detailsContainerStacked {
+                text-align: left;
+                width: 100%;
+                display: inline-flex;
+                flex-direction: column;
+            }
+
+            .detailsIcon {
+                scale: 1.5;
+                height: fit-content;
+                margin: 15px;
+            }
+
+            .nowDescripLabel {
+                margin: 0;
+                font-size: 15px;
+                font-family: "Roboto", sans-serif;
+                font-optical-sizing: auto;
+            }
+
+            .nowDescripText {
+                margin: 0;
+                font-size: 30px;
+            }
+
+            .dayContainer {
+                border-radius: 7px;
+                background-color: rgba(0, 0, 0, 0.077);
+                margin: 15px;
+                padding: 20px;
+                width: calc(50vw - 30px);
+            }
+
+            .dayHContainer {
+                border-radius: 5px;
+                background-color: rgba(0, 0, 0, 0.071);
+                margin: 15px;
+                max-width: min(1000px, calc(100vw - 0px));
+                text-align: center;
+                padding: 20px;
+            }
+
+            .dayTitle {
+                font-size: 25px;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+
+            .dayConditions {
+                margin: 0;
+                padding: 0;
+            }
+
+            .link {
+                background-color: rgba(0, 0, 0, 0);
+                border-width: 0;
+                font-size: 22px;
+                text-align: center;
+                transition-duration: 0.1s;
+                transition-timing-function: ease-in-out;
+                padding: 9px;
+            }
+
+            .link:active {
+                scale: 0.95;
+            }
+
+            .linkContainer {
+                text-align: center;
+            }
+
+            .hourContainer {
+                display: inline-flex;
+                flex-direction: row;
+                width: 100%;
+                text-align: center;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            .setupButtonSmall {
+                background-color: rgb(29 29 135 / 69%);
+                border-radius: 25px;
+                border: 0;
+                font-size: 20px;
+                width: 100px;
+                align-self: center;
+                transition: 0.1s;
+                height: 75px;
+                color: white;
+                margin: 10px;
+            }
+            .setupButtonSmall:hover {
+                font-size: 22px;
+                color: black;
+                background-color: #7da1e0;
+            }
+            .setupButtonSmall:active {
+                scale: 0.95;
+            }
+
+            .textHourly {
+                font-size: 30px;
+                padding: 10px;
+            }
+
+            .textTime {
+                font-size: 23px;
+                padding: 20px;
+                padding-right: 75px;
+            }
+
+            .hourlyDetailContainer {
+                display: inline-flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 2px;
+            }
+
+            .overlay {
+                position: fixed;
+                z-index: 2;
+                background-color: rgba(0, 0, 0, 0);
+                height: 100vh;
+                width: 100vw;
+                transition-duration: 0.5s;
+                backdrop-filter: blur(0px);
+            }
+
+            .overlayTop {
+                z-index: 3;
+                opacity: 0;
+            }
+
+            .locationName {
+                padding-top: 2px;
+                font-size: 17px;
+            }
+
+            .locationButton {
+                display: inline-flex;
+                flex-direction: row;
+                align-items: center;
+                border-radius: 10px;
+                margin: 20px;
+                padding: 5px;
+                width: 90%;
+                transition: background-color 0.25s linear, scale 0.05s linear;
+            }
+
+            .locationButton:hover {
+                background-color: rgba(131, 131, 255, 0.273);
+            }
+
+            .locationButton:active {
+                scale: 0.99;
+                background-color: rgba(131, 131, 255, 0.329);
+            }
+
+            .mobilenav {
+                position: fixed;
+                top: calc(100vh - 100px);
+                width: 100vw;
+                height: 100px;
+                background-color: rgba(223, 223, 255, 0.37);
+                backdrop-filter: blur(5px);
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: center;
+                display: none; /*Hidden doesn't work for some reason*/
+            }
+
+            .navButton {
+                scale: 2;
+                padding: 30px;
+                margin: 5px;
+            }
+
+            .proButton {
+                border-radius: 25px;
+                box-shadow: 5px 5px 20px 0 black;
+                display: inline-flex;
+                flex-direction: row;
+                text-align: left;
+                align-items: center;
+                margin: 20px;
+                padding: 15px;
+                transition: 0.5s box-shadow, 0.1s scale;
+                background-color: rgba(255, 255, 255, 0.717);
+                backdrop-filter: blur(2px);
+            }
+
+            .proButton:hover {
+                box-shadow: 5px 5px 5px 0 black;
+            }
+
+            .proButton:active {
+                box-shadow: 5px 5px 2px 0 rgba(0, 0, 0, 0);
+                scale: 0.99;
+            }
+
+            .locationInput {
+                border: 0;
+                margin: 0;
+                padding: 0;
+                padding-left: 10px;
+                width: 100%;
+                background-color: transparent;
+            }
+
+            .locationPicker {
+                border-radius: 10px;
+                padding: 5px;
+                text-align: center;
+                border: 0;
+                background-color: rgba(255, 255, 255, 0.4);
+                transition-duration: 0.1s;
+                width: 400px;
+                height: 40px;
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-between;
+                margin: 10px;
+            }
+
+            .locationPicker:hover {
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .topTitleBar {
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            .locationSubmit {
+                border: none;
+                background-color: transparent;
+                transition: 0.05s;
+            }
+
+            .locationSubmit:hover {
+                scale: 1.1;
+            }
+
+            .todayHourlyTime {
+                font-size: 25px;
+                padding: 10px;
+            }
+
+            .todayHourContainer {
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+            }
+
+            /* MOBILE */
+            .titleBarMOBILE {
+                display: inline-flex;
+                flex-direction: row;
+                padding: 5px;
+                justify-content: space-between;
+                width: 100%;
+                position: fixed;
+                background-image: linear-gradient(
+                    rgb(166, 192, 237),
+                    rgb(166, 192, 237),
+                    rgb(166, 192, 237),
+                    rgba(0, 0, 0, 0)
+                );
+                padding: 10px;
+                z-index: 1;
+            }
+
+            .locationNameContainerMOBILE {
+                display: inline-flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .locationNameArrowMOBILE {
+                padding-top: 2px;
+                /*    top padding just to make it look a bit more centered vertically*/
+            }
+
+            .currentWeatherMOBILE {
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+                padding-top: 50px;
+            }
+
+            .nowTempMOBILE {
+                font-family: "Arvo";
+                font-size: 47px;
+                padding-top: 4px;
+                /*   Top padding To make it look more centered with the icon*/
+            }
+
+            .descriptionMOBILE {
+                text-align: center;
+                padding: 5px;
+            }
+
+            .scrollingHourlyContainerMOBILE {
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+                background-color: rgba(0, 0, 0, 0.16);
+                margin: 25px;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            .hourlyContainerMOBILE {
+                width: 100vw;
+                margin: 0px;
+                padding: 0px;
+                overflow: scroll;
+            }
+
+            .todayHourContainerMOBILE {
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            .todayHourlyTimeMOBILE {
+                font-size: 20px;
+                margin: 5px;
+            }
+
+            .dailyContainerMOBILE {
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                background-color: rgba(0, 0, 0, 0.16);
+                margin: 25px;
+                padding: 5px;
+                border-radius: 10px;
+                width: calc(100vw - 70px);
+            }
+
+            .iconVerySmallMOBILE {
+                width: 50px;
+                height: 50px;
+            }
+
+            .dayContainerMOBILE {
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 100%;
+            }
+
+            .dailyForecastDayNameMOBILE {
+                font-size: 20px;
+                width: 125px;
+            }
+
+            .dailyForecastTextMOBILE {
+                font-size: 20px;
+            }
+
+            .mainMenuMOBILE {
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                overflow-x: hidden;
+                overflow-y: auto;
+                z-index: 2;
+                opacity: 0;
+                transition: 0.2s opacity;
+                background-image: url("https://lh3.googleusercontent.com/d/1DWKW0ctnHpaobZ_RkQYl0tiPtZ6kjY3a");
+                background-size: cover;
+                color: black;
+            }
+
+            .menuHeaderMOBILE {
+                padding: 20px;
+                font-size: 30px;
+                font-family: "Arvo";
+                padding-bottom: 0px;
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: calc(100vw - 50px);
+            }
+
+            .locationPickerMOBILE {
+                text-align: left;
+                padding: 10px;
+                margin: 25px;
+                border-radius: 12px;
+                border: none;
+                background-color: transparent;
+                width: calc(100vw - 70px);
+                display: inline-flex;
+                flex-direction: row;
+                position: sticky;
+                z-index: 3;
+                top: 10px;
+                backdrop-filter: blur(5px);
+                box-shadow: 0 0 10px 3px rgb(122, 123, 132) inset,
+                    0 0 10px 3px rgb(122, 123, 132);
+            }
+
+            .locationInputMOBILE {
+                padding: 0;
+                margin: 0;
+                background-color: transparent;
+                border: none;
+                width: 100%;
+                font-size: 16px;
+            }
+
+            .menuLocationContainerMOBILE {
+                display: inline-flex;
+                flex-direction: row;
+                align-items: center;
+                margin-top: 20px;
+                margin-left: 25px;
+                padding: 0 10px;
+                width: calc(100vw - 70px);
+                backdrop-filter: blur(7px);
+                border-radius: 13px;
+                background-color: rgba(255, 144, 94, 0.12);
+                color: white;
+                box-shadow: 0px 0px 10px 11px rgba(108, 111, 116, 0.75),
+                    inset 0px 0px 10px 10px rgba(108, 111, 116, 0.75);
+            }
+
+            .menuLocationNameMOBILE {
+                font-size: 20px;
+                padding-left: 10px;
+                padding-bottom: 1px;
+            }
+
+            .loadingMOBILE {
+                position: fixed;
+                z-index: 2;
+                background-color: rgb(255, 255, 255);
+                width: 100vw;
+                height: 100vh;
+                background-color: #afbdec;
+                transition: 0.2s opacity;
+            }
+
+            .loadingTextBigMOBILE {
+                padding-top: calc(100vh / 3);
+                text-align: center;
+                font-size: 40px;
+                margin-bottom: 0;
+            }
+
+            .loadingTextSmallMOBILE {
+                text-align: center;
+                font-size: 18px;
+                opacity: 0.75;
+            }
+
+            .loading {
+                position: fixed;
+                z-index: 2;
+                background-color: rgb(255, 255, 255);
+                width: 100vw;
+                height: 100vh;
+                background-color: #afbdec;
+                transition: 0.2s opacity;
+            }
+
+            .loadingTextBig {
+                padding-top: calc(100vh / 3);
+                text-align: center;
+                font-size: 40px;
+                margin-bottom: 0;
+            }
+
+            .loadingTextSmall {
+                text-align: center;
+                font-size: 18px;
+                opacity: 0.75;
+            }
+
+            .locationSubmitMOBILE {
+                padding: 0;
+                margin: 0;
+                background-color: transparent;
+                border: 0;
+            }
+
+            .detailedDailyMOBILE {
+                margin-left: 100vw;
+                transition: 0.2s;
+                z-index: 2;
+                position: fixed;
+                overflow: scroll;
+                top: 0;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            .hourContainerMOBILE {
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+                align-self: center;
+                width: 100%;
+            }
+
+            .sectionHourlyMOBILE {
+                background-color: rgba(0, 0, 0, 0.16);
+            }
+
+            .setupButtonMOBILE {
+                width: 80vw;
+                background-color: rgb(29 29 135 / 69%);
+                color: white;
+                border: 0;
+                border-radius: 45px;
+                font-size: 20px;
+                align-self: center;
+                margin-top: 50px;
+                height: 75px;
+            }
+
+            .setupInputMOBILE {
+                border-radius: 25px;
+                background-color: #ffffffbe;
+                border: 0;
+                width: 85vw;
+                height: 75px;
+                font-size: 20px;
+                text-align: center;
+                transition: 0.3s background-color;
+            }
+
+            .setupInputMOBILE:focus {
+                background-color: #ffffff;
+            }
+
+            .setupButtonMOBILE {
+                padding: 20px;
+                background-color: rgb(29 29 135 / 69%);
+                color: white;
+                border: 0;
+                border-radius: 45px;
+                font-size: 20px;
+                width: 80vw;
+                align-self: center;
+                margin-top: 50px;
+                height: 75px;
+            }
+
+            .menuTextSmallMOBILE {
+                padding: 10px;
+            }
+
+            .error {
+                z-index: 9999;
+                background-color: rgb(144, 4, 4) !important;
+                color: white;
+                position: fixed;
+            }
+
+            .homeScreenMOBILE {
+                height: 100vh;
+                overflow-y: scroll;
+            }
+
+            .detailsContainerMOBILE {
+                display: inline-flex;
+                flex-direction: row;
+                justify-content: center;
+                width: 49vw;
+                align-items: center;
+                padding: 0;
+                margin: 0;
+            }
+
+            .detailsTextMOBILE {
+                font-size: 20px;
+                padding-left: 15px;
+            }
+
+            .hourlyChoiceMOBILE {
+                background-color: #ffffff00;
+                border: 0;
+                width: 50vw;
+                text-align: center;
+                margin-left: 25vw;
+                border-radius: 10px;
+                padding: 5px;
+                position: sticky;
+                left: 100px;
+            }
+
+            .menuLocationContentContainerMOBILE {
+                display: inline-flex;
+                flex-direction: row;
+                align-items: center;
+                width: calc(100vw - 70px);
+            }
+
+            .locationActionMenuMOBILE {
+                border-radius: 15px;
+                padding: 5px;
+                margin: 5px;
+                background-color: rgba(255, 255, 255, 0.673);
+                backdrop-filter: blur(5px);
+                position: absolute;
+                z-index: 4;
+                text-align: right;
+                margin-left: calc(100vw - 240px);
+                box-shadow: 5px 5px 20px 0px #00000045;
+                transition: 0.5s ease;
+                scale: 0;
+                opacity: 0;
+                transform: translateX(340px);
+            }
+
+            .locationActionButtonMOBILE {
+                width: 170px;
+                padding-left: 5px;
+                padding-right: 5px;
+                margin: 2px;
+                background-color: transparent;
+                border: 0;
+                text-align: left;
+                display: inline-flex;
+                flex-direction: row;
+                font-size: 15px;
+                align-items: center;
+            }
+
+            .actionIcon {
+                margin-right: 5px;
+                font-size: 20px;
+            }
+
+            .locationMenuv2 {
+                z-index: 2;
+                background-image: url("https://lh3.googleusercontent.com/d/1DWKW0ctnHpaobZ_RkQYl0tiPtZ6kjY3a");
+                background-size: cover;
+                transition: 0.2s opacity;
+            }
+
+            .locationInputContainerv2 {
+                padding: 0;
+                width: 80vw;
+                margin: 50px 10vw 30px 10vw;
+                border-radius: 12px;
+                border: 0;
+                background-color: transparent;
+                position: sticky;
+                top: 10px;
+                z-index: 3;
+            }
+
+            .locationInputv2 {
+                padding: 13px;
+                border-radius: 12px;
+                font-size: 18px;
+                border: 0;
+                margin: 0;
+                width: calc(100% - 26px);
+                background-color: transparent;
+                backdrop-filter: blur(5px);
+                box-shadow: 0 0 10px 3px rgb(122, 123, 132) inset,
+                    0 0 10px 3px rgb(122, 123, 132);
+                transition: 0.3s ease;
+            }
+
+            .locationInputv2:hover {
+                box-shadow: 0 0 10px 7px rgb(122, 123, 132) inset,
+                    0 0 10px 7px rgb(122, 123, 132);
+            }
+
+            .locationInputv2:focus {
+                background-color: rgba(255, 255, 255, 0.218);
+            }
+
+            .locationGroupContainer {
+                width: 90vw;
+                padding: 10px 5vw 10px 5vw;
+                align-content: center;
+            }
+
+            .locationCard {
+                backdrop-filter: blur(7px);
+                width: 150px;
+                height: 150px;
+                border-radius: 13px;
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                background-color: rgba(255, 144, 94, 0.12);
+                color: white;
+                margin: 7px;
+                box-shadow: 0px 0px 10px 10px rgba(108, 111, 116, 0.5),
+                    inset 0px 0px 10px 10px rgba(108, 111, 116, 0.5);
+                transition: 0.3s ease;
+                border: 0;
+            }
+
+            .locationCard:hover {
+                background-color: rgba(255, 144, 94, 0.15);
+                box-shadow: 0px 5px 10px 10px rgba(108, 111, 116, 0.6),
+                    inset 0px 0px 10px 10px rgba(108, 111, 116, 0.5);
+                transform: translate(0, -5px);
+            }
+
+            .locationCard:active {
+                box-shadow: 0px 0px 10px 10px rgba(108, 111, 116, 0.5),
+                    inset 0px 0px 10px 10px rgba(108, 111, 116, 0.5);
+                transform: none;
+                scale: 0.95;
+            }
+
+            .locationCardIcon {
+                font-size: 45px;
+            }
+
+            .locationCardText {
+                font-size: 18px;
+            }
+
+            .locationGroupHeader {
+                font-size: 24px;
+            }
+
+            .locationSubmitv2 {
+                position: absolute;
+                width: 44px;
+                height: 44px;
+                background-color: transparent;
+                border: 0;
+                z-index: 4;
+                left: 0;
+                offset: 0;
+                margin-left: calc(90vw - 88px - 5vw);
+                padding-top: 5px;
+                transition: 0.1s scale;
+            }
+
+            .locationSubmitv2:hover {
+                scale: 1.1;
+            }
+
+            .locationMenuHeader {
+                font-size: 40px;
+                padding-top: 30px;
+            }
+
+            .locationCardDouble {
+                width: 300px;
+            }
+
+            .locationAutofillContainer {
+                padding: 0;
+                background-color: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(7px);
+                margin: 5px;
+                border-radius: 13px;
+                position: absolute;
+                width: calc(80vw - 10px);
+            }
+
+            .locationAutofillItem {
+                width: calc(100% - 30px);
+                padding: 15px;
+                font-size: 18px;
+                transition: 0.3s ease;
+                border-radius: 13px;
+                text-align: left;
+                cursor: pointer;
+            }
+
+            .locationAutofillItem:hover {
+                background-color: rgba(255, 255, 255, 0.187);
+            }
+
+            .locationAutofillItem:active {
+                background-color: rgba(255, 255, 255, 0.187);
+            }
+
+            .locationContextMenu {
+                width: 200px;
+                margin: 0;
+                padding-left: 0;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                background-color: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(7px);
+                position: absolute;
+                border-radius: 13px;
+                z-index: 4;
+            }
+
+            .locationContextMenuItem {
+                list-style-type: none;
+                text-align: left;
+                padding: 10px;
+                font-size: 20px;
+                cursor: pointer;
+                transition: 0.3s ease;
+                border-radius: 13px;
+                display: inline-flex;
+                flex-direction: row;
+                width: calc(100% - 20px);
+                align-items: center;
+                height: 30px;
+            }
+
+            .locationContextMenuItem:hover {
+                background-color: rgba(255, 255, 255, 0.187);
+            }
+
+            .locationContextMenuItemText {
+                padding: 5px;
+            }
+
+            .locationContextMenuItemIcon {
+                padding-top: 1px;
+            }
+
+            .threeDot {
+                background-color: transparent;
+                border: 0;
+                color: white;
+                text-align: right;
+                border-radius: 999px;
+                padding: 5px;
+                position: absolute;
+                top: 7px;
+                right: 7px;
+                transition: 0.3s background-color;
+            }
+
+            .threeDot:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .locationSaveMenu {
+                z-index: 5;
+                position: fixed;
+                border-radius: 15px;
+                background-color: rgba(255, 255, 255, 0.5);
+                backdrop-filter: blur(10px);
+                padding: 20px;
+                text-align: center;
+                width: 500px;
+                height: 300px;
+                overflow: scroll;
+                margin-left: calc((100vw - 540px) / 2);
+                margin-top: calc(((100vh - 340px) / 2) - 100px);
+            }
+
+            .locationSaveMenuHeader {
+                text-align: left;
+                font-family: "Arvo", sans-serif;
+            }
+
+            .locationSaveMenuText {
+                text-align: left;
+            }
+
+            .locationSaveMenuInput {
+                padding: 15px;
+                border-radius: 12px;
+                font-size: 18px;
+                border: 1px solid #ff825973;
+                width: calc(100% - 26px);
+                background-color: transparent;
+            }
+
+            ::placeholder {
+                color: rgba(38, 38, 38, 0.758);
+            }
+
+            .iconGrid {
+                display: inline-flex;
+                flex-direction: row;
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .iconGridItem {
+                border-radius: 999px;
+                padding: 5px;
+                border: 1px solid transparent;
+            }
+
+            .bgTop {
+                background-color: #afbdec;
+            }
+
+            .locationSaveButton {
+                border: 0;
+                padding: 15px;
+                margin: 10px;
+                border-radius: 99px;
+                background-color: #ff825973;
+                box-shadow: 0 0 15px 8px #ff825973, 0 0 20px 4px #ff825973 inset;
+                transition: 0.2s ease;
+                width: calc(50% - 35px);
+            }
+
+            .locationSaveButton:hover {
+                box-shadow: 0 0 15px 12px #ff825973,
+                    0 0 20px 4px #ff825973 inset;
+                scale: 1.04;
+            }
+
+            .locationSaveButton:active {
+                box-shadow: 0 0 15px 3px #ff825973, 0 0 20px 4px #ff825973 inset;
+                scale: 0.98;
+            }
+
+            .threeDotMOBILE {
+                background-color: transparent;
+                border: 0;
+                color: white;
+                text-align: right;
+                border-radius: 999px;
+                padding: 5px;
+                position: absolute;
+                top: 33pxpx;
+                right: 7px;
+                transition: 0.3s background-color;
+            }
+
+            .locationAutofillContainerMOBILE {
+                padding: 0;
+                background-color: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(7px);
+                margin: -30px 25px 0 25px;
+                border-radius: 13px;
+                position: absolute;
+                z-index: 4;
+                width: calc(100vw - 50px);
+                max-height: calc(
+                    100vh - 215px
+                ); /*100vh - 205 for the position of it, then also -10 for a 10px margin*/
+                overflow: scroll;
+            }
+
+            .locationAutofillItemMOBILE {
+                width: calc(100% - 30px);
+                padding: 15px;
+                font-size: 18px;
+                transition: 0.3s ease;
+                border-radius: 13px;
+                text-align: left;
+                cursor: pointer;
+            }
+
+            .locationSaveMenuMOBILE {
+                z-index: 5;
+                position: fixed;
+                border-radius: 15px;
+                background-color: rgba(255, 255, 255, 0.5);
+                backdrop-filter: blur(10px);
+                padding: 20px;
+                text-align: center;
+                width: calc(100vw - 40px);
+                height: calc(100vh - 20px);
+                top: 20px;
+                overflow: scroll;
+                margin: 0;
+            }
+
+            .locationSaveButtonMOBILE {
+                border: 0;
+                padding: 15px;
+                margin: 5px;
+                border-radius: 99px;
+                background-color: #ff825973;
+                box-shadow: 0 0 15px 8px #ff825973, 0 0 20px 4px #ff825973 inset;
+                width: calc(50% - 30px);
+            }
+        </style>
+        <title>SamWeather</title>
+        <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+        <script>
+            let hourlyIndex = [];
+
+            function getDate(date) {
+                var month = Number(date[5] + date[6]);
+                var day = Number(date[8] + date[9]);
+                return month + "/" + day;
+            }
+
+            function getTime(date) {
+                var hour = Number(date[11] + date[12]);
+                if (hour > 12) {
+                    hour = hour - 12;
+                    return hour + ":" + date[14] + date[15] + "p";
+                } else if (hour == 0) {
+                    return "12" + ":" + date[14] + date[15] + "a";
+                } else {
+                    return hour + ":" + date[14] + date[15] + "a";
+                }
+            }
+
+            function getWind(windspeed) {
+                var list = windspeed.split(" ");
+                return list[0];
+            }
+
+            function getIcon(description, isDaytime, getThemeInstead = false) {
+                let bg_top;
+                let bg;
+                let icon;
+                let whiteText = false;
+
+                if (
+                    description.includes("Mostly Sunny") ||
+                    description.includes("Partly Cloudy") ||
+                    description.includes("Mostly Clear") ||
+                    description.includes("Mostly Cloudy")
+                ) {
+                    if (isDaytime) {
+                        bg_top = "#a6c0ed";
+                        bg = "linear-gradient(#a6c0ed, #7d9cd1)";
+                        icon = "http://openweathermap.org/img/wn/02d@2x.png";
+                    } else {
+                        bg_top = "#4e5c8a";
+                        bg = "linear-gradient(#4e5c8a, #434859)";
+                        icon = "http://openweathermap.org/img/wn/02n@2x.png";
+                        whiteText = true;
+                    }
+                } else if (
+                    description.includes("Snow") ||
+                    description.includes("Blizzard") ||
+                    description.includes("Flurries") ||
+                    description.includes("Hail") ||
+                    description.includes("Sleet")
+                ) {
+                    bg_top = "#d7d9de";
+                    bg = "linear-gradient(#d7d9de, #f0f0f0)";
+                    icon = "http://openweathermap.org/img/wn/13d@2x.png";
+                } else if (
+                    description.includes("Thunder") ||
+                    description.includes("T-storm")
+                ) {
+                    bg_top = "#434343";
+                    bg = "linear-gradient(#434343, #2e2d2d)";
+                    icon = "http://openweathermap.org/img/wn/11d@2x.png";
+                    whiteText = true;
+                } else if (
+                    description.includes("Showers") ||
+                    description.includes("Rain") ||
+                    description.includes("Drizzle")
+                ) {
+                    if (
+                        description.includes("Sun") ||
+                        description.includes("Partly Cloudy") ||
+                        description.includes("Mostly Sunny")
+                    ) {
+                        if (isDaytime) {
+                            bg_top = "#95a6de";
+                            bg = "linear-gradient(#95a6de, #c0caeb)";
+                            icon =
+                                "http://openweathermap.org/img/wn/10d@2x.png";
+                        } else {
+                            bg_top = "#444a5e";
+                            bg = "linear-gradient(#444a5e, #293354)";
+                            icon =
+                                "http://openweathermap.org/img/wn/10n@2x.png";
+                            whiteText = true;
+                        }
+                    } else {
+                        if (isDaytime) {
+                            bg_top = "#9a9fb3";
+                            bg = "linear-gradient(#9a9fb3, #6c7080)";
+                        } else {
+                            bg_top = "#444a5e";
+                            bg = "linear-gradient(#444a5e, #131621)";
+                            whiteText = true;
+                        }
+                        icon = "http://openweathermap.org/img/wn/09d@2x.png";
+                    }
+                } else if (
+                    description.includes("Cloud") ||
+                    description.includes("Frost")
+                ) {
+                    if (isDaytime) {
+                        bg_top = "#a7a8ab";
+                        bg = "linear-gradient(#a7a8ab, #7e8087)";
+                    } else {
+                        bg_top = "#38383b";
+                        bg = "linear-gradient(#38383b, #767682)";
+                        whiteText = true;
+                    }
+                    icon = "http://openweathermap.org/img/wn/03d@2x.png";
+                } else if (
+                    description.includes("Sunny") ||
+                    description == "Sunny" ||
+                    description.includes("Sun") ||
+                    description.includes("Clear")
+                ) {
+                    if (isDaytime) {
+                        bg_top = "#a6c0ed";
+                        bg = "linear-gradient(#a6c0ed, #5e99ff)";
+                        icon = "http://openweathermap.org/img/wn/01d@2x.png";
+                    } else {
+                        bg_top = "#041d47";
+                        bg = "linear-gradient(#041d47, #06378a)";
+                        icon = "http://openweathermap.org/img/wn/01n@2x.png";
+                        whiteText = true;
+                    }
+                } else if (
+                    description.includes("Mist") ||
+                    description.includes("Fog") ||
+                    description.includes("Haze") ||
+                    description.includes("Smoke")
+                ) {
+                    if (isDaytime) {
+                        bg_top = "#adadad";
+                        bg = "linear-gradient(#adadad, #dbdbdb)";
+                    } else {
+                        bg_top = "#6e6e6e";
+                        bg = "linear-gradient(#6e6e6e, #363636)";
+                        whiteText = true;
+                    }
+                    icon = "http://openweathermap.org/img/wn/50d@2x.png";
+                } else {
+                    console.log(
+                        "Could not find correct icon for ",
+                        description
+                    );
+                }
+
+                if (getThemeInstead) {
+                    let textColor;
+                    if (whiteText) {
+                        textColor = "#ffffff";
+                    } else {
+                        textColor = "#000000";
+                    }
+
+                    // Update text color
+                    for (
+                        let i = 0;
+                        i < document.getElementsByClassName("text").length;
+                        i++
+                    ) {
+                        let element =
+                            document.getElementsByClassName("text")[i];
+                        element.style.color = textColor;
+                    }
+
+                    // Update top background color
+                    for (
+                        let i = 0;
+                        i < document.getElementsByClassName("bgTop").length;
+                        i++
+                    ) {
+                        let element =
+                            document.getElementsByClassName("bgTop")[i];
+                        element.style.backgroundColor = bg_top;
+                    }
+
+                    document.getElementById("body").style.backgroundImage = bg;
+                    if (mobile) {
+                        for (
+                            let i = 0;
+                            i <
+                            document.getElementsByClassName("titleBarMOBILE")
+                                .length;
+                            i++
+                        ) {
+                            document.getElementsByClassName("titleBarMOBILE")[
+                                i
+                            ].style.backgroundImage =
+                                "linear-gradient(" +
+                                bg_top +
+                                ", " +
+                                bg_top +
+                                ", " +
+                                bg_top +
+                                ", " +
+                                "rgba(0, 0, 0, 0)";
+                        }
+                    } else {
+                        document.getElementById(
+                            "sectionsContainer"
+                        ).style.backgroundImage = bg;
+                        // document.getElementById("mainMenu").style.backgroundImage = bg;
+                    }
+                } else {
+                    return icon;
+                }
+            }
+
+            function getPrecipitation(probability) {
+                if (probability == null) {
+                    return "0%";
+                } else {
+                    return `${probability}%`;
+                }
+            }
+
+            function getFeelsLike(
+                temperature,
+                humidity,
+                wind,
+                dontPrintInfo = false
+            ) {
+                var T = temperature;
+                var RH = humidity;
+                var feelsLike = 0;
+                if (!dontPrintInfo) {
+                    console.log("t", T, "rh", RH);
+                }
+
+                if (T <= 50 && wind >= 3) {
+                    feelsLike = `${Math.round(
+                        35.74 +
+                            0.6215 * T -
+                            35.75 * wind ** 0.16 +
+                            0.4275 * T * wind ** 0.16
+                    )}°`;
+                    return feelsLike;
+                } else {
+                    // Heat index
+                    let simple =
+                        0.5 * (T + 61.0 + (T - 68.0) * 1.2 + RH * 0.094);
+                    if (!dontPrintInfo) {
+                        console.log("simple", simple);
+                    }
+                    let HI;
+                    let HI_rothfusz;
+                    if (simple < 80) {
+                        HI = (simple + T) / 2;
+                    } else {
+                        HI_rothfusz =
+                            -42.379 +
+                            2.04901523 * T +
+                            10.14333127 * RH -
+                            0.22475541 * T * RH -
+                            0.00683783 * T * T -
+                            0.05481717 * RH * RH +
+                            0.00122874 * T * T * RH +
+                            0.00085282 * T * RH * RH -
+                            0.00000199 * T * T * RH * RH;
+                        HI = HI_rothfusz;
+                    }
+                    // Adjust temp
+                    if (HI >= 80) {
+                        if (RH < 13 && 80 <= T <= 112) {
+                            ADJUSTMENT_low =
+                                ((13 - RH) / 4) *
+                                Math.sqrt(
+                                    Math.abs(17 - Math.abs(T - 95.0)) / 17
+                                );
+                            HI = HI_rothfusz - ADJUSTMENT_low;
+                            if (!dontPrintInfo) {
+                                console.log("0", HI);
+                            }
+                        } else if (RH > 85 && 80 <= T <= 87) {
+                            ADJUSTMENT_high = ((RH - 85) / 10) * ((87 - T) / 5);
+                            HI = HI_rothfusz + ADJUSTMENT_high;
+                            if (!dontPrintInfo) {
+                                console.log("1", HI);
+                                console.log("rothfuz", HI_rothfusz);
+                            }
+                        } else {
+                            HI = HI_rothfusz;
+                            if (!dontPrintInfo) {
+                                console.log("2", HI);
+                            }
+                        }
+                    }
+                    if (!dontPrintInfo) {
+                        console.log("Returning feels like:", HI);
+                    }
+                    return `${Math.round(HI)}°`;
+                }
+            }
+
+            let currentLocationName = "Yarmouth ME";
+            let periods;
+            let periods_h;
+            function displayWeatherForecast(data, data_h) {
+                periods = data.properties.periods;
+                periods_h = data_h.properties.periods;
+
+                // Change the theme
+                getIcon(
+                    periods_h[0].shortForecast,
+                    periods_h[0].isDaytime,
+                    true
+                );
+
+                //////////////////
+                // Hourly Index //
+                //////////////////
+
+                hourlyIndex = [];
+
+                // For every hour in periods_h
+                for (let i = 0; i < periods_h.length; i++) {
+                    var currentDate = getDate(periods_h[i].startTime);
+                    var found = false;
+
+                    // Check if date already exists. Go through every list in hourlyIndex, and if the current date is the same as the date for that, adds i to the list, and sets found to true.
+                    for (let j = 0; j < hourlyIndex.length; j++) {
+                        if (currentDate == hourlyIndex[j][0]) {
+                            hourlyIndex[j].push(i);
+                            found = true;
+                        }
+                    }
+                    // If it doesn't exist, create it
+                    if (found == false) {
+                        hourlyIndex.push([currentDate]);
+                        hourlyIndex[hourlyIndex.length - 1].push(i); // Add to the last day in hourlyIndex. Use [-1] because 0 is the first one. So if the hourlyindex had 2 lists in it, it would add to the [1] list.
+                    }
+                }
+
+                /////////////////
+                // Daily Index //
+                /////////////////
+
+                // Store every day that we use in the daily forecast, filter out nights.
+
+                dailyIndex = [];
+
+                // For every day
+                for (let i = 0; i < periods.length; i++) {
+                    if (!periods[i].name.toLowerCase().includes("night")) {
+                        dailyIndex.push(i);
+                    }
+                }
+
+                // Display weather forecast
+                if (mobile) {
+                    /////////////////////
+                    // Current Weather //
+                    /////////////////////
+
+                    // Icon
+                    let nowIcon = document.getElementById("nowIconMOBILE");
+                    nowIcon.setAttribute(
+                        "src",
+                        getIcon(
+                            periods_h[0].shortForecast,
+                            periods_h[0].isDaytime
+                        )
+                    );
+                    nowIcon.setAttribute("title", periods_h[0].shortForecast);
+
+                    // current temperature
+                    let nowTemp = document.getElementById("nowTempMOBILE");
+                    nowTemp.innerText = `${periods_h[0].temperature}°`;
+
+                    // Description
+                    let nowDescription =
+                        document.getElementById("nowDescripMOBILE");
+                    nowDescription.innerText = periods[0].detailedForecast;
+
+                    // Precipitation
+                    let nowPrecip = document.getElementById("nowPrecipMOBILE");
+                    nowPrecip.innerText = getPrecipitation(
+                        periods_h[0].probabilityOfPrecipitation.value
+                    );
+
+                    // Feels Like
+                    let nowFeelsLike =
+                        document.getElementById("nowFeelsLikeMOBILE");
+                    nowFeelsLike.innerText = getFeelsLike(
+                        periods_h[0].temperature,
+                        periods_h[0].relativeHumidity.value,
+                        periods_h[0].windspeed,
+                        false
+                    );
+
+                    // Wind
+                    let nowWind = document.getElementById("nowWindMOBILE");
+                    nowWind.innerText = `${periods_h[0].windSpeed} ${periods_h[0].windDirection}`;
+
+                    // Humidity
+                    let nowHumid = document.getElementById("nowHumidityMOBILE");
+                    nowHumid.innerText = `${periods_h[0].relativeHumidity.value}%`;
+
+                    ////////////////////
+                    // current Hourly //
+                    ////////////////////
+
+                    changeHourly();
+
+                    ////////////////////
+                    // Daily Forecast //
+                    ////////////////////
+
+                    document.getElementById("dailyContainerMOBILE").innerHTML =
+                        "";
+                    // Set i to 1 here because we don't want today
+                    for (let i = 1; i < dailyIndex.length; i++) {
+                        let dayContainer = document.createElement("div");
+                        dayContainer.setAttribute(
+                            "class",
+                            "dayContainerMOBILE"
+                        );
+
+                        dayTitle = document.createElement("p");
+                        dayTitle.setAttribute(
+                            "class",
+                            "dailyForecastDayNameMOBILE"
+                        );
+                        dayTitle.innerText = periods[dailyIndex[i]].name;
+
+                        dayIcon = document.createElement("img");
+                        dayIcon.setAttribute(
+                            "src",
+                            getIcon(
+                                periods[dailyIndex[i]].shortForecast,
+                                periods[dailyIndex[i]].isDaytime
+                            )
+                        );
+                        dayIcon.setAttribute("class", "iconVerySmallMOBILE");
+                        dayIcon.setAttribute(
+                            "title",
+                            periods[dailyIndex[i]].shortForecast
+                        );
+
+                        dayTemp = document.createElement("p");
+                        dayTemp.setAttribute(
+                            "class",
+                            "dailyForecastTextMOBILE"
+                        );
+                        dayTemp.innerText = `${
+                            periods[dailyIndex[i]].temperature
+                        }°`;
+
+                        // Add to dayContainer
+                        dayContainer.appendChild(dayTitle);
+                        dayContainer.appendChild(dayIcon);
+                        dayContainer.appendChild(dayTemp);
+                        dayContainer.onclick = () => {
+                            openHourly(i, periods, periods_h);
+                        };
+
+                        // Add to section
+                        document
+                            .getElementById("dailyContainerMOBILE")
+                            .appendChild(dayContainer);
+                    }
+                } else {
+                    const sectionNow = document.getElementById("now");
+                    const sectionHourly = document.getElementById("hourly");
+                    const sectionDaily = document.getElementById("daily");
+
+                    document.title = `${periods_h[0].temperature}° and ${periods_h[0].shortForecast}`;
+
+                    // Reset from picking a location
+                    if (mobile) {
+                        document.getElementById("locationInputMOBILE").value =
+                            "";
+                    } else {
+                        document.getElementById("address").value = "";
+                    }
+
+                    /////////////////////
+                    // Current Weather //
+                    /////////////////////
+
+                    // icon
+                    var nowIcon = document.getElementById("nowIcon");
+                    nowIcon.setAttribute(
+                        "src",
+                        getIcon(
+                            periods_h[0].shortForecast,
+                            periods_h[0].isDaytime
+                        )
+                    );
+                    nowIcon.setAttribute("title", periods_h[0].shortForecast);
+
+                    // current temperature
+                    var nowTemp = document.getElementById("nowTemp");
+                    nowTemp.innerText = `${periods_h[0].temperature}°`;
+
+                    // Description
+                    var nowDescription = document.getElementById("nowDescrip");
+                    nowDescription.innerText = periods[0].detailedForecast;
+
+                    // Current precipitation
+                    var nowPrecip = document.getElementById("nowPrecip");
+                    nowPrecip.innerText = getPrecipitation(
+                        periods_h[0].probabilityOfPrecipitation.value
+                    );
+
+                    // Current wind
+                    var nowWind = document.getElementById("nowWind");
+                    nowWind.innerText = `${periods_h[0].windSpeed} ${periods_h[0].windDirection}`;
+
+                    // Current humidity
+                    var nowWind = document.getElementById("nowHumid");
+                    nowWind.innerText = `${periods_h[0].relativeHumidity.value}%`;
+
+                    // Wind chill
+                    var nowFeelslike = document.getElementById("nowFeelsLike");
+                    nowFeelslike.innerText = getFeelsLike(
+                        periods_h[0].temperature,
+                        periods_h[0].relativeHumidity.value,
+                        periods_h[0].windSpeed
+                    );
+
+                    ////////////////////
+                    // Current Hourly //
+                    ////////////////////
+                    let todayHourlyContainer = document.getElementById(
+                        "todayHourlyContainer"
+                    );
+                    todayHourlyContainer.innerHTML = "";
+
+                    for (let i = 1; i < hourlyIndex[0].length; i++) {
+                        // container
+                        let hourContainer = document.createElement("div");
+                        hourContainer.setAttribute(
+                            "class",
+                            "todayHourContainer"
+                        );
+                        // time
+                        let time = document.createElement("p");
+                        time.setAttribute("class", "todayHourlyTime");
+                        time.innerText = getTime(
+                            periods_h[hourlyIndex[0][i]].startTime
+                        );
+
+                        // temperature
+                        let temp = document.createElement("p");
+                        temp.setAttribute("class", "todayHourlyTime");
+                        temp.innerText = `${
+                            periods_h[hourlyIndex[0][i]].temperature
+                        }°`;
+
+                        // icon
+                        let icon = document.createElement("img");
+                        icon.setAttribute(
+                            "src",
+                            getIcon(
+                                periods_h[hourlyIndex[0][i]].shortForecast,
+                                periods_h[hourlyIndex[0][i]].isDaytime
+                            )
+                        );
+                        icon.setAttribute("class", "iconSmall");
+                        icon.setAttribute(
+                            "title",
+                            periods_h[hourlyIndex[0][i]].shortForecast
+                        );
+
+                        // Precipitation
+                        let precipContainer = document.createElement("div");
+                        precipContainer.setAttribute(
+                            "class",
+                            "hourlyDetailContainer"
+                        );
+                        let precipIcon = document.createElement("span");
+                        precipIcon.setAttribute(
+                            "class",
+                            "material-symbols-outlined hourlyDetailIcon"
+                        );
+                        precipIcon.innerText = " water_drop ";
+                        let precipText = document.createElement("p");
+                        precipText.setAttribute("class", "textTime");
+                        precipText.innerText = getPrecipitation(
+                            periods_h[hourlyIndex[0][i]]
+                                .probabilityOfPrecipitation.value
+                        );
+
+                        precipContainer.appendChild(precipIcon);
+                        precipContainer.appendChild(precipText);
+
+                        // Add to document
+                        hourContainer.appendChild(time);
+                        hourContainer.appendChild(temp);
+                        hourContainer.appendChild(icon);
+                        hourContainer.appendChild(precipContainer);
+
+                        todayHourlyContainer.appendChild(hourContainer);
+                    }
+
+                    ////////////////////
+                    // Daily Forecast //
+                    ////////////////////
+
+                    sectionDaily.innerHTML = "";
+                    for (let i = 0; i < dailyIndex.length; i++) {
+                        let dayContainer = document.createElement("div");
+                        dayContainer.setAttribute("class", "dayContainer");
+
+                        let conditionsContainer = document.createElement("div");
+                        conditionsContainer.setAttribute(
+                            "class",
+                            "conditionsContainer dayConditions"
+                        );
+
+                        let dayTitle = document.createElement("p");
+                        dayTitle.setAttribute("class", "dayTitle");
+                        dayTitle.innerText = periods[dailyIndex[i]].name;
+
+                        let dayIcon = document.createElement("img");
+                        dayIcon.setAttribute(
+                            "src",
+                            getIcon(
+                                periods[dailyIndex[i]].shortForecast,
+                                periods[dailyIndex[i]].isDaytime
+                            )
+                        );
+                        dayIcon.setAttribute("class", "iconBig");
+                        dayIcon.setAttribute(
+                            "title",
+                            periods[dailyIndex[i]].shortForecast
+                        );
+
+                        let dayTemp = document.createElement("p");
+                        dayTemp.setAttribute("class", "textBig");
+                        dayTemp.innerText = `${
+                            periods[dailyIndex[i]].temperature
+                        }°`;
+
+                        let dayDescription = document.createElement("p");
+                        dayDescription.setAttribute("class", "description");
+                        dayDescription.innerText =
+                            periods[dailyIndex[i]].detailedForecast;
+
+                        // Add to dayContainer
+                        conditionsContainer.appendChild(dayIcon);
+                        conditionsContainer.appendChild(dayTemp);
+                        dayContainer.appendChild(dayTitle);
+                        dayContainer.appendChild(conditionsContainer);
+                        dayContainer.appendChild(dayDescription);
+                        dayContainer.onclick = () => {
+                            openHourly(i, periods, periods_h);
+                        };
+
+                        // Add to section
+                        sectionDaily.appendChild(dayContainer);
+                    }
+
+                    /////////////////////
+                    // Hourly Forecast //
+                    /////////////////////
+
+                    // for every day, i is the day number
+                    for (let i = 0; i < hourlyIndex.length; i++) {
+                        var dayH = document.createElement("div");
+                        dayH.setAttribute("class", "dayHContainer");
+                        var dayHTitle = document.createElement("p");
+                        dayHTitle.setAttribute("class", "dayTitle");
+                        // For every day in hourlyIndex
+                        for (let z = 0; z < hourlyIndex.length; z++) {
+                            dayHTitle.innerText = hourlyIndex[0][i];
+                        }
+
+                        dayH.appendChild(dayHTitle);
+
+                        // for every hour
+                        for (let x = 1; x < hourlyIndex[i].length; x++) {
+                            let container = document.createElement("div");
+                            container.setAttribute("class", "hourContainer");
+
+                            let time = document.createElement("p");
+                            time.setAttribute("class", "textTime");
+                            time.innerText = getTime(
+                                periods_h[hourlyIndex[i][x]].startTime
+                            );
+                            container.appendChild(time);
+
+                            let temp = document.createElement("p");
+                            temp.setAttribute("class", "textHourly");
+                            temp.innerText = `${
+                                periods_h[hourlyIndex[i][x]].temperature
+                            }°`;
+
+                            let icon = document.createElement("img");
+                            icon.setAttribute("class", "iconSmall");
+                            icon.setAttribute(
+                                "src",
+                                getIcon(
+                                    periods_h[hourlyIndex[i][x]].shortForecast,
+                                    periods_h[hourlyIndex[i][x]].isDaytime
+                                )
+                            );
+                            icon.setAttribute(
+                                "title",
+                                periods_h[hourlyIndex[i][x]].shortForecast
+                            );
+
+                            let precipContainer = document.createElement("div");
+                            precipContainer.setAttribute(
+                                "class",
+                                "hourlyDetailContainer"
+                            );
+                            let precipIcon = document.createElement("span");
+                            precipIcon.setAttribute(
+                                "class",
+                                "material-symbols-outlined hourlyDetailIcon"
+                            );
+                            precipIcon.innerText = " water_drop ";
+                            let precipText = document.createElement("p");
+                            precipText.setAttribute("class", "textTime");
+                            precipText.innerText = getPrecipitation(
+                                periods_h[hourlyIndex[i][x]]
+                                    .probabilityOfPrecipitation.value
+                            );
+
+                            precipContainer.appendChild(precipIcon);
+                            precipContainer.appendChild(precipText);
+
+                            let windContainer = document.createElement("div");
+                            windContainer.setAttribute(
+                                "class",
+                                "hourlyDetailContainer"
+                            );
+                            let windIcon = document.createElement("span");
+                            windIcon.setAttribute(
+                                "class",
+                                "material-symbols-outlined hourlyDetailIcon"
+                            );
+                            windIcon.innerText = " air ";
+                            let windText = document.createElement("p");
+                            windText.setAttribute("class", "textTime");
+                            windText.innerText =
+                                periods_h[hourlyIndex[i][x]].windSpeed;
+
+                            windContainer.appendChild(windIcon);
+                            windContainer.appendChild(windText);
+
+                            let flContainer = document.createElement("div");
+                            flContainer.setAttribute(
+                                "class",
+                                "hourlyDetailContainer"
+                            );
+                            let flIcon = document.createElement("span");
+                            flIcon.setAttribute(
+                                "class",
+                                "material-symbols-outlined hourlyDetailIcon"
+                            );
+                            flIcon.innerText = " thermostat ";
+                            let flText = document.createElement("p");
+                            flText.setAttribute("class", "textTime");
+                            flText.innerText = getFeelsLike(
+                                periods_h[hourlyIndex[i][x]].temperature,
+                                periods_h[hourlyIndex[i][x]].relativeHumidity
+                                    .value,
+                                periods_h[hourlyIndex[i][x]].windSpeed,
+                                true
+                            );
+
+                            flContainer.appendChild(flIcon);
+                            flContainer.appendChild(flText);
+
+                            container.appendChild(temp);
+                            container.appendChild(icon);
+                            container.appendChild(precipContainer);
+                            container.appendChild(windContainer);
+                            container.appendChild(flContainer);
+                            dayH.appendChild(container);
+                        }
+
+                        sectionHourly.appendChild(dayH);
+                    }
+                }
+                toggleLocationPicker(false);
+                setLoading(false);
+            }
+
+            function changeHourly() {
+                console.log("changing hourly");
+                // Change the information shown in the hourly forecast
+
+                if (mobile) {
+                    let value =
+                        document.getElementById("hourlyChoiceMOBILE").value;
+
+                    document.getElementById(
+                        "scrollingHourlyContainerMOBILE"
+                    ).innerHTML = "";
+
+                    for (let i = 1; i < hourlyIndex[0].length; i++) {
+                        // container
+                        let hourContainer = document.createElement("div");
+                        hourContainer.setAttribute(
+                            "class",
+                            "todayHourContainerMOBILE"
+                        );
+                        // time
+                        let time = document.createElement("p");
+                        time.setAttribute("class", "todayHourlyTimeMOBILE");
+                        time.innerText = getTime(
+                            periods_h[hourlyIndex[0][i]].startTime
+                        );
+
+                        // icon
+                        let icon = document.createElement("img");
+                        icon.setAttribute(
+                            "src",
+                            getIcon(
+                                periods_h[hourlyIndex[0][i]].shortForecast,
+                                periods_h[hourlyIndex[0][i]].isDaytime
+                            )
+                        );
+                        icon.setAttribute("class", "iconSmallMOBILE");
+                        icon.setAttribute(
+                            "title",
+                            periods_h[hourlyIndex[0][i]].shortForecast
+                        );
+
+                        let detail = document.createElement("p");
+                        detail.setAttribute("class", "todayHourlyTimeMOBILE");
+                        if (value == "Temperature") {
+                            // temperature
+                            detail.innerText = `${
+                                periods_h[hourlyIndex[0][i]].temperature
+                            }°`;
+                        } else if (value == "Feels Like") {
+                            // Feels like
+                            detail.innerText = getFeelsLike(
+                                periods_h[hourlyIndex[0][i]].temperature,
+                                periods_h[hourlyIndex[0][i]].relativeHumidity
+                                    .value,
+                                periods_h[hourlyIndex[0][i]].windSpeed,
+                                true
+                            );
+                        } else if (value == "Precipitation") {
+                            // Precipitation
+                            detail.innerText = getPrecipitation(
+                                periods_h[hourlyIndex[0][i]]
+                                    .probabilityOfPrecipitation.value
+                            );
+                        }
+
+                        // Add to document
+                        hourContainer.appendChild(time);
+                        hourContainer.appendChild(icon);
+                        hourContainer.appendChild(detail);
+
+                        document
+                            .getElementById("scrollingHourlyContainerMOBILE")
+                            .appendChild(hourContainer);
+                    }
+                } else {
+                    // don't have it for desktop yet
+                }
+            }
+
+            function fetchMoreWeather(url) {
+                setLoading(true);
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("Daily weather forecast: ", data);
+                        fetch(url + "/hourly")
+                            .then((response) => response.json())
+                            .then((dataHourly) => {
+                                console.log(
+                                    "Hourly weather forecast",
+                                    dataHourly
+                                );
+                                displayWeatherForecast(data, dataHourly);
+                            })
+                            .catch((error) => {
+                                console.error(
+                                    "Error getting hourly weather data",
+                                    error
+                                );
+                                document
+                                    .getElementById("error")
+                                    .removeAttribute("hidden");
+                            });
+                    })
+                    .catch((error) => {
+                        console.error("Error getting weather data", error);
+                        document
+                            .getElementById("error")
+                            .removeAttribute("hidden");
+                    });
+            }
+
+            async function fetchWeather(coordinates, returnName = false) {
+                try {
+                    const lat = Math.abs(Number(coordinates[0]).toFixed(4));
+                    const long = -Math.abs(Number(coordinates[1]).toFixed(4));
+                    const infoUrl =
+                        "https://api.weather.gov/points/" + lat + "," + long;
+
+                    const response = await fetch(infoUrl);
+                    const data = await response.json();
+                    if (returnName) {
+                        return (
+                            data.properties.relativeLocation.properties.city +
+                            " " +
+                            data.properties.relativeLocation.properties.state
+                        );
+                    } else {
+                        const url = data.properties.forecast;
+                        if (mobile) {
+                            document.getElementById(
+                                "locationNameMOBILE"
+                            ).innerText =
+                                data.properties.relativeLocation.properties
+                                    .city +
+                                " " +
+                                data.properties.relativeLocation.properties
+                                    .state;
+                        } else {
+                            document.getElementById("locationName").innerText =
+                                data.properties.relativeLocation.properties
+                                    .city +
+                                " " +
+                                data.properties.relativeLocation.properties
+                                    .state;
+                        }
+                        currentLocationName =
+                            data.properties.relativeLocation.properties.city +
+                            " " +
+                            data.properties.relativeLocation.properties.state;
+                        fetchMoreWeather(url);
+                    }
+                } catch (error) {
+                    console.error("Error getting weather data", error);
+                    document.getElementById("error").removeAttribute("hidden");
+                }
+            }
+
+            var mobile = false;
+
+            function resizeUI() {
+                // Finds if the user is on a phone, then resizes the UI based on that
+                var width = window.innerWidth;
+                var height = window.innerHeight;
+                console.log("UI resized");
+                if (width <= 500) {
+                    mobile = true;
+                    console.log("mobile");
+                    document
+                        .getElementById("desktop")
+                        .setAttribute("hidden", true);
+                    document.getElementById("mobile").removeAttribute("hidden");
+                } else {
+                    mobile = false;
+                }
+            }
+
+            let visitorId = null;
+            let version = 700;
+            let userData = [null, null, null, []]; // [visitor exists (t/f), fingerprint, [home lat, home long], [[savedlocation lat, savedlocation long, savedlocation name, savedlocation icon], [savedlocation lat, savedlocation long, savedlocation name, savedlocation icon]]]
+            let locations;
+            let rowNumber;
+            async function loadData() {
+                // Loads and/or modifies google sheet saved data
+
+                // Load the FingerprintJS library
+                const fp = await FingerprintJS.load();
+                const result = await fp.get();
+                visitorId = result.visitorId;
+                console.log("User ID:", visitorId);
+                userData[1] = visitorId;
+
+                // Fetch google sheet
+                try {
+                    const response = await fetch(
+                        "https://script.google.com/macros/s/AKfycbzgKMTVyTVGD4y63agrWAo4r5yV2ACvJ0G3T0OBefDEBUB5kzZS0mwGNnAVxLrwFPI/exec"
+                    );
+                    const data = await response.json();
+                    userData[0] = data.length + 1;
+                    console.log("google sheet recieved");
+
+                    rowNumber = data.length;
+                    userData[0] = false;
+                    for (i = 1; i < data.length; i++) {
+                        if (visitorId == data[i][0]) {
+                            rowNumber = i;
+                            userData[0] = true;
+                            console.log("visitor exists already");
+                            break;
+                        }
+                    }
+                    if (userData[0] === false) {
+                        rowNumber = data.length;
+                        toggleLocationPicker();
+                        setLoading(false);
+                        console.log("visitor does not exist");
+                    } else {
+                        userData[1] = visitorId;
+                        locations = data[rowNumber][2].split(";");
+                        for (let i = 0; i < locations.length; i++) {
+                            locations[i] = locations[i].split(",");
+                            locations[i][0] = parseFloat(locations[i][0]);
+                            locations[i][1] = parseFloat(locations[i][1]);
+                            userData[3].push(locations[i]);
+                        }
+                        userData[2] = locations[0];
+                        fetchWeather([userData[2][0], userData[2][1]]);
+
+                        updateMenu();
+
+                        if (data[rowNumber][1] != version) {
+                            console.log("Updating version");
+                            setCell("B", version);
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error getting google sheet", error);
+                    document.getElementById("error").removeAttribute("hidden");
+                }
+            }
+
+            async function updateMenu() {
+                locations = [];
+                for (let i = 0; i < userData[3].length; i++) {
+                    locations.push(userData[3][i]);
+                }
+
+                // add locations to menu
+                if (mobile) {
+                    document.getElementById("savedLocationsMOBILE").innerHTML =
+                        "";
+                } else {
+                    document.getElementById("savedLocationsv2").innerHTML = "";
+                }
+                document.getElementById("savedLocationsv2").innerHTML = "";
+
+                for (let i = 0; i < locations.length; i++) {
+                    addToMenu(
+                        userData[3][i][2],
+                        [locations[i][0], locations[i][1]],
+                        true,
+                        userData[3][i][3]
+                    );
+                }
+            }
+
+            async function setCell(column, content) {
+                formData = new URLSearchParams();
+                formData.append("content", content);
+                formData.append("append", "false");
+                formData.append("cell", `${column}${rowNumber + 1}`);
+                await fetch(
+                    "https://script.google.com/macros/s/AKfycbzgKMTVyTVGD4y63agrWAo4r5yV2ACvJ0G3T0OBefDEBUB5kzZS0mwGNnAVxLrwFPI/exec",
+                    {
+                        redirect: "follow",
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: formData,
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((data) => console.log("Success:", data))
+                    .catch((err) => {
+                        console.error("Fetch error:", err);
+                        document
+                            .getElementById("error")
+                            .removeAttribute("hidden");
+                    });
+            }
+
+            async function setRow(content) {
+                // Content should be a list
+                formData = new URLSearchParams();
+                formData.append("content", content.join("|"));
+                formData.append("append", "true");
+                await fetch(
+                    "https://script.google.com/macros/s/AKfycbzgKMTVyTVGD4y63agrWAo4r5yV2ACvJ0G3T0OBefDEBUB5kzZS0mwGNnAVxLrwFPI/exec",
+                    {
+                        redirect: "follow",
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: formData,
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((data) => console.log("Success:", data))
+                    .catch((err) => {
+                        console.error("Fetch error:", err);
+                        document
+                            .getElementById("error")
+                            .removeAttribute("hidden");
+                    });
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                resizeUI();
+
+                loadData();
+
+                if (!mobile) {
+                    document
+                        .getElementById("address")
+                        .addEventListener("keydown", function (event) {
+                            if (event.key === "Enter") {
+                                fetchLocation(
+                                    document.getElementById("locationInputv2")
+                                        .value
+                                );
+                            }
+                        });
+                }
+            });
+
+            document.addEventListener("click", () => {
+                if (mobile) {
+                    document
+                        .getElementById("locationContextMenuMOBILE")
+                        .setAttribute("hidden", "true");
+                } else {
+                    document
+                        .getElementById("locationContextMenu")
+                        .setAttribute("hidden", "true");
+                }
+            });
+
+            function saveLocation(coordinates, name, icon) {
+                let coordinatesToAdd = coordinates;
+                coordinatesToAdd[0] = coordinatesToAdd[0];
+                coordinatesToAdd[1] = coordinatesToAdd[1];
+                userData[3].push([
+                    coordinatesToAdd[0],
+                    coordinatesToAdd[1],
+                    name,
+                    icon,
+                ]);
+
+                // Format locations to save to sheet
+                let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]},${userData[3][0][2]},${userData[3][0][3]}`;
+                for (let i = 1; i < userData[3].length; i++) {
+                    formattedLocation =
+                        formattedLocation +
+                        `;${userData[3][i][0]},${userData[3][i][1]},${userData[3][i][2]},${userData[3][i][3]}`;
+                }
+                console.log("Formatted Location to save", formattedLocation);
+
+                if (!userData[0]) {
+                    setRow([userData[1], version, formattedLocation]);
+                } else {
+                    setCell("C", formattedLocation);
+                }
+                updateMenu();
+            }
+
+            function locationAction(id, action) {
+                document.getElementById(id).setAttribute("hidden", "true");
+                if (action == "save") {
+                    let locationToAdd = id.split(",");
+                    locationToAdd[0] = locationToAdd[0];
+                    locationToAdd[1] = locationToAdd[1];
+                    userData[3].push(locationToAdd);
+
+                    // Format locations to save to sheet
+                    let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]}`;
+                    for (let i = 1; i < userData[3].length; i++) {
+                        formattedLocation =
+                            formattedLocation +
+                            `;${userData[3][i][0]},${userData[3][i][1]}`;
+                    }
+                    console.log(
+                        "Formatted Location (from locationAction)",
+                        formattedLocation
+                    );
+                    setCell("C", formattedLocation);
+                    updateMenu();
+                } else if (action == "delete") {
+                    let locationToDelete = id.split(",");
+                    let indexToDelete;
+                    for (let i = 0; i < userData[3].length; i++) {
+                        if (
+                            locationToDelete[0] == userData[3][i][0] &&
+                            locationToDelete[1] == userData[3][i][1]
+                        ) {
+                            console.log("FOUND");
+                            indexToDelete = i;
+                            break;
+                        }
+                    }
+                    userData[3].splice(indexToDelete, 1);
+
+                    // Format locations to save to sheet
+                    let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]}`;
+                    for (let i = 1; i < userData[3].length; i++) {
+                        formattedLocation =
+                            formattedLocation +
+                            `;${userData[3][i][0]},${userData[3][i][1]}`;
+                    }
+                    console.log(formattedLocation);
+                    setCell("C", formattedLocation);
+                    updateMenu();
+                }
+            }
+
+            function openHourly(day, periods, periods_h) {
+                if (mobile) {
+                    // Open hourly forecast
+                    let detailedDaily = document.getElementById(
+                        "detailedDailyMOBILE"
+                    );
+                    detailedDaily.removeAttribute("hidden");
+                    setTimeout(() => {
+                        detailedDaily.style.marginLeft = "0";
+                    }, 100);
+
+                    // Day name in title bar
+                    document.getElementById("dayNameMOBILE").innerText =
+                        periods[dailyIndex[day]].name;
+
+                    // Icon and temperature
+                    document
+                        .getElementById("dailyIconMOBILE")
+                        .setAttribute(
+                            "src",
+                            getIcon(
+                                periods[dailyIndex[day]].shortForecast,
+                                periods[dailyIndex[day]].isDaytime
+                            )
+                        );
+                    document.getElementById("dailyTempMOBILE").innerText = `${
+                        periods[dailyIndex[day]].temperature
+                    }°`;
+
+                    // Description
+                    document.getElementById("dailyDescripMOBILE").innerText =
+                        periods[dailyIndex[day]].detailedForecast;
+
+                    // Display hourly forecast
+                    document.getElementById("sectionHourlyMOBILE").innerHTML =
+                        "";
+                    for (let i = 1; i <= hourlyIndex[day].length - 1; i++) {
+                        let container = document.createElement("div");
+                        container.setAttribute("class", "hourContainerMOBILE");
+
+                        let time = document.createElement("p");
+                        time.setAttribute(
+                            "class",
+                            "dailyForecastDayNameMOBILE"
+                        );
+                        time.innerText = getTime(
+                            periods_h[hourlyIndex[day][i]].startTime
+                        );
+
+                        // temperature
+                        let temp = document.createElement("p");
+                        temp.setAttribute("class", "dailyForecastTextMOBILE");
+                        temp.innerText = `${
+                            periods_h[hourlyIndex[day][i]].temperature
+                        }°`;
+
+                        // icon
+                        let icon = document.createElement("img");
+                        icon.setAttribute(
+                            "src",
+                            getIcon(
+                                periods_h[hourlyIndex[day][i]].shortForecast,
+                                periods_h[hourlyIndex[day][i]].isDaytime
+                            )
+                        );
+                        icon.setAttribute("class", "iconVerySmallMOBILE");
+                        icon.setAttribute(
+                            "title",
+                            periods_h[hourlyIndex[day][i]].shortForecast
+                        );
+
+                        // Append everything
+                        container.appendChild(time);
+                        container.appendChild(temp);
+                        container.appendChild(icon);
+                        document
+                            .getElementById("sectionHourlyMOBILE")
+                            .appendChild(container);
+                    }
+                } else {
+                    // Clear any previous hourly data
+                    let sectionHourly = document.getElementById("hourly");
+                    sectionHourly.innerHTML = "";
+
+                    // Show section houly
+                    sectionHourly.removeAttribute("hidden");
+
+                    // Add Close Hourly icon
+                    document.getElementById("menuIcon").innerText =
+                        "chevron_backward";
+                    document.getElementById("menuButton").style.flexDirection =
+                        "row-reverse";
+                    document.getElementById("locationName").innerText = "Back";
+                    document.getElementById("menuButton").onclick = () => {
+                        closeHourly();
+                    };
+
+                    // Open hourly forecast (slide everything else to the side)
+                    let sectionsContainer =
+                        document.getElementById("sectionsContainer");
+                    sectionsContainer.style.width = "150vw";
+                    setTimeout(() => {
+                        sectionsContainer.style.marginLeft = "-50vw";
+                    }, 1);
+
+                    // Display hourly forecast
+                    for (let i = 1; i <= hourlyIndex[day].length - 1; i++) {
+                        let container = document.createElement("div");
+                        container.setAttribute("class", "hourContainer");
+
+                        let time = document.createElement("p");
+                        time.setAttribute("class", "textTime");
+                        time.innerText = getTime(
+                            periods_h[hourlyIndex[day][i]].startTime
+                        );
+
+                        // temperature
+                        let temp = document.createElement("p");
+                        temp.setAttribute("class", "todayHourlyTime");
+                        temp.innerText = `${
+                            periods_h[hourlyIndex[day][i]].temperature
+                        }°`;
+
+                        // icon
+                        let icon = document.createElement("img");
+                        icon.setAttribute(
+                            "src",
+                            getIcon(
+                                periods_h[hourlyIndex[day][i]].shortForecast,
+                                periods_h[hourlyIndex[day][i]].isDaytime
+                            )
+                        );
+                        icon.setAttribute("class", "iconSmall");
+                        icon.setAttribute(
+                            "title",
+                            periods_h[hourlyIndex[day][i]].shortForecast
+                        );
+
+                        // Append everything
+                        container.appendChild(time);
+                        container.appendChild(temp);
+                        container.appendChild(icon);
+                        sectionHourly.appendChild(container);
+                    }
+                }
+            }
+
+            function closeHourly() {
+                if (mobile) {
+                    let detailedDaily = document.getElementById(
+                        "detailedDailyMOBILE"
+                    );
+                    detailedDaily.style.marginLeft = "100vw";
+                    setTimeout(() => {
+                        detailedDaily.setAttribute("hidden", "true");
+                    }, 200);
+                } else {
+                    // Reset close icon to main menu icon
+                    document.getElementById("menuButton").style.flexDirection =
+                        "row";
+                    document.getElementById("menuIcon").innerText =
+                        "chevron_forward";
+                    document.getElementById("locationName").innerText =
+                        currentLocationName;
+                    document.getElementById("menuButton").onclick = () => {
+                        toggleLocationPicker();
+                    };
+
+                    // Slide out of hourly forecast
+                    let sectionsContainer =
+                        document.getElementById("sectionsContainer");
+                    sectionsContainer.style.width = "100vw";
+                    sectionsContainer.style.marginLeft = "0";
+
+                    // Hide hourly section
+                    document
+                        .getElementById("hourly")
+                        .setAttribute("hidden", true);
+                }
+            }
+
+            async function updateLocationAutofill() {
+                let container;
+                let input;
+                let itemClassName;
+                if (mobile) {
+                    container = document.getElementById(
+                        "locationAutofillMOBILE"
+                    );
+                    input = document.getElementById("locationInputMOBILE");
+                    itemClassName = "locationAutofillItemMOBILE";
+                } else {
+                    container = document.getElementById("locationAutofill");
+                    input = document.getElementById("locationInputv2");
+                    itemClassName = "locationAutofillItem";
+                }
+                const address = input.value;
+                const url =
+                    "https://nominatim.openstreetmap.org/search?q=" +
+                    address +
+                    "&format=jsonv2";
+
+                if (address == "") {
+                    // If there isn't any text, delete previous suggestions instead of loading and using api first
+                    container.innerHTML = "";
+                } else {
+                    setTimeout(async () => {
+                        if (address == input.value) {
+                            try {
+                                // Say that its loading
+                                container.innerHTML = "";
+                                let loading = document.createElement("div");
+                                loading.setAttribute("class", itemClassName);
+                                loading.innerText = "Loading...";
+                                container.appendChild(loading);
+
+                                // Fetch data and show options
+                                const response = await fetch(url);
+                                const data = await response.json();
+                                console.log(
+                                    "Location autofill data for ",
+                                    address,
+                                    data
+                                );
+
+                                container.innerHTML = "";
+
+                                for (let i = 0; i < data.length; i++) {
+                                    let coordinates = [
+                                        data[i].lat,
+                                        data[i].lon,
+                                    ];
+                                    let item = document.createElement("div");
+                                    item.setAttribute("class", itemClassName);
+                                    item.innerText = data[i].display_name;
+                                    if (userData[0]) {
+                                        item.onclick = async () => {
+                                            fetchWeather(coordinates);
+                                            let name = await fetchWeather(
+                                                coordinates,
+                                                true
+                                            );
+                                            addToMenu(name, coordinates);
+                                            if (mobile) {
+                                                document.getElementById(
+                                                    "locationInputMOBILE"
+                                                ).value = "";
+                                            } else {
+                                                document.getElementById(
+                                                    "locationInputv2"
+                                                ).value = "";
+                                            }
+                                            container.innerHTML = "";
+                                        };
+                                    } else {
+                                        item.onclick = async () => {
+                                            fetchWeather(coordinates);
+                                            let name = await fetchWeather(
+                                                coordinates,
+                                                true
+                                            );
+                                            addToMenu(name, coordinates, true);
+                                            if (mobile) {
+                                                document.getElementById(
+                                                    "locationInputMOBILE"
+                                                ).value = "";
+                                            } else {
+                                                document.getElementById(
+                                                    "locationInputv2"
+                                                ).value = "";
+                                            }
+                                            container.innerHTML = "";
+                                            userData[0] = true;
+                                            userData[1] = visitorId;
+                                            userData[3] = [
+                                                [
+                                                    coordinates[0],
+                                                    coordinates[1],
+                                                    name,
+                                                    "place",
+                                                ],
+                                            ];
+                                            setRow([
+                                                userData[1],
+                                                version,
+                                                [
+                                                    coordinates[0],
+                                                    coordinates[1],
+                                                    name,
+                                                    "place",
+                                                ],
+                                            ]);
+                                            updateMenu();
+                                        };
+                                    }
+
+                                    container.appendChild(item);
+                                }
+                            } catch (error) {
+                                console.log(
+                                    "Error autofilling locations. Trying again..."
+                                );
+                                updateLocationAutofill();
+                            }
+                        }
+                    }, 500);
+                }
+            }
+
+            function openLocationContextMenu(x, y, content) {
+                // Content = [[icon, text, onclick], [icon, text, onclick]]
+
+                console.log(x, y);
+                let menu;
+                if (mobile) {
+                    menu = document.getElementById("locationContextMenuMOBILE");
+                } else {
+                    menu = document.getElementById("locationContextMenu");
+                }
+                // Un-hide menu
+                menu.removeAttribute("hidden");
+
+                let maxTopValue = window.innerHeight - menu.offsetHeight - 5;
+                let maxLeftValue = window.innerWidth - menu.offsetWidth - 5;
+
+                menu.style.top = `${Math.min(maxTopValue, y)}px`;
+                menu.style.left = `${Math.min(maxLeftValue, x)}px`;
+
+                // Clear menu
+                menu.innerHTML = "";
+
+                // Buttons inside menu
+                for (let i = 0; i < content.length; i++) {
+                    // Button
+                    let container = document.createElement("li");
+                    container.setAttribute("class", "locationContextMenuItem");
+                    container.onclick = content[i][2];
+
+                    // Icon inside button
+                    let saveIcon = document.createElement("span");
+                    saveIcon.setAttribute(
+                        "class",
+                        "material-symbols-outlined locationContextMenuItemIcon"
+                    );
+                    saveIcon.innerText = content[i][0];
+
+                    // Text
+                    let saveText = document.createElement("p");
+                    saveText.setAttribute(
+                        "class",
+                        "locationContextMenuItemText"
+                    );
+                    saveText.innerText = content[i][1];
+
+                    // Append to menu
+                    container.appendChild(saveIcon);
+                    container.appendChild(saveText);
+                    menu.appendChild(container);
+                }
+            }
+
+            let menuOpen = false;
+
+            function toggleLocationPicker(setTo = null) {
+                // Decide whether to open or close the menu
+                let setMenuTo;
+                if (setTo === true) {
+                    setMenuTo = true;
+                } else if (setTo === false) {
+                    setMenuTo = false;
+                } else {
+                    setMenuTo = !menuOpen;
+                }
+                if (mobile) {
+                    const menu = document.getElementById("mainMenuMOBILE");
+
+                    if (setMenuTo) {
+                        menuOpen = true;
+                        menu.removeAttribute("hidden");
+                        setTimeout(() => {
+                            menu.style.opacity = "1";
+                        }, 1);
+                    } else {
+                        menuOpen = false;
+                        menu.style.opacity = "0";
+                        setTimeout(() => {
+                            menu.setAttribute("hidden", true);
+                        }, 200);
+                    }
+                } else {
+                    const menu = document.getElementById("locationMenuv2");
+
+                    if (setMenuTo) {
+                        menuOpen = true;
+                        menu.removeAttribute("hidden");
+                        setTimeout(() => {
+                            menu.style.opacity = "1";
+                        }, 1);
+                    } else {
+                        menuOpen = false;
+                        menu.style.opacity = "0";
+                        setTimeout(() => {
+                            menu.setAttribute("hidden", true);
+                        }, 200);
+                    }
+                }
+            }
+
+            function setLoading(setTo) {
+                let loading;
+                if (mobile) {
+                    loading = document.getElementById("loadingMOBILE");
+                } else {
+                    loading = document.getElementById("loading");
+                }
+
+                if (setTo === true) {
+                    loading.removeAttribute("hidden");
+                    setTimeout(() => {
+                        loading.style.opacity = "1";
+                    }, 1);
+                } else {
+                    loading.style.opacity = "0";
+                    setTimeout(() => {
+                        loading.setAttribute("hidden", "true");
+                    }, 200);
+                }
+            }
+
+            async function fetchLocation(text, returnCoordinates = false) {
+                toggleLocationPicker(false);
+                setLoading(true);
+
+                let address = text;
+
+                const url =
+                    "https://nominatim.openstreetmap.org/search?q=" +
+                    address +
+                    "&format=jsonv2";
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    console.log("Location data for ", address, data);
+
+                    const lat = data[0].lat;
+                    const long = data[0].lon;
+                    if (returnCoordinates) {
+                        console.log([lat, long]);
+                        return [lat, long];
+                    } else {
+                        fetchWeather([lat, long]);
+                    }
+
+                    if (mobile) {
+                        let locationContainer = document.createElement("div");
+                        locationContainer.setAttribute(
+                            "class",
+                            "menuLocationContainerMOBILE"
+                        );
+
+                        let locationContentContainer =
+                            document.createElement("div");
+                        locationContentContainer.setAttribute(
+                            "class",
+                            "menuLocationContentContainerMOBILE"
+                        );
+                        locationContentContainer.onclick = function () {
+                            fetchWeather([lat, long]);
+                        };
+
+                        let threeDot = document.createElement("button");
+                        threeDot.setAttribute("class", "threeDotMOBILE");
+                        threeDot.addEventListener("click", (ev) => {
+                            const x = ev.clientX;
+                            const y = ev.clientY;
+                            openLocationContextMenu(x, y);
+                        });
+                        let threeDotIcon = document.createElement("span");
+                        threeDotIcon.setAttribute(
+                            "class",
+                            "material-symbols-outlined"
+                        );
+                        threeDotIcon.innerText = "more_horiz";
+                        threeDot.appendChild(threeDotIcon);
+
+                        let locationIcon = document.createElement("span");
+                        locationIcon.setAttribute(
+                            "class",
+                            "material-symbols-outlined"
+                        );
+                        locationIcon.innerText = "place";
+
+                        let locationName = document.createElement("p");
+                        locationName.setAttribute("class", "locationCardText");
+                        let name;
+                        if (data[0].name == "") {
+                            name = await fetchWeather([lat, long], true);
+                            locationName.innerText = name;
+                        } else {
+                            name = data[0].name;
+                            locationName.innerText = name;
+                        }
+
+                        locationContentContainer.appendChild(locationIcon);
+                        locationContentContainer.appendChild(locationName);
+                        locationContainer.appendChild(locationContentContainer);
+                        locationContainer.appendChild(threeDot);
+
+                        if (userData[0]) {
+                            document
+                                .getElementById("recentLocationsMOBILE")
+                                .appendChild(locationContainer);
+                        } else {
+                            document
+                                .getElementById("savedLocationsMOBILE")
+                                .appendChild(locationContainer);
+                            saveLocation([lat, long], name, "place");
+                        }
+                    } else {
+                        let locationContainer =
+                            document.createElement("button");
+                        locationContainer.setAttribute("class", "locationCard");
+                        locationContainer.onclick = function () {
+                            fetchWeather([lat, long]);
+                        };
+
+                        let threeDot = document.createElement("button");
+                        threeDot.setAttribute("class", threeDot);
+                        threeDot.addEventListener("click", (ev) => {
+                            const x = ev.clientX;
+                            const y = ev.clientY;
+                            openLocationContextMenu(x, y);
+                        });
+                        let threeDotIcon = document.createElement("span");
+                        threeDotIcon.setAttribute(
+                            "class",
+                            "material-symbols-outlined"
+                        );
+                        threeDotIcon.innerText = "more_horiz";
+                        threeDot.appendChild(threeDotIcon);
+
+                        let locationIcon = document.createElement("span");
+                        locationIcon.setAttribute(
+                            "class",
+                            "material-symbols-outlined locationCardIcon"
+                        );
+                        locationIcon.innerText = "place";
+
+                        let locationName = document.createElement("p");
+                        locationName.setAttribute("class", "locationCardText");
+                        let name;
+                        if (data[0].name == "") {
+                            name = await fetchWeather([lat, long], true);
+                            locationName.innerText = name;
+                        } else {
+                            name = data[0].name;
+                            locationName.innerText = name;
+                        }
+
+                        locationContainer.appendChild(threeDot);
+                        locationContainer.appendChild(locationIcon);
+                        locationContainer.appendChild(locationName);
+
+                        if (userData[0]) {
+                            document
+                                .getElementById("recentLocationsv2")
+                                .appendChild(locationContainer);
+                        } else {
+                            document
+                                .getElementById("savedLocationsv2")
+                                .appendChild(locationContainer);
+                            saveLocation([lat, long], name, "place");
+                        }
+                    }
+                } catch (error) {
+                    alert(
+                        "We couldn't find ",
+                        address,
+                        ". Try reloading the page and using a different location name."
+                    );
+                    console.error("Error getting location", error);
+                    document.getElementById("error").removeAttribute("hidden");
+                }
+                // TODO: fix this
+            }
+
+            let selectedIcon = "place";
+            let coordinatesToSave;
+            function selectIcon(element) {
+                selectedIcon = element.innerText;
+                console.log("Selected Icon: ", element.innerText);
+
+                let allElementsInDiv;
+                if (mobile) {
+                    allElementsInDiv = document
+                        .getElementById("iconGridMOBILE")
+                        .querySelectorAll("*");
+                } else {
+                    allElementsInDiv = document
+                        .getElementById("iconGrid")
+                        .querySelectorAll("*");
+                }
+                for (let i = 0; i < allElementsInDiv.length; i++) {
+                    allElementsInDiv[i].style.border = "0";
+                }
+                element.style.border = "1px solid black";
+            }
+
+            function addToMenu(
+                name,
+                coordinates,
+                addToSaved = false,
+                icon = "place"
+            ) {
+                if (mobile) {
+                    let locationContainer = document.createElement("div");
+                    locationContainer.setAttribute(
+                        "class",
+                        "menuLocationContainerMOBILE"
+                    );
+                    locationContainer.onclick = () => {
+                        fetchWeather(coordinates);
+                    };
+
+                    let threeDot = document.createElement("button");
+                    threeDot.setAttribute("class", "threeDotMOBILE");
+                    threeDot.addEventListener("click", (ev) => {
+                        ev.stopPropagation();
+                        const x = ev.clientX;
+                        const y = ev.clientY;
+                        if (addToSaved) {
+                            openLocationContextMenu(x, y, [
+                                [
+                                    "delete",
+                                    "Delete location",
+                                    () => {
+                                        for (
+                                            let i = 0;
+                                            i < userData[3].length;
+                                            i++
+                                        ) {
+                                            if (
+                                                coordinates[0] ==
+                                                    userData[3][i][0] &&
+                                                coordinates[1] ==
+                                                    userData[3][i][1]
+                                            ) {
+                                                console.log(
+                                                    "Location to delete found ",
+                                                    i
+                                                );
+                                                userData[3].splice(i, 1);
+
+                                                // Format locations to save to sheet
+                                                let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]},${userData[3][0][2]},${userData[3][0][3]}`;
+                                                for (
+                                                    let i = 1;
+                                                    i < userData[3].length;
+                                                    i++
+                                                ) {
+                                                    formattedLocation =
+                                                        formattedLocation +
+                                                        `;${userData[3][i][0]},${userData[3][i][1]},${userData[3][i][2]},${userData[3][i][3]}`;
+                                                }
+                                                console.log(
+                                                    "Formatted location to save: ",
+                                                    formattedLocation
+                                                );
+                                                setCell("C", formattedLocation);
+                                                updateMenu();
+                                            }
+                                        }
+                                    },
+                                ],
+                            ]);
+                        } else {
+                            openLocationContextMenu(x, y, [
+                                [
+                                    "add",
+                                    "Save location",
+                                    () => {
+                                        coordinatesToSave = coordinates;
+                                        document
+                                            .getElementById(
+                                                "locationSaveMenuMOBILE"
+                                            )
+                                            .removeAttribute("hidden");
+                                        document.getElementById(
+                                            "locationSaveMenuInputMOBILE"
+                                        ).value = name;
+                                    },
+                                ],
+                            ]);
+                        }
+                    });
+
+                    let threeDotIcon = document.createElement("span");
+                    threeDotIcon.setAttribute(
+                        "class",
+                        "material-symbols-outlined"
+                    );
+                    threeDotIcon.innerText = "more_horiz";
+                    threeDot.appendChild(threeDotIcon);
+
+                    let locationIcon = document.createElement("span");
+                    locationIcon.setAttribute(
+                        "class",
+                        "material-symbols-outlined"
+                    );
+                    locationIcon.innerText = icon;
+
+                    let locationName = document.createElement("p");
+                    locationName.setAttribute(
+                        "class",
+                        "menuLocationNameMOBILE"
+                    );
+                    locationName.innerText = name;
+
+                    locationContainer.appendChild(threeDot);
+                    locationContainer.appendChild(locationIcon);
+                    locationContainer.appendChild(locationName);
+
+                    if (addToSaved) {
+                        document
+                            .getElementById("savedLocationsMOBILE")
+                            .appendChild(locationContainer);
+                    } else {
+                        document
+                            .getElementById("recentLocationsMOBILE")
+                            .appendChild(locationContainer);
+                    }
+                } else {
+                    let locationContainer = document.createElement("div");
+                    locationContainer.setAttribute("class", "locationCard");
+                    locationContainer.onclick = () => {
+                        fetchWeather(coordinates);
+                    };
+
+                    let threeDot = document.createElement("button");
+                    threeDot.setAttribute("class", "threeDot");
+                    threeDot.addEventListener("click", (ev) => {
+                        ev.stopPropagation();
+                        const x = ev.clientX;
+                        const y = ev.clientY;
+                        if (addToSaved) {
+                            openLocationContextMenu(x, y, [
+                                [
+                                    "delete",
+                                    "Delete location",
+                                    () => {
+                                        for (
+                                            let i = 0;
+                                            i < userData[3].length;
+                                            i++
+                                        ) {
+                                            if (
+                                                coordinates[0] ==
+                                                    userData[3][i][0] &&
+                                                coordinates[1] ==
+                                                    userData[3][i][1]
+                                            ) {
+                                                console.log(
+                                                    "Location to delete found ",
+                                                    i
+                                                );
+                                                userData[3].splice(i, 1);
+
+                                                // Format locations to save to sheet
+                                                let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]},${userData[3][0][2]},${userData[3][0][3]}`;
+                                                for (
+                                                    let i = 1;
+                                                    i < userData[3].length;
+                                                    i++
+                                                ) {
+                                                    formattedLocation =
+                                                        formattedLocation +
+                                                        `;${userData[3][i][0]},${userData[3][i][1]},${userData[3][i][2]},${userData[3][i][3]}`;
+                                                }
+                                                console.log(
+                                                    "Formatted location to save: ",
+                                                    formattedLocation
+                                                );
+                                                setCell("C", formattedLocation);
+                                                updateMenu();
+                                            }
+                                        }
+                                    },
+                                ],
+                            ]);
+                        } else {
+                            openLocationContextMenu(x, y, [
+                                [
+                                    "add",
+                                    "Save location",
+                                    () => {
+                                        coordinatesToSave = coordinates;
+                                        document
+                                            .getElementById("locationSaveMenu")
+                                            .removeAttribute("hidden");
+                                        document.getElementById(
+                                            "locationSaveMenuInput"
+                                        ).value = name;
+                                    },
+                                ],
+                            ]);
+                        }
+                    });
+                    let threeDotIcon = document.createElement("span");
+                    threeDotIcon.setAttribute(
+                        "class",
+                        "material-symbols-outlined"
+                    );
+                    threeDotIcon.innerText = "more_horiz";
+                    threeDot.appendChild(threeDotIcon);
+
+                    let locationIcon = document.createElement("span");
+                    locationIcon.setAttribute(
+                        "class",
+                        "material-symbols-outlined locationCardIcon"
+                    );
+                    locationIcon.innerText = icon;
+
+                    let locationName = document.createElement("p");
+                    locationName.setAttribute("class", "locationCardText");
+                    locationName.innerText = name;
+
+                    locationContainer.appendChild(threeDot);
+                    locationContainer.appendChild(locationIcon);
+                    locationContainer.appendChild(locationName);
+
+                    if (addToSaved) {
+                        document
+                            .getElementById("savedLocationsv2")
+                            .appendChild(locationContainer);
+                    } else {
+                        document
+                            .getElementById("recentLocationsv2")
+                            .appendChild(locationContainer);
+                    }
+                }
+            }
+
+            async function getCurrentLocation() {
+                // Get IP address
+                fetch("https://api.ipify.org/?format=json")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("IP address successful: ", data.ip);
+                        fetch("https://free.freeipapi.com/api/json/" + data.ip)
+                            .then((response) => response.json())
+                            .then((data2) => {
+                                console.log(
+                                    "IP Location successful: ",
+                                    data2.cityName,
+                                    data2.regionName
+                                );
+                                fetchWeather([data2.latitude, data2.longitude]);
+                            })
+                            .catch((error) => {
+                                console.error(
+                                    "Error fetching IP location:",
+                                    error
+                                );
+                                document
+                                    .getElementById("error")
+                                    .removeAttribute("hidden");
+                            });
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching IP address:", error);
+                        document
+                            .getElementById("error")
+                            .removeAttribute("hidden");
+                    });
+            }
+        </script>
+    </head>
+    <body id="body" class="text">
+        <div id="error" class="fullscreen error" hidden>
+            <p class="loadingTextBig">ERROR</p>
+            <p class="loadingTextSmall">
+                Try clicking "Try again" first. If that doesn't fix the problem,
+                click "Reset my data", wait 30 seconds, then click "try again"
+            </p>
+            <button class="setupButton" onclick="location.reload()">
+                Try Again</button
+            ><br />
+            <button
+                class="setupButton"
+                onclick="{this.innerText = '...';setCell('A', '');setCell('B', '');setCell(
+                    'C','');}"
+            >
+                Reset my Data
+            </button>
+            <br />
+        </div>
+        <div class="overlay overlayTop" hidden id="actionOverlay"></div>
+        <div id="desktop">
+            <div
+                class="fullscreen locationNotFoundPage"
+                id="locationNotFound"
+                hidden
+            >
+                <h1>Location not found</h1>
+                <p>
+                    SamWeather only supports locations in the United States
+                    right now.
+                </p>
+                <button>Ok</button>
+            </div>
+            <div class="fullscreen locationMenuv2" id="locationMenuv2">
+                <div class="locationSaveMenu" id="locationSaveMenu" hidden>
+                    <h2 class="locationSaveMenuHeader">Save Location</h2>
+                    <p class="locationSaveMenuText">Name:</p>
+                    <input
+                        type="text"
+                        class="locationSaveMenuInput"
+                        id="locationSaveMenuInput"
+                        placeholder="Name of location"
+                    />
+                    <br />
+                    <p class="locationSaveMenuText">Icon:</p>
+                    <div class="iconGrid" id="iconGrid">
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            style="border: 1px solid black"
+                            onclick="selectIcon(this)"
+                            >place</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >home</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >house</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >business</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >castle</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >chalet</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >cabin</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >cottage</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >holiday_village</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >location_city</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >globe</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >apartment</span
+                        >
+                    </div>
+                    <button
+                        class="locationSaveButton"
+                        onclick="{saveLocation(coordinatesToSave, document.getElementById('locationSaveMenuInput').value, selectedIcon); document.getElementById('locationSaveMenu').setAttribute('hidden', 'true'); document.getElementById('locationSaveMenuInput').value = '';}"
+                    >
+                        Save
+                    </button>
+                    <button
+                        class="locationSaveButton"
+                        onclick="{document.getElementById('locationSaveMenu').setAttribute('hidden', 'true'); document.getElementById('locationSaveMenuInput').value = '';}"
+                    >
+                        Cancel
+                    </button>
+                </div>
+                <ul class="locationContextMenu" id="locationContextMenu" hidden>
+                    <li class="locationContextMenuItem">
+                        <span
+                            class="material-symbols-outlined locationContextMenuItemIcon"
+                            >add</span
+                        >
+                        <p class="locationContextMenuItemText">idk</p>
+                    </li>
+                    <li class="locationContextMenuItem">
+                        <span
+                            class="material-symbols-outlined locationContextMenuItemIcon"
+                            >add</span
+                        >
+                        <p class="locationContextMenuItemText">idk2</p>
+                    </li>
+                </ul>
+                <h1 class="locationMenuHeader">SamWeather</h1>
+                <div class="locationInputContainerv2">
+                    <input
+                        class="locationInputv2"
+                        id="locationInputv2"
+                        placeholder="Where do you want to see weather for?"
+                        onclick="document.getElementById('locationInputv2').placeholder='Enter an address or town name'"
+                        oninput="updateLocationAutofill()"
+                    />
+                    <button
+                        class="locationSubmitv2"
+                        onclick="{fetchLocation(document.getElementById('locationInputv2').value);document.getElementById('locationInputv2').value = ''}"
+                    >
+                        <span class="material-symbols-outlined">Search</span>
+                    </button>
+                    <div
+                        id="locationAutofill"
+                        class="locationAutofillContainer"
+                    ></div>
+                </div>
+                <p class="locationGroupHeader">Saved locations</p>
+                <div class="locationGroupContainer" id="savedLocationsv2">
+                    <div class="locationCard locationCardDouble">
+                        <p class="locationCardText">
+                            Search for a location to get started.
+                        </p>
+                    </div>
+                </div>
+                <p class="locationGroupHeader">Recent locations</p>
+                <div
+                    class="locationGroupContainer"
+                    id="recentLocationsv2"
+                ></div>
+            </div>
+            <div class="loading text" id="loading">
+                <p class="loadingTextBig">SamWeather</p>
+                <p class="loadingTextSmall">Version 7.1</p>
+            </div>
+            <div
+                class="overlay"
+                hidden
+                id="overlay"
+                onclick="toggleLocationPicker(false)"
+            ></div>
+            <div class="menu" id="mainMenu">
+                <div class="menuHeader">
+                    <p class="header">Locations</p>
+                    <button
+                        class="menuButton menuButtonAnimated"
+                        onclick="toggleLocationPicker()"
+                    >
+                        <span
+                            class="material-symbols-outlined detailsIcon menuIcon text"
+                        >
+                            close
+                        </span>
+                    </button>
+                </div>
+                <br />
+                <div class="locationPicker">
+                    <input
+                        class="locationInput"
+                        id="address"
+                        placeholder="Where do you want to see weather for?"
+                        type="text"
+                        onclick="this.placeholder = 'enter an address or town name'"
+                    />
+                    <button
+                        class="locationSubmit"
+                        id="locationSubmit"
+                        onclick="fetchLocation(document.getElementById('address').value)"
+                    >
+                        <span class="material-symbols-outlined">Search</span>
+                    </button>
+                </div>
+                <div id="savedLocations">
+                    <p>Saved Locations</p>
+                    <div class="locationButton">
+                        <span class="material-symbols-outlined locationIcon"
+                            >near_me</span
+                        >
+                        <p class="locationText">Current Location</p>
+                    </div>
+                </div>
+                <div id="recentLocations">
+                    <p>Recent Locations</p>
+                    <br />
+                </div>
+            </div>
+            <div class="titleBar bgTop" id="titleBar">
+                <div class="topTitleBar">
+                    <button
+                        class="menuButtonContainer text"
+                        id="menuButton"
+                        onclick="toggleLocationPicker()"
+                    >
+                        <p class="locationName" id="locationName">
+                            Yarmouth ME
+                        </p>
+                        <span
+                            class="material-symbols-outlined menuIcon menuIconAnimated text"
+                            id="menuIcon"
+                        >
+                            chevron_forward
+                        </span>
+                    </button>
+                    <h1>SamWeather</h1>
+                    <p>Version 7.1</p>
+                </div>
+            </div>
+            <div class="sectionsContainer" id="sectionsContainer">
+                <div class="section sectionNow" id="now">
+                    <div class="conditionsContainer" id="conditionsContainer">
+                        <img class="iconBig" id="nowIcon" />
+                        <div class="textBig" id="nowTemp">--°</div>
+                    </div>
+                    <p class="description" id="nowDescrip">Loading...</p>
+                    <div class="detailsContainer">
+                        <span class="material-symbols-outlined detailsIcon">
+                            water_drop
+                        </span>
+                        <div class="detailsContainerStacked">
+                            <p class="nowDescripLabel">Precipitation</p>
+                            <p class="nowDescripText" id="nowPrecip">--%</p>
+                        </div>
+                    </div>
+                    <div class="detailsContainer">
+                        <span class="material-symbols-outlined detailsIcon">
+                            Thermostat
+                        </span>
+                        <div class="detailsContainerStacked">
+                            <p class="nowDescripLabel">Feels Like</p>
+                            <p class="nowDescripText" id="nowFeelsLike">-- °</p>
+                        </div>
+                    </div>
+                    <div class="detailsContainer">
+                        <span class="material-symbols-outlined detailsIcon"
+                            >air</span
+                        >
+                        <div class="detailsContainerStacked">
+                            <p class="nowDescripLabel">Wind</p>
+                            <p class="nowDescripText" id="nowWind">-- MPH</p>
+                        </div>
+                    </div>
+                    <div class="detailsContainer">
+                        <span class="material-symbols-outlined detailsIcon">
+                            Mist
+                        </span>
+                        <div class="detailsContainerStacked">
+                            <p class="nowDescripLabel">Humidity</p>
+                            <p class="nowDescripText" id="nowHumid">-- °</p>
+                        </div>
+                    </div>
+                    <div
+                        class="todayHourlyContainer"
+                        id="todayHourlyContainer"
+                    ></div>
+                </div>
+
+                <div class="section" id="daily"></div>
+                <div class="section" id="hourly" hidden></div>
+            </div>
+        </div>
+        <div hidden id="mobile">
+            <div class="fullscreen" id="setup0MOBILE" hidden>
+                <p class="welcome">Welcome to SamWeather</p>
+                <button class="setupButtonMOBILE" onclick="setup()">
+                    Get Started!
+                </button>
+                <br />
+                <button
+                    class="setupButtonMOBILE setupButtonSecondary"
+                    style="
+                        background-color: transparent;
+                        color: rgb(29 29 135 / 69%);
+                        border: 2px #4a4fa7 solid;
+                    "
+                    onclick="{setLoading(true);
+                        document.getElementById('setup0MOBILE').setAttribute('hidden', 'true');
+                        setupSoFar = -1;}"
+                >
+                    skip for now
+                </button>
+            </div>
+            <div class="loadingMOBILE text bgTop" id="loadingMOBILE">
+                <p class="loadingTextBigMOBILE">SamWeather</p>
+                <p class="loadingTextSmallMOBILE">Version 7.1</p>
+            </div>
+            <div class="mainMenuMOBILE bgTop" hidden id="mainMenuMOBILE">
+                <div class="menuHeaderMOBILE">
+                    <p>SamWeather</p>
+                    <button
+                        class="menuButton"
+                        onclick="toggleLocationPicker(false)"
+                    >
+                        <span class="material-symbols-outlined"> close </span>
+                    </button>
+                </div>
+                <div
+                    class="locationSaveMenuMOBILE"
+                    id="locationSaveMenuMOBILE"
+                    hidden
+                >
+                    <h2 class="locationSaveMenuHeader">Save Location</h2>
+                    <p class="locationSaveMenuText">Name:</p>
+                    <input
+                        type="text"
+                        class="locationSaveMenuInput"
+                        id="locationSaveMenuInputMOBILE"
+                        placeholder="Name of location"
+                    />
+                    <br />
+                    <p class="locationSaveMenuText">Icon:</p>
+                    <div class="iconGrid" id="iconGridMOBILE">
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            style="border: 1px solid black"
+                            onclick="selectIcon(this)"
+                            >place</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >home</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >house</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >business</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >castle</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >chalet</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >cabin</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >cottage</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >holiday_village</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >location_city</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >globe</span
+                        >
+                        <span
+                            class="material-symbols-outlined iconGridItem"
+                            onclick="selectIcon(this)"
+                            >apartment</span
+                        >
+                    </div>
+                    <button
+                        class="locationSaveButtonMOBILE"
+                        onclick="{saveLocation(coordinatesToSave, document.getElementById('locationSaveMenuInputMOBILE').value, selectedIcon); document.getElementById('locationSaveMenuMOBILE').setAttribute('hidden', 'true'); document.getElementById('locationSaveMenuInputMOBILE').value = '';}"
+                    >
+                        Save
+                    </button>
+                    <button
+                        class="locationSaveButtonMOBILE"
+                        onclick="{document.getElementById('locationSaveMenuMOBILE').setAttribute('hidden', 'true'); document.getElementById('locationSaveMenuInputMOBILE').value = '';}"
+                    >
+                        Cancel
+                    </button>
+                </div>
+                <ul
+                    class="locationContextMenu"
+                    id="locationContextMenuMOBILE"
+                    hidden
+                ></ul>
+                <div class="locationInputContainerv2MOBILE">
+                    <div class="locationPickerMOBILE">
+                        <input
+                            class="locationInputMOBILE"
+                            id="locationInputMOBILE"
+                            placeholder="Enter an address or town name"
+                            type="text"
+                            oninput="updateLocationAutofill()"
+                        />
+                        <button
+                            onclick="fetchLocation(document.getElementById('locationInputMOBILE').value)"
+                            class="locationSubmitMOBILE"
+                        >
+                            <span class="material-symbols-outlined"
+                                >Search</span
+                            >
+                        </button>
+                    </div>
+                    <div
+                        id="locationAutofillMOBILE"
+                        class="locationAutofillContainerMOBILE"
+                    ></div>
+                </div>
+
+                <div id="savedLocationsMOBILE">
+                    <p class="menuTextSmallMOBILE">Saved Locations</p>
+                    <div class="menuLocationContainerMOBILE">
+                        <div class="menuLocationContentContainerMOBILE">
+                            <p class="menuLocationNameMOBILE">
+                                Search for a location to get started.
+                            </p>
+                        </div>
+                        <div
+                            class="locationActionMenuMOBILE"
+                            id="testThreeDot"
+                            hidden
+                        >
+                            <button class="locationActionButtonMOBILE">
+                                <span
+                                    class="material-symbols-outlined actionIcon text"
+                                    >delete</span
+                                >
+                                <p>Delete</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="recentLocationsMOBILE">
+                    <p class="menuTextSmallMOBILE">Recent Locations</p>
+                </div>
+            </div>
+            <div id="homeScreenMOBILE" class="homeScreenMOBILE">
+                <div class="titleBarMOBILE" id="titleBarMOBILE">
+                    <div
+                        class="locationNameContainerMOBILE"
+                        onclick="toggleLocationPicker()"
+                    >
+                        <p id="locationNameMOBILE">Loading...</p>
+                        <span
+                            class="material-symbols-outlined locationNameArrowMOBILE"
+                            >chevron_forward</span
+                        >
+                    </div>
+                </div>
+                <div class="currentWeatherMOBILE">
+                    <img class="iconBigMOBILE" id="nowIconMOBILE" />
+                    <p class="nowTempMOBILE" id="nowTempMOBILE">--</p>
+                </div>
+                <p class="descriptionMOBILE" id="nowDescripMOBILE">
+                    Loading...
+                </p>
+                <div class="detailsContainerMOBILE">
+                    <span class="material-symbols-outlined">water_drop</span>
+                    <p id="nowPrecipMOBILE" class="detailsTextMOBILE">--%</p>
+                </div>
+                <div class="detailsContainerMOBILE">
+                    <span class="material-symbols-outlined">Thermostat</span>
+                    <p id="nowFeelsLikeMOBILE" class="detailsTextMOBILE">--°</p>
+                </div>
+                <div class="detailsContainerMOBILE">
+                    <span class="material-symbols-outlined">air</span>
+                    <p id="nowWindMOBILE" class="detailsTextMOBILE">-- MPH</p>
+                </div>
+                <div class="detailsContainerMOBILE">
+                    <span class="material-symbols-outlined">Mist</span>
+                    <p id="nowHumidityMOBILE" class="detailsTextMOBILE">--%</p>
+                </div>
+                <div class="hourlyContainerMOBILE" id="hourlyContainerMOBILE">
+                    <select
+                        id="hourlyChoiceMOBILE"
+                        class="hourlyChoiceMOBILE text"
+                        onchange="changeHourly()"
+                    >
+                        <optgroup label="show hourly for"></optgroup>
+                        <option>Temperature</option>
+                        <option>Feels Like</option>
+                        <option>Precipitation</option>
+                    </select>
+                    <div
+                        class="scrollingHourlyContainerMOBILE"
+                        id="scrollingHourlyContainerMOBILE"
+                    ></div>
+                </div>
+                <div
+                    class="dailyContainerMOBILE"
+                    id="dailyContainerMOBILE"
+                ></div>
+            </div>
+            <div
+                id="detailedDailyMOBILE"
+                class="detailedDailyMOBILE bgTop"
+                hidden
+            >
+                <div class="titleBarMOBILE">
+                    <div
+                        class="locationNameContainerMOBILE"
+                        onclick="closeHourly()"
+                    >
+                        <span
+                            class="material-symbols-outlined locationNameArrowMOBILE"
+                            >chevron_backward</span
+                        >
+                        <p class="locationNameMOBILE">Back</p>
+                    </div>
+                    <p class="locationNameMOBILE" id="dayNameMOBILE">--</p>
+                    <p></p>
+                </div>
+                <div class="currentWeatherMOBILE">
+                    <img class="iconBigMOBILE" id="dailyIconMOBILE" />
+                    <p class="nowTempMOBILE" id="dailyTempMOBILE">--</p>
+                </div>
+
+                <p class="descriptionMOBILE" id="dailyDescripMOBILE">
+                    Loading...
+                </p>
+
+                <div
+                    class="dailyContainerMOBILE"
+                    id="sectionHourlyMOBILE"
+                ></div>
+            </div>
+        </div>
+    </body>
+</html>

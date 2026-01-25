@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+<head>
+    <title>SamWeather Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+        rel="stylesheet"
+    />
+    <style>
+        body {
+            background-color: black;
+            font-family: "quicksand";
+            background-image: linear-gradient(black, white);
+            transition-duration: 1s;
+            transition-timing-function: linear(
+                0 0%,
+                0 1.8%,
+                0.01 3.6%,
+                0.03 6.35%,
+                0.07 9.1%,
+                0.13 11.4%,
+                0.19 13.4%,
+                0.27 15%,
+                0.34 16.1%,
+                0.54 18.35%,
+                0.66 20.6%,
+                0.72 22.4%,
+                0.77 24.6%,
+                0.81 27.3%,
+                0.85 30.4%,
+                0.88 35.1%,
+                0.92 40.6%,
+                0.94 47.2%,
+                0.96 55%,
+                0.98 64%,
+                0.99 74.4%,
+                1 86.4%,
+                1 100%
+            );
+        }
+
+        .day {
+            color: black;
+            margin: 20px;
+            background-color: rgb(220, 234, 245);
+            border-radius: 10px;
+            padding: 4%;
+            margin: 10px;
+            margin-top: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .section {
+            background-color: rgba(59, 58, 58, 0.286);
+            border-radius: 10px;
+            padding: 2%;
+            margin: 10px;
+            backdrop-filter: blur(4px);
+            color: white;
+            font-size: 20px;
+        }
+
+        .sectionNoBG {
+            background-color: rgba(0, 0, 0, 0);
+            padding: 0px;
+            margin: 0px;
+        }
+        .sectionRightContainer {
+            width: 44%;
+            float: right;
+            text-align: center;
+        }
+        .sectionRight {
+            width: 100%;
+            float: right;
+            text-align: center;
+        }
+
+        .sectionLeft {
+            width: 100%;
+            float: left;
+        }
+        .sectionLeftContainer {
+            width: 44%;
+            float: left;
+            text-align: center;
+        }
+        .sectionTop {
+            margin-top: 200px;
+            padding: 1%;
+            text-align: center;
+        }
+
+        .titleBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.252);
+            backdrop-filter: blur(5px);
+            width: 100%;
+            margin: 0;
+            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+
+        h1 {
+            color: white;
+            margin: 30px;
+        }
+
+        h2 {
+            color: rgba(219, 221, 246, 0.763);
+            margin: 30px;
+        }
+
+        .descriptionBig {
+            font-weight: normal;
+            font-size: 20px;
+        }
+        .temperatureBig {
+            font-size: 50px;
+            font-weight: normal;
+            margin-top: 20px;
+            margin-right: 25%;
+        }
+        .iconBig {
+            margin-left: 20%;
+        }
+
+        .hourContainer {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .smallIcon {
+            width: 50px;
+        }
+
+        .menu {
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            padding-top: 60px;
+            color: white;
+            /* start with closed menu: */
+            width: 0px;
+            transition-duration: 1s;
+            transition-timing-function: linear(
+                0 0%,
+                0 1.8%,
+                0.01 3.6%,
+                0.03 6.35%,
+                0.07 9.1%,
+                0.13 11.4%,
+                0.19 13.4%,
+                0.27 15%,
+                0.34 16.1%,
+                0.54 18.35%,
+                0.66 20.6%,
+                0.72 22.4%,
+                0.77 24.6%,
+                0.81 27.3%,
+                0.85 30.4%,
+                0.88 35.1%,
+                0.92 40.6%,
+                0.94 47.2%,
+                0.96 55%,
+                0.98 64%,
+                0.99 74.4%,
+                1 86.4%,
+                1 100%
+            );
+        }
+
+        .menuButton {
+            padding: 5px;
+            font-size: medium;
+            font-family: "quicksand";
+            background-color: rgba(0, 0, 0, 0.26);
+            color: white;
+            backdrop-filter: blur(5px);
+            border-radius: 5px;
+            border-width: 0;
+        }
+
+        .menuButton:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-width: 0;
+        }
+
+        .expandedMenu {
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 25%;
+            overflow-x: hidden;
+            padding-top: 60px;
+            color: white;
+            /* start with closed menu: */
+            width: 0px;
+            transition-duration: 1s;
+            transition-timing-function: linear(
+                0 0%,
+                0 1.8%,
+                0.01 3.6%,
+                0.03 6.35%,
+                0.07 9.1%,
+                0.13 11.4%,
+                0.19 13.4%,
+                0.27 15%,
+                0.34 16.1%,
+                0.54 18.35%,
+                0.66 20.6%,
+                0.72 22.4%,
+                0.77 24.6%,
+                0.81 27.3%,
+                0.85 30.4%,
+                0.88 35.1%,
+                0.92 40.6%,
+                0.94 47.2%,
+                0.96 55%,
+                0.98 64%,
+                0.99 74.4%,
+                1 86.4%,
+                1 100%
+            );
+        }
+
+        .button {
+            background-color: rgba(255, 255, 255, 0.679);
+            backdrop-filter: blur(3px);
+            border-radius: 10px;
+            min-height: 50px;
+            padding: 10px;
+            border: 0px;
+            transition-duration: 0.1s;
+        }
+        .button:hover {
+            background-color: black;
+            color: white;
+        }
+        .button:active {
+            scale: 0.95;
+        }
+        .input {
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        a {
+            transition-duration: 0.1s;
+            color: white;
+        }
+        a:hover {
+            color: rgb(255, 215, 215);
+            font-size: 19px;
+        }
+        a:active {
+            font-size: 14px;
+        }
+    </style>
+    <meta charset="utf-8" />
+</head>
+
+<body id="body">
+    <div class="menu" id="menu">
+        <button class="menuButton" onclick="closeMenu()">Close Menu</button>
+        <div id="locationContainer">
+            <div id="loc1"></div>
+            <div id="loc2"></div>
+            <div id="loc3"></div>
+            <button onclick="openLocationPicker()" class="button">
+                Add Location
+            </button>
+        </div>
+    </div>
+    <div class="expandedMenu" id="locationPicker">
+        <h1>Add Location</h1>
+        <input type="number" class="input" id="lat" placeholder="Latitude" />
+        <input type="number" class="input" id="long" placeholder="Longitude" />
+        <input type="number" class="input" id="slot" placeholder="1, 2, or 3" />
+        <button onclick="addLocation()" class="button">Add</button>
+    </div>
+    <div class="section" id="loading" style="margin-top: 200px">LOADING...</div>
+    <div class="section sectionTop" id="now"></div>
+    <div
+        class="section sectionNoBG sectionRightContainer"
+        id="dailyForecast"
+    ></div>
+    <div id="hourly" class="section sectionNoBG sectionLeftContainer"></div>
+    <div id="titleBar" class="titleBar">
+        <button class="menuButton" onclick="openMenu()">Menu</button>
+        <h1>SamWeather Pro</h1>
+        <h2>Version 3.2.1</h2>
+    </div>
+    <script>
+        console.log("Hello, World!");
+
+        function openMenu() {
+            document.getElementById("menu").style.width = "25%";
+            // document.getElementById("body").style.marginLeft = "250px";
+        }
+
+        function closeMenu() {
+            document.getElementById("menu").style.width = "0px";
+            // document.getElementById("body").style.marginLeft = "0";
+            openLocationPicker(true);
+        }
+
+        function openLocationPicker(shouldClose = false) {
+            const locationPicker = document.getElementById("locationPicker");
+            if (shouldClose) {
+                locationPicker.style.width = "0px";
+            } else {
+                if (locationPicker.style.width == "0px") {
+                    locationPicker.style.width = "75%";
+                } else {
+                    locationPicker.style.width = "0px";
+                }
+            }
+        }
+
+        function getColorTheme(
+            description,
+            isDaytime,
+            getThemeInstead = false
+        ) {
+            if (
+                description.includes("Mostly Sunny") ||
+                description.includes("Partly Cloudy") ||
+                description.includes("Mostly Clear") ||
+                description.includes("Mostly Cloudy")
+            ) {
+                if (isDaytime) {
+                    bg = "linear-gradient(#a6c0ed, #7d9cd1)";
+                    icon = "http://openweathermap.org/img/wn/02d@2x.png";
+                } else {
+                    bg = "linear-gradient(#4e5c8a, #434859)";
+                    icon = "http://openweathermap.org/img/wn/02n@2x.png";
+                }
+            } else if (
+                description.includes("Snow") ||
+                description.includes("Blizzard") ||
+                description.includes("Flurries")
+            ) {
+                bg = "linear-gradient(#d7d9de, #f0f0f0)";
+                icon = "http://openweathermap.org/img/wn/13d@2x.png";
+            } else if (
+                description.includes("Thunder") ||
+                description.includes("T-storm")
+            ) {
+                bg = "linear-gradient(#434343, #2e2d2d)";
+                icon = "http://openweathermap.org/img/wn/11d@2x.png";
+            } else if (
+                description.includes("Showers") ||
+                description.includes("Rain") ||
+                description.includes("Drizzle")
+            ) {
+                if (
+                    description.includes("Sun") ||
+                    description.includes("Partly Cloudy") ||
+                    description.includes("Mostly Sunny")
+                ) {
+                    if (isDaytime) {
+                        bg = "linear-gradient(#95a6de, #c0caeb)";
+                        icon = "http://openweathermap.org/img/wn/10d@2x.png";
+                    } else {
+                        bg = "linear-gradient(#444a5e, #293354)";
+                        icon = "http://openweathermap.org/img/wn/10n@2x.png";
+                    }
+                } else {
+                    if (isDaytime) {
+                        bg = "linear-gradient(#9a9fb3, #6c7080)";
+                    } else {
+                        bg = "linear-gradient(#444a5e, #131621)";
+                    }
+                    icon = "http://openweathermap.org/img/wn/09d@2x.png";
+                }
+            } else if (description.includes("Cloud")) {
+                if (isDaytime) {
+                    bg = "linear-gradient(#a7a8ab, #7e8087)";
+                } else {
+                    bg = "linear-gradient(#38383b, #767682)";
+                }
+                icon = "http://openweathermap.org/img/wn/03d@2x.png";
+            } else if (
+                description.includes("Sunny") ||
+                description == "Sunny" ||
+                description.includes("Sun") ||
+                description.includes("Clear")
+            ) {
+                if (isDaytime) {
+                    bg = "linear-gradient(#a6c0ed, #5e99ff)";
+                    icon = "http://openweathermap.org/img/wn/01d@2x.png";
+                } else {
+                    bg = "linear-gradient(#041d47, #06378a)";
+                    icon = "http://openweathermap.org/img/wn/01n@2x.png";
+                }
+            } else if (
+                description.includes("Mist") ||
+                description.includes("Fog")
+            ) {
+                if (isDaytime) {
+                    bg = "linear-gradient(#adadad, #dbdbdb)";
+                } else {
+                    bg = "linear-gradient(#6e6e6e, #363636)";
+                }
+                icon = "http://openweathermap.org/img/wn/50d@2x.png";
+            } else {
+                console.log("Could not find correct icon for ", description);
+            }
+            if (getThemeInstead) {
+                document.getElementById("body").style.backgroundImage = bg;
+            } else {
+                return icon;
+            }
+        }
+
+        function getPrecipitation(probability) {
+            if (probability == null) {
+                return "0%";
+            } else {
+                return `${probability}%`;
+            }
+        }
+
+        function getDate(date) {
+            var month = Number(date[5] + date[6]);
+            var day = Number(date[8] + date[9]);
+            return month + "/" + day;
+        }
+        function getTime(date) {
+            var hour = Number(date[11] + date[12]);
+            if (hour > 12) {
+                hour = hour - 12;
+                return hour + ":" + date[14] + date[15] + "p";
+            } else if (hour == 0) {
+                return "12" + ":" + date[14] + date[15] + "a";
+            } else {
+                return hour + ":" + date[14] + date[15] + "a";
+            }
+        }
+
+        function displayWeatherForecast(data) {
+            const periods = data.properties.periods;
+            const now = document.getElementById("now");
+            const dailyForecast = document.getElementById("dailyForecast");
+
+            console.log("Daily Forecast", data.properties);
+            document.title = `${periods[0].temperature}° and ${periods[0].shortForecast}`;
+
+            // clear any data already there
+            now.innerHTML = "";
+            dailyForecast.innerHTML = "";
+
+            // icon
+            var icon = document.createElement("img");
+            icon.setAttribute(
+                "src",
+                getColorTheme(periods[0].shortForecast, periods[0].isDaytime)
+            );
+            icon.className = "iconBig";
+            now.appendChild(icon);
+
+            // current temperature
+            var temperaturenow = document.createElement("p");
+            temperaturenow.className = "temperatureBig";
+            temperaturenow.innerText = `${periods[0].temperature}°`;
+            temperaturenow.style.float = "right";
+            now.appendChild(temperaturenow);
+
+            // precipitation
+            var precip = document.createElement("h4");
+            precip.innerText = `💧 ${getPrecipitation(
+                periods[0].probabilityOfPrecipitation.value
+            )}`;
+            now.appendChild(precip);
+
+            // Description
+            var descrip = document.createElement("p");
+            descrip.className = "descriptionBig";
+            descrip.innerText = periods[0].detailedForecast;
+            now.appendChild(descrip);
+
+            // 7-day forecast
+            for (let i = 1; i < 13; i++) {
+                var element = document.createElement("div");
+                element.className = "section sectionRight";
+
+                var name = document.createElement("p");
+                name.innerText = `${periods[i].name} • ${getDate(
+                    periods[i].startTime
+                )}`;
+
+                var icon = document.createElement("img");
+                icon.setAttribute(
+                    "src",
+                    getColorTheme(
+                        periods[i].shortForecast,
+                        periods[i].isDaytime
+                    )
+                );
+
+                var temperature = document.createElement("p");
+                temperature.innerText = `${periods[i].temperature}°`;
+
+                var precip = document.createElement("p");
+                precip.innerText = `💧 ${getPrecipitation(
+                    periods[i].probabilityOfPrecipitation.value
+                )}`;
+
+                var descrip = document.createElement("p");
+                descrip.innerText = periods[i].detailedForecast;
+
+                element.appendChild(name);
+                element.appendChild(icon);
+                element.appendChild(temperature);
+                element.appendChild(precip);
+                element.appendChild(descrip);
+                document.getElementById("dailyForecast").appendChild(element);
+            }
+            getColorTheme(periods[0].shortForecast, periods[0].isDaytime, true);
+        }
+
+        function displayWeatherForecastHourly(data) {
+            const hourly = document.getElementById("hourly");
+            const periods = data.properties.periods;
+
+            const days = {}; // Use an object to store days and times
+
+            // clear any existing forecast
+            hourly.innerHTML = "";
+
+            for (const period of periods) {
+                const date = getDate(period.startTime);
+                const time = getTime(period.startTime);
+
+                if (!days[date]) {
+                    days[date] = []; // Create an array for the day if it doesn't exist
+                }
+                days[date].push(time);
+            }
+
+            console.log("days:", days);
+
+            for (const date in days) {
+                // Iterate through the days
+                var day = document.createElement("div");
+                var dayName = document.createElement("p");
+                day.appendChild(dayName);
+                day.innerText = date;
+                day.classList.add("section", "sectionLeft");
+                const times = days[date];
+                for (const period of periods) {
+                    // find the matching period for the time
+                    if (
+                        getDate(period.startTime) === date &&
+                        times.includes(getTime(period.startTime))
+                    ) {
+                        var element = document.createElement("div");
+                        element.setAttribute("class", "hourContainer");
+
+                        var name = document.createElement("p");
+                        name.innerText = getTime(period.startTime);
+
+                        var temp = document.createElement("p");
+                        temp.innerText = `${period.temperature}°`;
+
+                        var icon = document.createElement("img");
+                        icon.setAttribute(
+                            "src",
+                            getColorTheme(
+                                period.shortForecast,
+                                period.isDaytime
+                            )
+                        );
+                        icon.setAttribute("title", period.shortForecast);
+                        icon.classList.add("smallIcon");
+
+                        var precip = document.createElement("p");
+                        precip.innerText = `💧 ${getPrecipitation(
+                            period.probabilityOfPrecipitation.value
+                        )}`;
+
+                        element.appendChild(name);
+                        element.appendChild(temp);
+                        element.appendChild(icon);
+                        element.appendChild(precip);
+                        day.appendChild(element);
+                    }
+                }
+                hourly.appendChild(day);
+            }
+
+            document
+                .getElementById("body")
+                .removeChild(document.getElementById("loading"));
+        }
+
+        function fetchMoreWeather(url) {
+            fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    // process and display data
+                    displayWeatherForecast(data);
+                })
+                .catch((error) =>
+                    console.error("Error getting weather data", error)
+                );
+
+            fetch(url + "/hourly")
+                .then((response) => response.json())
+                .then((dataHourly) => {
+                    console.log(dataHourly);
+                    displayWeatherForecastHourly(dataHourly);
+                })
+                .catch((error) =>
+                    console.error("Error getting hourly weather data", error)
+                );
+        }
+
+        async function fetchWeather(lat, long, returnName = false) {
+            const infoUrl =
+                "https://api.weather.gov/points/" + lat + "," + long;
+            try {
+                const response = await fetch(infoUrl);
+                const data = await response.json();
+                if (returnName) {
+                    return data.properties.relativeLocation.properties.city;
+                } else {
+                    const url = data.properties.forecast;
+                    fetchMoreWeather(url);
+                }
+            } catch (error) {
+                console.error("Error getting weather data", error);
+            }
+        }
+
+        function updateSaved() {
+            const storageExists = localStorage.getItem("hi");
+            const name1 = localStorage.getItem("name1");
+            const name2 = localStorage.getItem("name2");
+            const name3 = localStorage.getItem("name3");
+            const lat1 = localStorage.getItem("lat1");
+            const lat2 = localStorage.getItem("lat2");
+            const lat3 = localStorage.getItem("lat3");
+            const long1 = localStorage.getItem("long1");
+            const long2 = localStorage.getItem("long2");
+            const long3 = localStorage.getItem("long3");
+
+            const container = document.getElementById("locationContainer");
+
+            const loc1 = document.getElementById("loc1");
+            const loc2 = document.getElementById("loc2");
+            const loc3 = document.getElementById("loc3");
+
+            loc1.innerHTML = "";
+            loc2.innerHTML = "";
+            loc3.innerHTML = "";
+
+            if (!storageExists) {
+                localStorage.setItem("name1", "Yarmouth");
+                localStorage.setItem("name2", "EMPTY");
+                localStorage.setItem("name3", "EMPTY");
+
+                localStorage.setItem("lat1", "43.8011");
+                localStorage.setItem("lat2", "EMPTY");
+                localStorage.setItem("lat3", "EMPTY");
+
+                localStorage.setItem("long1", "-70.1879");
+                localStorage.setItem("long2", "EMPTY");
+                localStorage.setItem("long3", "EMPTY");
+
+                localStorage.setItem("hi", "12345");
+            }
+
+            link1 = document.createElement("a");
+            link1.innerText = name1;
+            link1.onclick = function () {
+                fetchWeather(Number(lat1), Number(long1));
+            };
+            link1.setAttribute("href", "#");
+
+            loc1.appendChild(link1);
+
+            link2 = document.createElement("a");
+            link2.innerText = name2;
+            link2.onclick = function () {
+                fetchWeather(Number(lat2), Number(long2));
+            };
+            link2.setAttribute("href", "#");
+
+            loc2.appendChild(link2);
+
+            link3 = document.createElement("a");
+            link3.innerText = name3;
+            link3.onclick = function () {
+                fetchWeather(Number(lat3), Number(long3));
+            };
+            link3.setAttribute("href", "#");
+
+            loc3.appendChild(link3);
+        }
+
+        async function addLocation() {
+            const lat = document.getElementById("lat").value;
+            const long = document.getElementById("long").value;
+            const slot = document.getElementById("slot").value;
+
+            let name = await fetchWeather(lat, long, true);
+
+            if (slot == 1) {
+                localStorage.setItem("lat1", lat);
+                localStorage.setItem("long1", long);
+                localStorage.setItem("name1", name);
+            } else if (slot == 2) {
+                localStorage.setItem("lat2", lat);
+                localStorage.setItem("long2", long);
+                localStorage.setItem("name2", name);
+            } else if (slot == 3) {
+                localStorage.setItem("lat3", lat);
+                localStorage.setItem("long3", long);
+                localStorage.setItem("name3", name);
+            }
+
+            fetchWeather(lat, long);
+            updateSaved();
+            closeMenu();
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchWeather(43.8011, -70.1879);
+
+            updateSaved();
+        });
+    </script>
+</body>
