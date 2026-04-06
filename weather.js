@@ -29,7 +29,13 @@ function getIcon(description, isDaytime, getThemeInstead = false) {
     let icon;
     let whiteText = false;
 
-    if (description.includes("Mostly Sunny") || description.includes("Partly Cloudy") || description.includes("Mostly Clear") || description.includes("Mostly Cloudy") || description.includes("Partly Sunny")) {
+    if (
+        description.includes("Mostly Sunny") ||
+        description.includes("Partly Cloudy") ||
+        description.includes("Mostly Clear") ||
+        description.includes("Mostly Cloudy") ||
+        description.includes("Partly Sunny")
+    ) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = "linear-gradient(#a6c0ed, #7d9cd1)";
@@ -40,17 +46,34 @@ function getIcon(description, isDaytime, getThemeInstead = false) {
             icon = "http://openweathermap.org/img/wn/02n@2x.png";
             whiteText = true;
         }
-    } else if (description.includes("Snow") || description.includes("Blizzard") || description.includes("Flurries") || description.includes("Hail") || description.includes("Sleet")) {
+    } else if (
+        description.includes("Snow") ||
+        description.includes("Blizzard") ||
+        description.includes("Flurries") ||
+        description.includes("Hail") ||
+        description.includes("Sleet")
+    ) {
         bg_top = "#d7d9de";
         bg = "linear-gradient(#d7d9de, #f0f0f0)";
         icon = "http://openweathermap.org/img/wn/13d@2x.png";
-    } else if (description.includes("Thunder") || description.includes("T-storm")) {
+    } else if (
+        description.includes("Thunder") ||
+        description.includes("T-storm")
+    ) {
         bg_top = "#434343";
         bg = "linear-gradient(#434343, #2e2d2d)";
         icon = "http://openweathermap.org/img/wn/11d@2x.png";
         whiteText = true;
-    } else if (description.includes("Showers") || description.includes("Rain") || description.includes("Drizzle")) {
-        if (description.includes("Sun") || description.includes("Partly Cloudy") || description.includes("Mostly Sunny")) {
+    } else if (
+        description.includes("Showers") ||
+        description.includes("Rain") ||
+        description.includes("Drizzle")
+    ) {
+        if (
+            description.includes("Sun") ||
+            description.includes("Partly Cloudy") ||
+            description.includes("Mostly Sunny")
+        ) {
             if (isDaytime) {
                 bg_top = "#95a6de";
                 bg = "linear-gradient(#95a6de, #c0caeb)";
@@ -82,7 +105,12 @@ function getIcon(description, isDaytime, getThemeInstead = false) {
             whiteText = true;
         }
         icon = "http://openweathermap.org/img/wn/03d@2x.png";
-    } else if (description.includes("Sunny") || description == "Sunny" || description.includes("Sun") || description.includes("Clear")) {
+    } else if (
+        description.includes("Sunny") ||
+        description == "Sunny" ||
+        description.includes("Sun") ||
+        description.includes("Clear")
+    ) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = "linear-gradient(#a6c0ed, #5e99ff)";
@@ -93,7 +121,12 @@ function getIcon(description, isDaytime, getThemeInstead = false) {
             icon = "http://openweathermap.org/img/wn/01n@2x.png";
             whiteText = true;
         }
-    } else if (description.includes("Mist") || description.includes("Fog") || description.includes("Haze") || description.includes("Smoke")) {
+    } else if (
+        description.includes("Mist") ||
+        description.includes("Fog") ||
+        description.includes("Haze") ||
+        description.includes("Smoke")
+    ) {
         if (isDaytime) {
             bg_top = "#adadad";
             bg = "linear-gradient(#adadad, #dbdbdb)";
@@ -116,24 +149,47 @@ function getIcon(description, isDaytime, getThemeInstead = false) {
         }
 
         // Update text color
-        for (let i = 0; i < document.getElementsByClassName("text").length; i++) {
+        for (
+            let i = 0;
+            i < document.getElementsByClassName("text").length;
+            i++
+        ) {
             let element = document.getElementsByClassName("text")[i];
             element.style.color = textColor;
         }
 
         // Update top background color
-        for (let i = 0; i < document.getElementsByClassName("bgTop").length; i++) {
+        for (
+            let i = 0;
+            i < document.getElementsByClassName("bgTop").length;
+            i++
+        ) {
             let element = document.getElementsByClassName("bgTop")[i];
             element.style.backgroundColor = bg_top;
         }
 
         document.getElementById("body").style.backgroundImage = bg;
         if (mobile) {
-            for (let i = 0; i < document.getElementsByClassName("titleBarMOBILE").length; i++) {
-                document.getElementsByClassName("titleBarMOBILE")[i].style.backgroundImage = "linear-gradient(" + bg_top + ", " + bg_top + ", " + bg_top + ", " + "rgba(0, 0, 0, 0)";
+            for (
+                let i = 0;
+                i < document.getElementsByClassName("titleBarMOBILE").length;
+                i++
+            ) {
+                document.getElementsByClassName("titleBarMOBILE")[
+                    i
+                ].style.backgroundImage =
+                    "linear-gradient(" +
+                    bg_top +
+                    ", " +
+                    bg_top +
+                    ", " +
+                    bg_top +
+                    ", " +
+                    "rgba(0, 0, 0, 0)";
             }
         } else {
-            document.getElementById("sectionsContainer").style.backgroundImage = bg;
+            document.getElementById("sectionsContainer").style.backgroundImage =
+                bg;
             // document.getElementById("mainMenu").style.backgroundImage = bg;
         }
     } else {
@@ -171,13 +227,24 @@ function getFeelsLike(temperature, humidity, wind, dontPrintInfo = false) {
         if (simple < 80) {
             HI = (simple + T) / 2;
         } else {
-            HI_rothfusz = -42.379 + 2.04901523 * T + 10.14333127 * RH - 0.22475541 * T * RH - 0.00683783 * T * T - 0.05481717 * RH * RH + 0.00122874 * T * T * RH + 0.00085282 * T * RH * RH - 0.00000199 * T * T * RH * RH;
+            HI_rothfusz =
+                -42.379 +
+                2.04901523 * T +
+                10.14333127 * RH -
+                0.22475541 * T * RH -
+                0.00683783 * T * T -
+                0.05481717 * RH * RH +
+                0.00122874 * T * T * RH +
+                0.00085282 * T * RH * RH -
+                0.00000199 * T * T * RH * RH;
             HI = HI_rothfusz;
         }
         // Adjust temp
         if (HI >= 80) {
             if (RH < 13 && 80 <= T <= 112) {
-                ADJUSTMENT_low = ((13 - RH) / 4) * Math.sqrt(Math.abs(17 - Math.abs(T - 95.0)) / 17);
+                ADJUSTMENT_low =
+                    ((13 - RH) / 4) *
+                    Math.sqrt(Math.abs(17 - Math.abs(T - 95.0)) / 17);
                 HI = HI_rothfusz - ADJUSTMENT_low;
                 if (!dontPrintInfo) {
                     console.log("0", HI);
@@ -263,7 +330,10 @@ function displayWeatherForecast(data, data_h, data_a) {
 
         // Icon
         let nowIcon = document.getElementById("nowIconMOBILE");
-        nowIcon.setAttribute("src", getIcon(periods_h[0].shortForecast, periods_h[0].isDaytime));
+        nowIcon.setAttribute(
+            "src",
+            getIcon(periods_h[0].shortForecast, periods_h[0].isDaytime),
+        );
         nowIcon.setAttribute("title", periods_h[0].shortForecast);
 
         // current temperature
@@ -276,11 +346,18 @@ function displayWeatherForecast(data, data_h, data_a) {
 
         // Precipitation
         let nowPrecip = document.getElementById("nowPrecipMOBILE");
-        nowPrecip.innerText = getPrecipitation(periods_h[0].probabilityOfPrecipitation.value);
+        nowPrecip.innerText = getPrecipitation(
+            periods_h[0].probabilityOfPrecipitation.value,
+        );
 
         // Feels Like
         let nowFeelsLike = document.getElementById("nowFeelsLikeMOBILE");
-        nowFeelsLike.innerText = getFeelsLike(periods_h[0].temperature, periods_h[0].relativeHumidity.value, periods_h[0].windspeed, false);
+        nowFeelsLike.innerText = getFeelsLike(
+            periods_h[0].temperature,
+            periods_h[0].relativeHumidity.value,
+            periods_h[0].windspeed,
+            false,
+        );
 
         // Wind
         let nowWind = document.getElementById("nowWindMOBILE");
@@ -311,7 +388,13 @@ function displayWeatherForecast(data, data_h, data_a) {
             dayTitle.innerText = periods[dailyIndex[i]].name;
 
             dayIcon = document.createElement("img");
-            dayIcon.setAttribute("src", getIcon(periods[dailyIndex[i]].shortForecast, periods[dailyIndex[i]].isDaytime));
+            dayIcon.setAttribute(
+                "src",
+                getIcon(
+                    periods[dailyIndex[i]].shortForecast,
+                    periods[dailyIndex[i]].isDaytime,
+                ),
+            );
             dayIcon.setAttribute("class", "iconVerySmallMOBILE");
             dayIcon.setAttribute("title", periods[dailyIndex[i]].shortForecast);
 
@@ -352,7 +435,10 @@ function displayWeatherForecast(data, data_h, data_a) {
 
         // icon
         var nowIcon = document.getElementById("nowIcon");
-        nowIcon.setAttribute("src", getIcon(periods_h[0].shortForecast, periods_h[0].isDaytime));
+        nowIcon.setAttribute(
+            "src",
+            getIcon(periods_h[0].shortForecast, periods_h[0].isDaytime),
+        );
         nowIcon.setAttribute("title", periods_h[0].shortForecast);
 
         // current temperature
@@ -365,7 +451,9 @@ function displayWeatherForecast(data, data_h, data_a) {
 
         // Current precipitation
         var nowPrecip = document.getElementById("nowPrecip");
-        nowPrecip.innerText = getPrecipitation(periods_h[0].probabilityOfPrecipitation.value);
+        nowPrecip.innerText = getPrecipitation(
+            periods_h[0].probabilityOfPrecipitation.value,
+        );
 
         // Current wind
         var nowWind = document.getElementById("nowWind");
@@ -377,12 +465,18 @@ function displayWeatherForecast(data, data_h, data_a) {
 
         // Wind chill
         var nowFeelslike = document.getElementById("nowFeelsLike");
-        nowFeelslike.innerText = getFeelsLike(periods_h[0].temperature, periods_h[0].relativeHumidity.value, periods_h[0].windSpeed);
+        nowFeelslike.innerText = getFeelsLike(
+            periods_h[0].temperature,
+            periods_h[0].relativeHumidity.value,
+            periods_h[0].windSpeed,
+        );
 
         ////////////////////
         // Current Hourly //
         ////////////////////
-        let todayHourlyContainer = document.getElementById("todayHourlyContainer");
+        let todayHourlyContainer = document.getElementById(
+            "todayHourlyContainer",
+        );
         todayHourlyContainer.innerHTML = "";
 
         for (let i = 1; i < hourlyIndex[0].length; i++) {
@@ -401,19 +495,33 @@ function displayWeatherForecast(data, data_h, data_a) {
 
             // icon
             let icon = document.createElement("img");
-            icon.setAttribute("src", getIcon(periods_h[hourlyIndex[0][i]].shortForecast, periods_h[hourlyIndex[0][i]].isDaytime));
+            icon.setAttribute(
+                "src",
+                getIcon(
+                    periods_h[hourlyIndex[0][i]].shortForecast,
+                    periods_h[hourlyIndex[0][i]].isDaytime,
+                ),
+            );
             icon.setAttribute("class", "iconSmall");
-            icon.setAttribute("title", periods_h[hourlyIndex[0][i]].shortForecast);
+            icon.setAttribute(
+                "title",
+                periods_h[hourlyIndex[0][i]].shortForecast,
+            );
 
             // Precipitation
             let precipContainer = document.createElement("div");
             precipContainer.setAttribute("class", "hourlyDetailContainer");
             let precipIcon = document.createElement("span");
-            precipIcon.setAttribute("class", "material-symbols-outlined hourlyDetailIcon");
+            precipIcon.setAttribute(
+                "class",
+                "material-symbols-outlined hourlyDetailIcon",
+            );
             precipIcon.innerText = " water_drop ";
             let precipText = document.createElement("p");
             precipText.setAttribute("class", "textTime");
-            precipText.innerText = getPrecipitation(periods_h[hourlyIndex[0][i]].probabilityOfPrecipitation.value);
+            precipText.innerText = getPrecipitation(
+                periods_h[hourlyIndex[0][i]].probabilityOfPrecipitation.value,
+            );
 
             precipContainer.appendChild(precipIcon);
             precipContainer.appendChild(precipText);
@@ -437,14 +545,23 @@ function displayWeatherForecast(data, data_h, data_a) {
             dayContainer.setAttribute("class", "dayContainer");
 
             let conditionsContainer = document.createElement("div");
-            conditionsContainer.setAttribute("class", "conditionsContainer dayConditions");
+            conditionsContainer.setAttribute(
+                "class",
+                "conditionsContainer dayConditions",
+            );
 
             let dayTitle = document.createElement("p");
             dayTitle.setAttribute("class", "dayTitle");
             dayTitle.innerText = periods[dailyIndex[i]].name;
 
             let dayIcon = document.createElement("img");
-            dayIcon.setAttribute("src", getIcon(periods[dailyIndex[i]].shortForecast, periods[dailyIndex[i]].isDaytime));
+            dayIcon.setAttribute(
+                "src",
+                getIcon(
+                    periods[dailyIndex[i]].shortForecast,
+                    periods[dailyIndex[i]].isDaytime,
+                ),
+            );
             dayIcon.setAttribute("class", "iconBig");
             dayIcon.setAttribute("title", periods[dailyIndex[i]].shortForecast);
 
@@ -494,7 +611,9 @@ function displayWeatherForecast(data, data_h, data_a) {
 
                 let time = document.createElement("p");
                 time.setAttribute("class", "textTime");
-                time.innerText = getTime(periods_h[hourlyIndex[i][x]].startTime);
+                time.innerText = getTime(
+                    periods_h[hourlyIndex[i][x]].startTime,
+                );
                 container.appendChild(time);
 
                 let temp = document.createElement("p");
@@ -503,17 +622,32 @@ function displayWeatherForecast(data, data_h, data_a) {
 
                 let icon = document.createElement("img");
                 icon.setAttribute("class", "iconSmall");
-                icon.setAttribute("src", getIcon(periods_h[hourlyIndex[i][x]].shortForecast, periods_h[hourlyIndex[i][x]].isDaytime));
-                icon.setAttribute("title", periods_h[hourlyIndex[i][x]].shortForecast);
+                icon.setAttribute(
+                    "src",
+                    getIcon(
+                        periods_h[hourlyIndex[i][x]].shortForecast,
+                        periods_h[hourlyIndex[i][x]].isDaytime,
+                    ),
+                );
+                icon.setAttribute(
+                    "title",
+                    periods_h[hourlyIndex[i][x]].shortForecast,
+                );
 
                 let precipContainer = document.createElement("div");
                 precipContainer.setAttribute("class", "hourlyDetailContainer");
                 let precipIcon = document.createElement("span");
-                precipIcon.setAttribute("class", "material-symbols-outlined hourlyDetailIcon");
+                precipIcon.setAttribute(
+                    "class",
+                    "material-symbols-outlined hourlyDetailIcon",
+                );
                 precipIcon.innerText = " water_drop ";
                 let precipText = document.createElement("p");
                 precipText.setAttribute("class", "textTime");
-                precipText.innerText = getPrecipitation(periods_h[hourlyIndex[i][x]].probabilityOfPrecipitation.value);
+                precipText.innerText = getPrecipitation(
+                    periods_h[hourlyIndex[i][x]].probabilityOfPrecipitation
+                        .value,
+                );
 
                 precipContainer.appendChild(precipIcon);
                 precipContainer.appendChild(precipText);
@@ -521,7 +655,10 @@ function displayWeatherForecast(data, data_h, data_a) {
                 let windContainer = document.createElement("div");
                 windContainer.setAttribute("class", "hourlyDetailContainer");
                 let windIcon = document.createElement("span");
-                windIcon.setAttribute("class", "material-symbols-outlined hourlyDetailIcon");
+                windIcon.setAttribute(
+                    "class",
+                    "material-symbols-outlined hourlyDetailIcon",
+                );
                 windIcon.innerText = " air ";
                 let windText = document.createElement("p");
                 windText.setAttribute("class", "textTime");
@@ -533,11 +670,19 @@ function displayWeatherForecast(data, data_h, data_a) {
                 let flContainer = document.createElement("div");
                 flContainer.setAttribute("class", "hourlyDetailContainer");
                 let flIcon = document.createElement("span");
-                flIcon.setAttribute("class", "material-symbols-outlined hourlyDetailIcon");
+                flIcon.setAttribute(
+                    "class",
+                    "material-symbols-outlined hourlyDetailIcon",
+                );
                 flIcon.innerText = " thermostat ";
                 let flText = document.createElement("p");
                 flText.setAttribute("class", "textTime");
-                flText.innerText = getFeelsLike(periods_h[hourlyIndex[i][x]].temperature, periods_h[hourlyIndex[i][x]].relativeHumidity.value, periods_h[hourlyIndex[i][x]].windSpeed, true);
+                flText.innerText = getFeelsLike(
+                    periods_h[hourlyIndex[i][x]].temperature,
+                    periods_h[hourlyIndex[i][x]].relativeHumidity.value,
+                    periods_h[hourlyIndex[i][x]].windSpeed,
+                    true,
+                );
 
                 flContainer.appendChild(flIcon);
                 flContainer.appendChild(flText);
@@ -568,15 +713,17 @@ function displayWeatherForecast(data, data_h, data_a) {
         let properties_a = alerts[0].properties;
         if (mobile) {
             document.getElementById("alertContainerMOBILE").hidden = false;
-            document.getElementById("alertHeaderMOBILE").innerText = properties_a.event;
-            document.getElementById("alertMessageMOBILE").innerText = properties_a.description + "\n\n" + properties_a.instruction;
+            document.getElementById("alertHeaderMOBILE").innerText =
+                properties_a.event;
+            document.getElementById("alertMessageMOBILE").innerText =
+                properties_a.description + "\n\n" + properties_a.instruction;
         } else {
             document.getElementById("alertContainer").hidden = false;
-            document.getElementById("alertHeader").innerText = properties_a.event;
-            document.getElementById("alertMessage").innerText = properties_a.description + "\n\n" + properties_a.instruction;
+            document.getElementById("alertHeader").innerText =
+                properties_a.event;
+            document.getElementById("alertMessage").innerText =
+                properties_a.description + "\n\n" + properties_a.instruction;
         }
-
-
     }
 
     toggleLocationPicker(false);
@@ -590,7 +737,8 @@ function changeHourly() {
     if (mobile) {
         let value = document.getElementById("hourlyChoiceMOBILE").value;
 
-        document.getElementById("scrollingHourlyContainerMOBILE").innerHTML = "";
+        document.getElementById("scrollingHourlyContainerMOBILE").innerHTML =
+            "";
 
         for (let i = 1; i < hourlyIndex[0].length; i++) {
             // container
@@ -603,9 +751,18 @@ function changeHourly() {
 
             // icon
             let icon = document.createElement("img");
-            icon.setAttribute("src", getIcon(periods_h[hourlyIndex[0][i]].shortForecast, periods_h[hourlyIndex[0][i]].isDaytime));
+            icon.setAttribute(
+                "src",
+                getIcon(
+                    periods_h[hourlyIndex[0][i]].shortForecast,
+                    periods_h[hourlyIndex[0][i]].isDaytime,
+                ),
+            );
             icon.setAttribute("class", "iconSmallMOBILE");
-            icon.setAttribute("title", periods_h[hourlyIndex[0][i]].shortForecast);
+            icon.setAttribute(
+                "title",
+                periods_h[hourlyIndex[0][i]].shortForecast,
+            );
 
             let detail = document.createElement("p");
             detail.setAttribute("class", "todayHourlyTimeMOBILE");
@@ -614,10 +771,18 @@ function changeHourly() {
                 detail.innerText = `${periods_h[hourlyIndex[0][i]].temperature}°`;
             } else if (value == "Feels Like") {
                 // Feels like
-                detail.innerText = getFeelsLike(periods_h[hourlyIndex[0][i]].temperature, periods_h[hourlyIndex[0][i]].relativeHumidity.value, periods_h[hourlyIndex[0][i]].windSpeed, true);
+                detail.innerText = getFeelsLike(
+                    periods_h[hourlyIndex[0][i]].temperature,
+                    periods_h[hourlyIndex[0][i]].relativeHumidity.value,
+                    periods_h[hourlyIndex[0][i]].windSpeed,
+                    true,
+                );
             } else if (value == "Precipitation") {
                 // Precipitation
-                detail.innerText = getPrecipitation(periods_h[hourlyIndex[0][i]].probabilityOfPrecipitation.value);
+                detail.innerText = getPrecipitation(
+                    periods_h[hourlyIndex[0][i]].probabilityOfPrecipitation
+                        .value,
+                );
             }
 
             // Add to document
@@ -644,12 +809,17 @@ function fetchMoreWeather(url, lat, long) {
                 .then((response) => response.json())
                 .then((dataHourly) => {
                     console.log("Hourly weather forecast", dataHourly);
-                    fetch('https://api.weather.gov/alerts/active?point=' + lat + "," + long)
+                    fetch(
+                        "https://api.weather.gov/alerts/active?point=" +
+                            lat +
+                            "," +
+                            long,
+                    )
                         .then((alertResponse) => alertResponse.json())
                         .then((dataAlert) => {
                             console.log("Alerts", dataAlert);
                             displayWeatherForecast(data, dataHourly, dataAlert);
-                        })
+                        });
                 })
                 .catch((error) => {
                     console.error("Error getting hourly weather data", error);
@@ -675,15 +845,28 @@ async function fetchWeather(coordinates, returnName = false) {
             console.log("OK");
             const data = await response.json();
             if (returnName) {
-                return (data.properties.relativeLocation.properties.city + " " + data.properties.relativeLocation.properties.state);
+                return (
+                    data.properties.relativeLocation.properties.city +
+                    " " +
+                    data.properties.relativeLocation.properties.state
+                );
             } else {
                 const url = data.properties.forecast;
                 if (mobile) {
-                    document.getElementById("locationNameMOBILE").innerText = data.properties.relativeLocation.properties.city + " " + data.properties.relativeLocation.properties.state;
+                    document.getElementById("locationNameMOBILE").innerText =
+                        data.properties.relativeLocation.properties.city +
+                        " " +
+                        data.properties.relativeLocation.properties.state;
                 } else {
-                    document.getElementById("locationName").innerText = data.properties.relativeLocation.properties.city + " " + data.properties.relativeLocation.properties.state;
+                    document.getElementById("locationName").innerText =
+                        data.properties.relativeLocation.properties.city +
+                        " " +
+                        data.properties.relativeLocation.properties.state;
                 }
-                currentLocationName = data.properties.relativeLocation.properties.city + " " + data.properties.relativeLocation.properties.state;
+                currentLocationName =
+                    data.properties.relativeLocation.properties.city +
+                    " " +
+                    data.properties.relativeLocation.properties.state;
                 fetchMoreWeather(url, lat, long);
             }
         } else {
@@ -731,7 +914,9 @@ async function loadData() {
 
     // Fetch google sheet
     try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbzgKMTVyTVGD4y63agrWAo4r5yV2ACvJ0G3T0OBefDEBUB5kzZS0mwGNnAVxLrwFPI/exec");
+        const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbzgKMTVyTVGD4y63agrWAo4r5yV2ACvJ0G3T0OBefDEBUB5kzZS0mwGNnAVxLrwFPI/exec",
+        );
         const data = await response.json();
         userData[0] = data.length + 1;
         console.log("google sheet recieved");
@@ -791,7 +976,12 @@ async function updateMenu() {
     document.getElementById("savedLocationsv2").innerHTML = "";
 
     for (let i = 0; i < locations.length; i++) {
-        addToMenu(userData[3][i][2], [locations[i][0], locations[i][1]], true, userData[3][i][3]);
+        addToMenu(
+            userData[3][i][2],
+            [locations[i][0], locations[i][1]],
+            true,
+            userData[3][i][3],
+        );
     }
 }
 
@@ -800,11 +990,17 @@ async function setCell(column, content) {
     formData.append("content", content);
     formData.append("append", "false");
     formData.append("cell", `${column}${rowNumber + 1}`);
-    await fetch("https://script.google.com/macros/s/AKfycbzgKMTVyTVGD4y63agrWAo4r5yV2ACvJ0G3T0OBefDEBUB5kzZS0mwGNnAVxLrwFPI/exec", {
-        redirect: "follow", method: "POST", headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        }, body: formData,
-    })
+    await fetch(
+        "https://script.google.com/macros/s/AKfycbzgKMTVyTVGD4y63agrWAo4r5yV2ACvJ0G3T0OBefDEBUB5kzZS0mwGNnAVxLrwFPI/exec",
+        {
+            redirect: "follow",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: formData,
+        },
+    )
         .then((res) => res.json())
         .then((data) => console.log("Success:", data))
         .catch((err) => {
@@ -819,11 +1015,17 @@ async function setRow(content) {
     formData = new URLSearchParams();
     formData.append("content", content.join("|"));
     formData.append("append", "true");
-    await fetch("https://script.google.com/macros/s/AKfycbzgKMTVyTVGD4y63agrWAo4r5yV2ACvJ0G3T0OBefDEBUB5kzZS0mwGNnAVxLrwFPI/exec", {
-        redirect: "follow", method: "POST", headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        }, body: formData,
-    })
+    await fetch(
+        "https://script.google.com/macros/s/AKfycbzgKMTVyTVGD4y63agrWAo4r5yV2ACvJ0G3T0OBefDEBUB5kzZS0mwGNnAVxLrwFPI/exec",
+        {
+            redirect: "follow",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: formData,
+        },
+    )
         .then((res) => res.json())
         .then((data) => console.log("Success:", data))
         .catch((err) => {
@@ -842,7 +1044,9 @@ document.addEventListener("DOMContentLoaded", function () {
             .getElementById("locationInputv2")
             .addEventListener("keydown", function (event) {
                 if (event.key === "Enter") {
-                    fetchFirstLocation(document.getElementById("locationInputv2").value);
+                    fetchFirstLocation(
+                        document.getElementById("locationInputv2").value,
+                    );
                 }
             });
     } else {
@@ -850,7 +1054,9 @@ document.addEventListener("DOMContentLoaded", function () {
             .getElementById("locationInputMOBILE")
             .addEventListener("keydown", function (event) {
                 if (event.key === "Enter") {
-                    fetchFirstLocation(document.getElementById("locationInputMOBILE").value);
+                    fetchFirstLocation(
+                        document.getElementById("locationInputMOBILE").value,
+                    );
                 }
             });
     }
@@ -872,9 +1078,13 @@ function saveLocation(coordinates, name, icon) {
     // Find out if it should be saved as the first location
     let saveAsDefault;
     if (mobile) {
-        saveAsDefault = document.getElementById("saveAsDefaultLocationMOBILE").checked;
+        saveAsDefault = document.getElementById(
+            "saveAsDefaultLocationMOBILE",
+        ).checked;
     } else {
-        saveAsDefault = document.getElementById("saveAsDefaultLocation").checked;
+        saveAsDefault = document.getElementById(
+            "saveAsDefaultLocation",
+        ).checked;
     }
 
     // Save it as the first location if it should be
@@ -887,7 +1097,9 @@ function saveLocation(coordinates, name, icon) {
     // Format locations to save to sheet
     let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]},${userData[3][0][2]},${userData[3][0][3]}`;
     for (let i = 1; i < userData[3].length; i++) {
-        formattedLocation = formattedLocation + `;${userData[3][i][0]},${userData[3][i][1]},${userData[3][i][2]},${userData[3][i][3]}`;
+        formattedLocation =
+            formattedLocation +
+            `;${userData[3][i][0]},${userData[3][i][1]},${userData[3][i][2]},${userData[3][i][3]}`;
     }
     console.log("Formatted Location to save", formattedLocation);
 
@@ -910,16 +1122,24 @@ function locationAction(id, action) {
         // Format locations to save to sheet
         let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]}`;
         for (let i = 1; i < userData[3].length; i++) {
-            formattedLocation = formattedLocation + `;${userData[3][i][0]},${userData[3][i][1]}`;
+            formattedLocation =
+                formattedLocation +
+                `;${userData[3][i][0]},${userData[3][i][1]}`;
         }
-        console.log("Formatted Location (from locationAction)", formattedLocation);
+        console.log(
+            "Formatted Location (from locationAction)",
+            formattedLocation,
+        );
         setCell("C", formattedLocation);
         updateMenu();
     } else if (action == "delete") {
         let locationToDelete = id.split(",");
         let indexToDelete;
         for (let i = 0; i < userData[3].length; i++) {
-            if (locationToDelete[0] == userData[3][i][0] && locationToDelete[1] == userData[3][i][1]) {
+            if (
+                locationToDelete[0] == userData[3][i][0] &&
+                locationToDelete[1] == userData[3][i][1]
+            ) {
                 console.log("FOUND");
                 indexToDelete = i;
                 break;
@@ -930,7 +1150,9 @@ function locationAction(id, action) {
         // Format locations to save to sheet
         let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]}`;
         for (let i = 1; i < userData[3].length; i++) {
-            formattedLocation = formattedLocation + `;${userData[3][i][0]},${userData[3][i][1]}`;
+            formattedLocation =
+                formattedLocation +
+                `;${userData[3][i][0]},${userData[3][i][1]}`;
         }
         console.log(formattedLocation);
         setCell("C", formattedLocation);
@@ -948,16 +1170,25 @@ function openHourly(day, periods, periods_h) {
         }, 100);
 
         // Day name in title bar
-        document.getElementById("dayNameMOBILE").innerText = periods[dailyIndex[day]].name;
+        document.getElementById("dayNameMOBILE").innerText =
+            periods[dailyIndex[day]].name;
 
         // Icon and temperature
         document
             .getElementById("dailyIconMOBILE")
-            .setAttribute("src", getIcon(periods[dailyIndex[day]].shortForecast, periods[dailyIndex[day]].isDaytime));
-        document.getElementById("dailyTempMOBILE").innerText = `${periods[dailyIndex[day]].temperature}°`;
+            .setAttribute(
+                "src",
+                getIcon(
+                    periods[dailyIndex[day]].shortForecast,
+                    periods[dailyIndex[day]].isDaytime,
+                ),
+            );
+        document.getElementById("dailyTempMOBILE").innerText =
+            `${periods[dailyIndex[day]].temperature}°`;
 
         // Description
-        document.getElementById("dailyDescripMOBILE").innerText = periods[dailyIndex[day]].detailedForecast;
+        document.getElementById("dailyDescripMOBILE").innerText =
+            periods[dailyIndex[day]].detailedForecast;
 
         // Display hourly forecast
         document.getElementById("sectionHourlyMOBILE").innerHTML = "";
@@ -976,9 +1207,18 @@ function openHourly(day, periods, periods_h) {
 
             // icon
             let icon = document.createElement("img");
-            icon.setAttribute("src", getIcon(periods_h[hourlyIndex[day][i]].shortForecast, periods_h[hourlyIndex[day][i]].isDaytime));
+            icon.setAttribute(
+                "src",
+                getIcon(
+                    periods_h[hourlyIndex[day][i]].shortForecast,
+                    periods_h[hourlyIndex[day][i]].isDaytime,
+                ),
+            );
             icon.setAttribute("class", "iconVerySmallMOBILE");
-            icon.setAttribute("title", periods_h[hourlyIndex[day][i]].shortForecast);
+            icon.setAttribute(
+                "title",
+                periods_h[hourlyIndex[day][i]].shortForecast,
+            );
 
             // Append everything
             container.appendChild(time);
@@ -998,7 +1238,8 @@ function openHourly(day, periods, periods_h) {
 
         // Add Close Hourly icon
         document.getElementById("menuIcon").innerText = "chevron_backward";
-        document.getElementById("menuButton").style.flexDirection = "row-reverse";
+        document.getElementById("menuButton").style.flexDirection =
+            "row-reverse";
         document.getElementById("locationName").innerText = "Back";
         document.getElementById("menuButton").onclick = () => {
             closeHourly();
@@ -1027,9 +1268,18 @@ function openHourly(day, periods, periods_h) {
 
             // icon
             let icon = document.createElement("img");
-            icon.setAttribute("src", getIcon(periods_h[hourlyIndex[day][i]].shortForecast, periods_h[hourlyIndex[day][i]].isDaytime));
+            icon.setAttribute(
+                "src",
+                getIcon(
+                    periods_h[hourlyIndex[day][i]].shortForecast,
+                    periods_h[hourlyIndex[day][i]].isDaytime,
+                ),
+            );
             icon.setAttribute("class", "iconSmall");
-            icon.setAttribute("title", periods_h[hourlyIndex[day][i]].shortForecast);
+            icon.setAttribute(
+                "title",
+                periods_h[hourlyIndex[day][i]].shortForecast,
+            );
 
             // Append everything
             container.appendChild(time);
@@ -1080,7 +1330,10 @@ async function updateLocationAutofill() {
         itemClassName = "locationAutofillItem";
     }
     const address = input.value;
-    const url = "https://nominatim.openstreetmap.org/search?q=" + address + "&format=jsonv2";
+    const url =
+        "https://nominatim.openstreetmap.org/search?q=" +
+        address +
+        "&format=jsonv2";
 
     if (address == "") {
         // If there isn't any text, delete previous suggestions instead of loading and using api first
@@ -1112,13 +1365,20 @@ async function updateLocationAutofill() {
                         if (userData[0]) {
                             item.onclick = async () => {
                                 setLoading(true);
-                                let name = await fetchWeather(coordinates, true);
+                                let name = await fetchWeather(
+                                    coordinates,
+                                    true,
+                                );
                                 fetchWeather(coordinates);
                                 addToMenu(name, coordinates);
                                 if (mobile) {
-                                    document.getElementById("locationInputMOBILE").value = "";
+                                    document.getElementById(
+                                        "locationInputMOBILE",
+                                    ).value = "";
                                 } else {
-                                    document.getElementById("locationInputv2").value = "";
+                                    document.getElementById(
+                                        "locationInputv2",
+                                    ).value = "";
                                 }
                                 container.innerHTML = "";
                             };
@@ -1126,18 +1386,41 @@ async function updateLocationAutofill() {
                             item.onclick = async () => {
                                 setLoading(true);
                                 fetchWeather(coordinates);
-                                let name = await fetchWeather(coordinates, true);
+                                let name = await fetchWeather(
+                                    coordinates,
+                                    true,
+                                );
                                 addToMenu(name, coordinates, true);
                                 if (mobile) {
-                                    document.getElementById("locationInputMOBILE").value = "";
+                                    document.getElementById(
+                                        "locationInputMOBILE",
+                                    ).value = "";
                                 } else {
-                                    document.getElementById("locationInputv2").value = "";
+                                    document.getElementById(
+                                        "locationInputv2",
+                                    ).value = "";
                                 }
                                 container.innerHTML = "";
                                 userData[0] = true;
                                 userData[1] = visitorId;
-                                userData[3] = [[coordinates[0], coordinates[1], name, "place",],];
-                                setRow([userData[1], version, [coordinates[0], coordinates[1], name, "place",],]);
+                                userData[3] = [
+                                    [
+                                        coordinates[0],
+                                        coordinates[1],
+                                        name,
+                                        "place",
+                                    ],
+                                ];
+                                setRow([
+                                    userData[1],
+                                    version,
+                                    [
+                                        coordinates[0],
+                                        coordinates[1],
+                                        name,
+                                        "place",
+                                    ],
+                                ]);
                                 updateMenu();
                             };
                         }
@@ -1184,7 +1467,10 @@ function openLocationContextMenu(x, y, content) {
 
         // Icon inside button
         let saveIcon = document.createElement("span");
-        saveIcon.setAttribute("class", "material-symbols-outlined locationContextMenuItemIcon");
+        saveIcon.setAttribute(
+            "class",
+            "material-symbols-outlined locationContextMenuItemIcon",
+        );
         saveIcon.innerText = content[i][0];
 
         // Text
@@ -1274,7 +1560,10 @@ async function fetchFirstLocation(text, returnCoordinates = false) {
 
     let address = text;
 
-    const url = "https://nominatim.openstreetmap.org/search?q=" + address + "&format=jsonv2";
+    const url =
+        "https://nominatim.openstreetmap.org/search?q=" +
+        address +
+        "&format=jsonv2";
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -1305,7 +1594,10 @@ async function fetchFirstLocation(text, returnCoordinates = false) {
             saveLocation([lat, long], name, "place");
         }
     } catch (error) {
-        console.error("Error getting first location on enter key press. ", error);
+        console.error(
+            "Error getting first location on enter key press. ",
+            error,
+        );
         // TODO: Get rid of error message when place is not in US.
     }
 }
@@ -1348,31 +1640,57 @@ function addToMenu(name, coordinates, addToSaved = false, icon = "place") {
             const x = ev.clientX;
             const y = ev.clientY;
             if (addToSaved) {
-                openLocationContextMenu(x, y, [["delete", "Delete location", () => {
-                    for (let i = 0; i < userData[3].length; i++) {
-                        if (coordinates[0] == userData[3][i][0] && coordinates[1] == userData[3][i][1]) {
-                            console.log("Location to delete found ", i);
-                            userData[3].splice(i, 1);
+                openLocationContextMenu(x, y, [
+                    [
+                        "delete",
+                        "Delete location",
+                        () => {
+                            for (let i = 0; i < userData[3].length; i++) {
+                                if (
+                                    coordinates[0] == userData[3][i][0] &&
+                                    coordinates[1] == userData[3][i][1]
+                                ) {
+                                    console.log("Location to delete found ", i);
+                                    userData[3].splice(i, 1);
 
-                            // Format locations to save to sheet
-                            let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]},${userData[3][0][2]},${userData[3][0][3]}`;
-                            for (let i = 1; i < userData[3].length; i++) {
-                                formattedLocation = formattedLocation + `;${userData[3][i][0]},${userData[3][i][1]},${userData[3][i][2]},${userData[3][i][3]}`;
+                                    // Format locations to save to sheet
+                                    let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]},${userData[3][0][2]},${userData[3][0][3]}`;
+                                    for (
+                                        let i = 1;
+                                        i < userData[3].length;
+                                        i++
+                                    ) {
+                                        formattedLocation =
+                                            formattedLocation +
+                                            `;${userData[3][i][0]},${userData[3][i][1]},${userData[3][i][2]},${userData[3][i][3]}`;
+                                    }
+                                    console.log(
+                                        "Formatted location to save: ",
+                                        formattedLocation,
+                                    );
+                                    setCell("C", formattedLocation);
+                                    updateMenu();
+                                }
                             }
-                            console.log("Formatted location to save: ", formattedLocation);
-                            setCell("C", formattedLocation);
-                            updateMenu();
-                        }
-                    }
-                },],]);
+                        },
+                    ],
+                ]);
             } else {
-                openLocationContextMenu(x, y, [["add", "Save location", () => {
-                    coordinatesToSave = coordinates;
-                    document
-                        .getElementById("locationSaveMenuMOBILE")
-                        .removeAttribute("hidden");
-                    document.getElementById("locationSaveMenuInputMOBILE").value = name;
-                },],]);
+                openLocationContextMenu(x, y, [
+                    [
+                        "add",
+                        "Save location",
+                        () => {
+                            coordinatesToSave = coordinates;
+                            document
+                                .getElementById("locationSaveMenuMOBILE")
+                                .removeAttribute("hidden");
+                            document.getElementById(
+                                "locationSaveMenuInputMOBILE",
+                            ).value = name;
+                        },
+                    ],
+                ]);
             }
         });
 
@@ -1416,31 +1734,57 @@ function addToMenu(name, coordinates, addToSaved = false, icon = "place") {
             const x = ev.clientX;
             const y = ev.clientY;
             if (addToSaved) {
-                openLocationContextMenu(x, y, [["delete", "Delete location", () => {
-                    for (let i = 0; i < userData[3].length; i++) {
-                        if (coordinates[0] == userData[3][i][0] && coordinates[1] == userData[3][i][1]) {
-                            console.log("Location to delete found ", i);
-                            userData[3].splice(i, 1);
+                openLocationContextMenu(x, y, [
+                    [
+                        "delete",
+                        "Delete location",
+                        () => {
+                            for (let i = 0; i < userData[3].length; i++) {
+                                if (
+                                    coordinates[0] == userData[3][i][0] &&
+                                    coordinates[1] == userData[3][i][1]
+                                ) {
+                                    console.log("Location to delete found ", i);
+                                    userData[3].splice(i, 1);
 
-                            // Format locations to save to sheet
-                            let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]},${userData[3][0][2]},${userData[3][0][3]}`;
-                            for (let i = 1; i < userData[3].length; i++) {
-                                formattedLocation = formattedLocation + `;${userData[3][i][0]},${userData[3][i][1]},${userData[3][i][2]},${userData[3][i][3]}`;
+                                    // Format locations to save to sheet
+                                    let formattedLocation = `${userData[3][0][0]},${userData[3][0][1]},${userData[3][0][2]},${userData[3][0][3]}`;
+                                    for (
+                                        let i = 1;
+                                        i < userData[3].length;
+                                        i++
+                                    ) {
+                                        formattedLocation =
+                                            formattedLocation +
+                                            `;${userData[3][i][0]},${userData[3][i][1]},${userData[3][i][2]},${userData[3][i][3]}`;
+                                    }
+                                    console.log(
+                                        "Formatted location to save: ",
+                                        formattedLocation,
+                                    );
+                                    setCell("C", formattedLocation);
+                                    updateMenu();
+                                }
                             }
-                            console.log("Formatted location to save: ", formattedLocation);
-                            setCell("C", formattedLocation);
-                            updateMenu();
-                        }
-                    }
-                },],]);
+                        },
+                    ],
+                ]);
             } else {
-                openLocationContextMenu(x, y, [["add", "Save location", () => {
-                    coordinatesToSave = coordinates;
-                    document
-                        .getElementById("locationSaveMenu")
-                        .removeAttribute("hidden");
-                    document.getElementById("locationSaveMenuInput").value = name;
-                },],]);
+                openLocationContextMenu(x, y, [
+                    [
+                        "add",
+                        "Save location",
+                        () => {
+                            coordinatesToSave = coordinates;
+                            document
+                                .getElementById("locationSaveMenu")
+                                .removeAttribute("hidden");
+                            document.getElementById(
+                                "locationSaveMenuInput",
+                            ).value = name;
+                        },
+                    ],
+                ]);
             }
         });
         let threeDotIcon = document.createElement("span");
@@ -1449,7 +1793,10 @@ function addToMenu(name, coordinates, addToSaved = false, icon = "place") {
         threeDot.appendChild(threeDotIcon);
 
         let locationIcon = document.createElement("span");
-        locationIcon.setAttribute("class", "material-symbols-outlined locationCardIcon");
+        locationIcon.setAttribute(
+            "class",
+            "material-symbols-outlined locationCardIcon",
+        );
         locationIcon.innerText = icon;
 
         let locationName = document.createElement("p");
@@ -1481,7 +1828,11 @@ async function getCurrentLocation() {
             fetch("https://free.freeipapi.com/api/json/" + data.ip)
                 .then((response) => response.json())
                 .then((data2) => {
-                    console.log("IP Location successful: ", data2.cityName, data2.regionName);
+                    console.log(
+                        "IP Location successful: ",
+                        data2.cityName,
+                        data2.regionName,
+                    );
                     fetchWeather([data2.latitude, data2.longitude]);
                 })
                 .catch((error) => {
