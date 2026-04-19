@@ -28,28 +28,29 @@ async function fetchWeather(coordinates) {
         if (infoResponse.ok) {
             console.log("Info: OK");
             const infoData = await infoResponse.json();
-            console.log("Info data:", infoData)
+            console.log("Info data:", infoData);
 
             // Get the actual data
             try {
-                const mainResponse = await fetch(infoData.properties.forecast)
+                const mainResponse = await fetch(infoData.properties.forecast);
                 if (mainResponse.ok) {
-                    console.log("Main: OK")
-                    const mainData = await mainResponse.json()
-                    console.log("Main data:", mainData)
-                    return mainData.properties.periods[0].detailedForecast
+                    console.log("Main: OK");
+                    const mainData = await mainResponse.json();
+                    console.log("Main data:", mainData);
+                    return mainData.properties.periods[0].detailedForecast;
                 }
+                
             } catch (error) {
                 console.error("Error gettting main weather data", error);
-                return error
+                return error;
             }
         } else {
-            console.error("LOCATION NOT FOUND")
-            return "LOCATION NOT FOUND"
+            console.error("LOCATION NOT FOUND");
+            return "LOCATION NOT FOUND";
         }
     } catch (error) {
         console.error("Error getting weather data", error);
-        return error
+        return error;
     }
 }
 
