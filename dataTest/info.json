@@ -1,0 +1,112 @@
+{
+    "@context": [
+        "https://geojson.org/geojson-ld/geojson-context.jsonld",
+        {
+            "@version": "1.1",
+            "wx": "https://api.weather.gov/ontology#",
+            "s": "https://schema.org/",
+            "geo": "http://www.opengis.net/ont/geosparql#",
+            "unit": "http://codes.wmo.int/common/unit/",
+            "@vocab": "https://api.weather.gov/ontology#",
+            "geometry": {
+                "@id": "s:GeoCoordinates",
+                "@type": "geo:wktLiteral"
+            },
+            "city": "s:addressLocality",
+            "state": "s:addressRegion",
+            "distance": {
+                "@id": "s:Distance",
+                "@type": "s:QuantitativeValue"
+            },
+            "bearing": {
+                "@type": "s:QuantitativeValue"
+            },
+            "value": {
+                "@id": "s:value"
+            },
+            "unitCode": {
+                "@id": "s:unitCode",
+                "@type": "@id"
+            },
+            "forecastOffice": {
+                "@type": "@id"
+            },
+            "forecastGridData": {
+                "@type": "@id"
+            },
+            "publicZone": {
+                "@type": "@id"
+            },
+            "county": {
+                "@type": "@id"
+            }
+        }
+    ],
+    "id": "https://api.weather.gov/points/44,-70",
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -70,
+            44
+        ]
+    },
+    "properties": {
+        "@id": "https://api.weather.gov/points/44,-70",
+        "@type": "wx:Point",
+        "cwa": "GYX",
+        "type": "land",
+        "forecastOffice": "https://api.weather.gov/offices/GYX",
+        "gridId": "GYX",
+        "gridX": 78,
+        "gridY": 75,
+        "forecast": "https://api.weather.gov/gridpoints/GYX/78,75/forecast",
+        "forecastHourly": "https://api.weather.gov/gridpoints/GYX/78,75/forecast/hourly",
+        "forecastGridData": "https://api.weather.gov/gridpoints/GYX/78,75",
+        "observationStations": "https://api.weather.gov/gridpoints/GYX/78,75/stations",
+        "relativeLocation": {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -70.057636,
+                    44.008612
+                ]
+            },
+            "properties": {
+                "city": "Lisbon Falls",
+                "state": "ME",
+                "distance": {
+                    "unitCode": "wmoUnit:m",
+                    "value": 4708.2126630874
+                },
+                "bearing": {
+                    "unitCode": "wmoUnit:degree_(angle)",
+                    "value": 101
+                }
+            }
+        },
+        "forecastZone": "https://api.weather.gov/zones/forecast/MEZ025",
+        "county": "https://api.weather.gov/zones/county/MEC023",
+        "fireWeatherZone": "https://api.weather.gov/zones/fire/MEZ110",
+        "timeZone": "America/New_York",
+        "radarStation": "KGYX",
+        "astronomicalData": {
+            "sunrise": "2026-04-27T05:35:24-04:00",
+            "sunset": "2026-04-27T19:39:49-04:00",
+            "transit": "2026-04-27T12:37:37-04:00",
+            "civilTwilightBegin": "2026-04-27T05:05:42-04:00",
+            "civilTwilightEnd": "2026-04-27T20:09:32-04:00",
+            "nauticalTwilightBegin": "2026-04-27T04:27:17-04:00",
+            "nauticalTwilightEnd": "2026-04-27T20:47:56-04:00",
+            "astronomicalTwilightBegin": "2026-04-27T03:45:11-04:00",
+            "astronomicalTwilightEnd": "2026-04-27T21:30:02-04:00"
+        },
+        "nwr": {
+            "transmitter": "WSM60",
+            "sameCode": "023023",
+            "areaBroadcast": "https://api.weather.gov/radio/WSM60/broadcast",
+            "pointBroadcast": "https://api.weather.gov/points/44,-70/radio"
+        }
+    }
+}

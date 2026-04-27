@@ -1,6 +1,129 @@
 // Fetch weather data and return it (And some other stuff)
 // Split to a separate file just to make things easier
 
+function formatData(infoData, mainData, hourlyData) {
+    ///////////////
+    // MAIN DATA //
+    ///////////////
+
+    // Create array of days
+    let formattedDays = [];
+
+    // Put days in order
+    for (let i = 0; i < mainData.properties.periods.length; i++) {
+        const thisPeriod = mainData.properties.periods[i];
+
+        if (thisPeriod.isDaytime) {
+            formattedDays.push({
+                name: thisPeriod.name,
+                date: formatDate(thisPeriod.startTime, false),
+                isDaytime: thisPeriod.isDaytime,
+                temperature: thisPeriod.temperature,
+                precipitation: thisPeriod.probabilityOfPrecipitation.value,
+                wind: {
+                    speed: thisPeriod.windSpeed,
+                    direction: thisPeriod.windDirection,
+                },
+                shortForecast: thisPeriod.shortForecast,
+                detailedForecast: thisPeriod.detailedForecast,
+                icon: getIcon(thisPeriod.shortForecast, thisPeriod.isDaytime),
+            });
+        }
+    }
+
+    console.log("FormattedMain:", formattedDays);
+
+    /////////////////
+    // HOURLY DATA //
+    /////////////////
+
+    // Create array of hours
+    let formattedHours = [];
+
+    // Put hours in the array sorted by day
+    for (let i = 0; i < hourlyData.properties.periods.length; i++) {
+        const thisHour = hourlyData.properties.periods[i];
+
+        // See if theres already been a day created that this hour is in
+        for (let x = 0; i < formattedHours.length; x++) {
+            const formattedThisHour = {
+                time: formatDate(thisHour.startTime, true),
+                isDaytime: thisHour.isDaytime,
+                temperature: thisHour.temperature,
+                precipitation: thisHour.probabilityOfPrecipitation.value,
+                dewPoint: thisHour.dewpoint.value,
+                humidity: thisHour.relativeHumidity.value,
+                wind: {
+                    speed: thisHour.windSpeed,
+                    direction: thisHour.windDirection,
+                },
+                icon: getIcon(
+                    thisHour.shortForecast,
+                    thisHour.isDaytime,
+                    false,
+                ),
+                shortForecast: thisHour.shortForecast,
+                feelsLike: getFeelsLike(
+                    thisHour.temperature,
+                    thisHour.relativeHumidity.value,
+                    thisHour.windSpeed,
+                    false,
+                ),
+            };
+            if (
+                formattedHours[x].date == formatDate(thisHour.startTime, false)
+            ) {
+                // This means they are the same day
+                formattedHours[x].hours.push(formattedThisHour);
+            } else {
+                // This means its the first hour of a new day
+                formattedHours.push({
+                    date: formatDate(thisHour.startTime, false),
+                    hours: [formattedThisHour],
+                });
+            }
+        }
+    }
+
+    ////////////////
+    // FINAL DATA //
+    ////////////////
+
+    // Create final formatted JSON data
+    const formattedData = {
+        info: {
+            office: infoData.properties.cwa,
+            forecastURL: infoData.properties.forecast,
+            forecastHourlyURL: infoData.properties.forecastHourly,
+            city: infoData.properties.relativeLocation.properties.city,
+            state: infoData.properties.relativeLocation.properties.state,
+            astronomical: {
+                sunrise: infoData.properties.astronomicalData.sunrise,
+                sunset: infoData.properties.astronomicalData.sunset,
+                civilTwilightBegin:
+                    infoData.properties.astronomicalData.civilTwilightBegin,
+                civilTwilightEnd:
+                    infoData.properties.astronomicalData.civilTwilightEnd,
+                nauticalTwilightBegin:
+                    infoData.properties.astronomicalData.nauticalTwilightBegin,
+                nauticalTwilightEnd:
+                    infoData.properties.astronomicalData.nauticalTwilightEnd,
+                astronomicalTwilightBegin:
+                    infoData.properties.astronomicalData
+                        .astronomicalTwilightBegin,
+                astronomicalTwilightEnd:
+                    infoData.properties.astronomicalData
+                        .astronomicalTwilightEnd,
+            },
+        },
+        days: formattedDays,
+        hours: formattedHours,
+    };
+
+    console.log("FORMATTED DATA FiNAL", formattedData);
+    return formattedData;
+}
+
 export async function fetchWeather(coordinates) {
     // Coordinates: [lat, long]
     try {
@@ -42,6 +165,7 @@ export async function fetchWeather(coordinates) {
                             console.log("Hourly data:", hourlyData);
 
                             // Return all the data
+                            formatData(infoData, mainData, hourlyData);
                             return [infoData, mainData, hourlyData];
                         }
                     } catch (error) {
@@ -220,7 +344,7 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             ) {
                 document.getElementsByClassName("titleBarMOBILE")[
                     i
-                    ].style.backgroundImage =
+                ].style.backgroundImage =
                     "linear-gradient(" +
                     bg_top +
                     ", " +
@@ -248,7 +372,21 @@ export function getPrecipitation(probability) {
     }
 }
 
-export function getFeelsLike(temperature, humidity, wind, dontPrintInfo = false) {
+export function formatDate(originalDate, returnTime) {
+    // Formats a date to a more readable format. Including the time will return just the time
+    if (returnTime) {
+        return originalDate.split("T")[1].split("-")[0];
+    } else {
+        return originalDate.split("T")[0];
+    }
+}
+
+export function getFeelsLike(
+    temperature,
+    humidity,
+    wind,
+    dontPrintInfo = false,
+) {
     var T = temperature;
     var RH = humidity;
     var feelsLike = 0;
