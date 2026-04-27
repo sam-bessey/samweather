@@ -165,8 +165,7 @@ export async function fetchWeather(coordinates) {
                             console.log("Hourly data:", hourlyData);
 
                             // Return all the data
-                            formatData(infoData, mainData, hourlyData);
-                            return [infoData, mainData, hourlyData];
+                            return formatData(infoData, mainData, hourlyData);
                         }
                     } catch (error) {
                         console.error(
