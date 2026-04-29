@@ -41,10 +41,7 @@ function DayOverview({ data, startExpanded = false }) {
                 {expanded ? (
                     <>
                         <p>{data.detailedForecast}</p>
-                        <p>
-                            {"Precipitation " +
-                                data.precipitation + "%"}
-                        </p>
+                        <p>{"Precipitation " + data.precipitation + "%"}</p>
                     </>
                 ) : (
                     <></>
@@ -56,7 +53,7 @@ function DayOverview({ data, startExpanded = false }) {
 
 function DayForecast({ data }) {
     return (
-        <div className={"w-1/2"}>
+        <div className={"w-1/2 h-full"}>
             <DayOverview
                 data={data?.days?.[1]}
                 startExpanded={true}
@@ -93,6 +90,10 @@ function DayForecast({ data }) {
     );
 }
 
+function HourlyForecast({ data }) {
+    return (<div className="w-1/2 h-full">fff</div>);
+}
+
 export default function App() {
     const [data, setWeatherData] = useState(null);
 
@@ -101,11 +102,14 @@ export default function App() {
     }, []);
 
     return (
-        <div className="m-0 p-0">
+        <div className="m-0 p-0 h-screen">
             <TitleBar></TitleBar>
 
             <p className="p-2">{data?.days?.[0]?.detailedForecast}</p>
-            <DayForecast data={data} />
+            <div className="inline-flex w-full">
+                <DayForecast data={data} />
+                <HourlyForecast data={data} />
+            </div>
         </div>
     );
 }

@@ -13,7 +13,8 @@ function formatData(infoData, mainData, hourlyData) {
     for (let i = 0; i < mainData.properties.periods.length; i++) {
         const thisPeriod = mainData.properties.periods[i];
 
-        if (thisPeriod.isDaytime) {
+        // Only include if it is daytime or the first item (in case its night right now)
+        if (thisPeriod.isDaytime || i == 0) {
             formattedDays.push({
                 name: thisPeriod.name,
                 date: formatDate(thisPeriod.startTime, false),
