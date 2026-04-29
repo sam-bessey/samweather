@@ -91,7 +91,11 @@ function DayForecast({ data }) {
 }
 
 function HourlyForecast({ data }) {
-    return (<div className="w-1/2 h-full">fff</div>);
+    return <div className="w-1/2 h-full">
+        <ul>{
+        data.hours.map((item) => <li></li>)
+}</ul>
+    </div>;
 }
 
 export default function App() {
