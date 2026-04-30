@@ -91,18 +91,22 @@ function DayForecast({ data }) {
 }
 
 function HourlyForecast({ data }) {
-    return <div className="w-1/2 h-full">
-        <ul>{
-        data.hours.map((item) => <li></li>)
-}</ul>
-    </div>;
+    return (
+        <div className="w-1/2 h-full">
+            <ul>
+                {/* {data.hours.map((item) => (
+                    <li>{item.temperature}</li>
+                ))} */}
+            </ul>
+        </div>
+    );
 }
 
 export default function App() {
-    const [data, setWeatherData] = useState(null);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
-        fetchWeather([44, -70]).then(setWeatherData);
+        fetchWeather([44, -70]).then(setData);
     }, []);
 
     return (

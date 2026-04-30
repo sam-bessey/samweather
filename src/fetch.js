@@ -32,8 +32,6 @@ function formatData(infoData, mainData, hourlyData) {
         }
     }
 
-    console.log("FormattedMain:", formattedDays);
-
     /////////////////
     // HOURLY DATA //
     /////////////////
@@ -45,43 +43,52 @@ function formatData(infoData, mainData, hourlyData) {
     for (let i = 0; i < hourlyData.properties.periods.length; i++) {
         const thisHour = hourlyData.properties.periods[i];
 
-        // See if theres already been a day created that this hour is in
-        for (let x = 0; i < formattedHours.length; x++) {
-            const formattedThisHour = {
-                time: formatDate(thisHour.startTime, true),
-                isDaytime: thisHour.isDaytime,
-                temperature: thisHour.temperature,
-                precipitation: thisHour.probabilityOfPrecipitation.value,
-                dewPoint: thisHour.dewpoint.value,
-                humidity: thisHour.relativeHumidity.value,
-                wind: {
-                    speed: thisHour.windSpeed,
-                    direction: thisHour.windDirection,
-                },
-                icon: getIcon(
-                    thisHour.shortForecast,
-                    thisHour.isDaytime,
-                    false,
-                ),
-                shortForecast: thisHour.shortForecast,
-                feelsLike: getFeelsLike(
-                    thisHour.temperature,
-                    thisHour.relativeHumidity.value,
-                    thisHour.windSpeed,
-                    false,
-                ),
-            };
-            if (
-                formattedHours[x].date == formatDate(thisHour.startTime, false)
-            ) {
-                // This means they are the same day
-                formattedHours[x].hours.push(formattedThisHour);
-            } else {
-                // This means its the first hour of a new day
-                formattedHours.push({
-                    date: formatDate(thisHour.startTime, false),
-                    hours: [formattedThisHour],
-                });
+        // Format the hour
+        const formattedThisHour = {
+            time: formatDate(thisHour.startTime, true),
+            isDaytime: thisHour.isDaytime,
+            temperature: thisHour.temperature,
+            precipitation: thisHour.probabilityOfPrecipitation.value,
+            dewPoint: thisHour.dewpoint.value,
+            humidity: thisHour.relativeHumidity.value,
+            wind: {
+                speed: thisHour.windSpeed,
+                direction: thisHour.windDirection,
+            },
+            icon: getIcon(thisHour.shortForecast, thisHour.isDaytime, false),
+            shortForecast: thisHour.shortForecast,
+            feelsLike: getFeelsLike(
+                thisHour.temperature,
+                thisHour.relativeHumidity.value,
+                thisHour.windSpeed,
+                true,
+            ),
+        };
+
+        // If its the first hour, add it to a new day:
+        if (formattedHours.length == 0) {
+            formattedHours.push({
+                date: formatDate(thisHour.startTime, false),
+                hours: [formattedThisHour],
+            });
+        } else {
+            // See if theres already been a day created that this hour is in
+            for (let x = 0; x < formattedHours.length; x++) {
+                if (
+                    formattedHours[x].date ==
+                    formatDate(thisHour.startTime, false)
+                ) {
+                    console.log("Hour", i, "On day as ", x)
+                    // This means they are the same day
+                    formattedHours[x].hours.push(formattedThisHour);
+                } else {
+                    // This means its the first hour of a new day
+                    formattedHours.push({
+                        date: formatDate(thisHour.startTime, false),
+                        hours: [formattedThisHour],
+                    });
+                }
+                console.log("F HOUR", formattedHours);
             }
         }
     }
@@ -423,7 +430,7 @@ export function getFeelsLike(
         // Adjust temp
         if (HI >= 80) {
             if (RH < 13 && 80 <= T <= 112) {
-                ADJUSTMENT_low =
+                let ADJUSTMENT_low =
                     ((13 - RH) / 4) *
                     Math.sqrt(Math.abs(17 - Math.abs(T - 95.0)) / 17);
                 HI = HI_rothfusz - ADJUSTMENT_low;
@@ -431,7 +438,7 @@ export function getFeelsLike(
                     console.log("0", HI);
                 }
             } else if (RH > 85 && 80 <= T <= 87) {
-                ADJUSTMENT_high = ((RH - 85) / 10) * ((87 - T) / 5);
+                let ADJUSTMENT_high = ((RH - 85) / 10) * ((87 - T) / 5);
                 HI = HI_rothfusz + ADJUSTMENT_high;
                 if (!dontPrintInfo) {
                     console.log("1", HI);
