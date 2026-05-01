@@ -14,7 +14,7 @@ function formatData(infoData, mainData, hourlyData) {
         const thisPeriod = mainData.properties.periods[i];
 
         // Only include if it is daytime or the first item (in case its night right now)
-        if (thisPeriod.isDaytime || i == 0) {
+        if (thisPeriod.isDaytime || i === 0) {
             formattedDays.push({
                 name: thisPeriod.name,
                 date: formatDate(thisPeriod.startTime, false),
@@ -66,29 +66,32 @@ function formatData(infoData, mainData, hourlyData) {
         };
 
         // If its the first hour, add it to a new day:
-        if (formattedHours.length == 0) {
+        if (formattedHours.length === 0) {
             formattedHours.push({
                 date: formatDate(thisHour.startTime, false),
                 hours: [formattedThisHour],
             });
         } else {
             // See if theres already been a day created that this hour is in
+            let foundDay = false;
             for (let x = 0; x < formattedHours.length; x++) {
                 if (
                     formattedHours[x].date ==
                     formatDate(thisHour.startTime, false)
                 ) {
-                    console.log("Hour", i, "On day as ", x)
+                    console.log("Hour", i, "On day as ", x);
                     // This means they are the same day
                     formattedHours[x].hours.push(formattedThisHour);
-                } else {
-                    // This means its the first hour of a new day
-                    formattedHours.push({
-                        date: formatDate(thisHour.startTime, false),
-                        hours: [formattedThisHour],
-                    });
+                    foundDay = true;
+                    break;
                 }
-                console.log("F HOUR", formattedHours);
+            }
+            if (!foundDay) {
+                // This means its the first hour of a new day
+                formattedHours.push({
+                    date: formatDate(thisHour.startTime, false),
+                    hours: [formattedThisHour],
+                });
             }
         }
     }
@@ -213,11 +216,11 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = "linear-gradient(#a6c0ed, #7d9cd1)";
-            icon = "http://openweathermap.org/img/wn/02d@2x.png";
+            icon = "https://openweathermap.org/img/wn/02d@2x.png";
         } else {
             bg_top = "#4e5c8a";
             bg = "linear-gradient(#4e5c8a, #434859)";
-            icon = "http://openweathermap.org/img/wn/02n@2x.png";
+            icon = "https://openweathermap.org/img/wn/02n@2x.png";
             whiteText = true;
         }
     } else if (
@@ -229,14 +232,14 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
     ) {
         bg_top = "#d7d9de";
         bg = "linear-gradient(#d7d9de, #f0f0f0)";
-        icon = "http://openweathermap.org/img/wn/13d@2x.png";
+        icon = "https://openweathermap.org/img/wn/13d@2x.png";
     } else if (
         description.includes("Thunder") ||
         description.includes("T-storm")
     ) {
         bg_top = "#434343";
         bg = "linear-gradient(#434343, #2e2d2d)";
-        icon = "http://openweathermap.org/img/wn/11d@2x.png";
+        icon = "https://openweathermap.org/img/wn/11d@2x.png";
         whiteText = true;
     } else if (
         description.includes("Showers") ||
@@ -251,11 +254,11 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             if (isDaytime) {
                 bg_top = "#95a6de";
                 bg = "linear-gradient(#95a6de, #c0caeb)";
-                icon = "http://openweathermap.org/img/wn/10d@2x.png";
+                icon = "https://openweathermap.org/img/wn/10d@2x.png";
             } else {
                 bg_top = "#444a5e";
                 bg = "linear-gradient(#444a5e, #293354)";
-                icon = "http://openweathermap.org/img/wn/10n@2x.png";
+                icon = "https://openweathermap.org/img/wn/10n@2x.png";
                 whiteText = true;
             }
         } else {
@@ -267,7 +270,7 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
                 bg = "linear-gradient(#444a5e, #131621)";
                 whiteText = true;
             }
-            icon = "http://openweathermap.org/img/wn/09d@2x.png";
+            icon = "https://openweathermap.org/img/wn/09d@2x.png";
         }
     } else if (description.includes("Cloud") || description.includes("Frost")) {
         if (isDaytime) {
@@ -278,21 +281,21 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             bg = "linear-gradient(#38383b, #767682)";
             whiteText = true;
         }
-        icon = "http://openweathermap.org/img/wn/03d@2x.png";
+        icon = "https://openweathermap.org/img/wn/03d@2x.png";
     } else if (
         description.includes("Sunny") ||
-        description == "Sunny" ||
+        description === "Sunny" ||
         description.includes("Sun") ||
         description.includes("Clear")
     ) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = "linear-gradient(#a6c0ed, #5e99ff)";
-            icon = "http://openweathermap.org/img/wn/01d@2x.png";
+            icon = "https://openweathermap.org/img/wn/01d@2x.png";
         } else {
             bg_top = "#041d47";
             bg = "linear-gradient(#041d47, #06378a)";
-            icon = "http://openweathermap.org/img/wn/01n@2x.png";
+            icon = "https://openweathermap.org/img/wn/01n@2x.png";
             whiteText = true;
         }
     } else if (
@@ -309,7 +312,7 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             bg = "linear-gradient(#6e6e6e, #363636)";
             whiteText = true;
         }
-        icon = "http://openweathermap.org/img/wn/50d@2x.png";
+        icon = "https://openweathermap.org/img/wn/50d@2x.png";
     } else {
         console.log("Could not find correct icon for ", description);
     }
@@ -394,9 +397,9 @@ export function getFeelsLike(
     wind,
     dontPrintInfo = false,
 ) {
-    var T = temperature;
-    var RH = humidity;
-    var feelsLike = 0;
+    const T = temperature;
+    const RH = humidity;
+    const feelsLike = 0;
     if (!dontPrintInfo) {
         console.log("t", T, "rh", RH);
     }
@@ -429,7 +432,7 @@ export function getFeelsLike(
         }
         // Adjust temp
         if (HI >= 80) {
-            if (RH < 13 && 80 <= T <= 112) {
+            if (RH < 13 && T >= 80 && T <= 112) {
                 let ADJUSTMENT_low =
                     ((13 - RH) / 4) *
                     Math.sqrt(Math.abs(17 - Math.abs(T - 95.0)) / 17);
@@ -437,7 +440,7 @@ export function getFeelsLike(
                 if (!dontPrintInfo) {
                     console.log("0", HI);
                 }
-            } else if (RH > 85 && 80 <= T <= 87) {
+            } else if (RH > 85 && T >= 80 && T <= 87) {
                 let ADJUSTMENT_high = ((RH - 85) / 10) * ((87 - T) / 5);
                 HI = HI_rothfusz + ADJUSTMENT_high;
                 if (!dontPrintInfo) {
