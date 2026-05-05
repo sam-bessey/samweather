@@ -90,13 +90,13 @@ function DayForecast({ data }) {
     );
 }
 
-function HourlyForecast({ data }) {
+function HourlyForecast({ data, dayIndex }) {
     return (
         <div className="w-1/2 h-full">
             <ul>
-                {/* {data.hours.map((item) => (
-                    <li>{item.temperature}</li>
-                ))} */}
+                {data?.hours?.[dayIndex]?.hours.map((item) => (
+                    <li key={item?.time}>{item?.temperature}</li>
+                ))}
             </ul>
         </div>
     );
@@ -104,6 +104,7 @@ function HourlyForecast({ data }) {
 
 export default function App() {
     const [data, setData] = useState(null);
+    // const [selectedDay, setSelectedDay] = useState(0);
 
     useEffect(() => {
         fetchWeather([44, -70]).then(setData);
@@ -116,7 +117,7 @@ export default function App() {
             <p className="p-2">{data?.days?.[0]?.detailedForecast}</p>
             <div className="inline-flex w-full">
                 <DayForecast data={data} />
-                <HourlyForecast data={data} />
+                <HourlyForecast data={data} dayIndex={0}/>
             </div>
         </div>
     );

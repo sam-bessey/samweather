@@ -79,7 +79,6 @@ function formatData(infoData, mainData, hourlyData) {
                     formattedHours[x].date ==
                     formatDate(thisHour.startTime, false)
                 ) {
-                    console.log("Hour", i, "On day as ", x);
                     // This means they are the same day
                     formattedHours[x].hours.push(formattedThisHour);
                     foundDay = true;
