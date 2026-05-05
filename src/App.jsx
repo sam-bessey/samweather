@@ -104,7 +104,7 @@ function HourlyForecast({ data, dayIndex }) {
 
 export default function App() {
     const [data, setData] = useState(null);
-    // const [selectedDay, setSelectedDay] = useState(0);
+    const [selectedDay, setSelectedDay] = useState(0);
 
     useEffect(() => {
         fetchWeather([44, -70]).then(setData);
@@ -117,7 +117,7 @@ export default function App() {
             <p className="p-2">{data?.days?.[0]?.detailedForecast}</p>
             <div className="inline-flex w-full">
                 <DayForecast data={data} />
-                <HourlyForecast data={data} dayIndex={0}/>
+                <HourlyForecast data={data} dayIndex={0} />
             </div>
         </div>
     );
