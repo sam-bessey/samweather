@@ -383,8 +383,25 @@ export function getPrecipitation(probability) {
 
 export function formatDate(originalDate, returnTime) {
     // Formats a date to a more readable format. Including the time will return just the time
+    // originalDate: The original non-formatted date
+    // returnTime: If true will return JUST THE FORMATTED TIME. If false will return JUST THE FORMATTED DATE
+
     if (returnTime) {
-        return originalDate.split("T")[1].split("-")[0];
+        let hour = originalDate.split("T")[1].split("-")[0].split(":")[0];
+
+        // Check if its 12:00
+        if (Number(hour) === 12) {
+            return "12pm";
+        } else if (Number(hour) === 0) {
+            return "12am";
+        }
+
+        // Do am/pm stuff
+        if (hour > 12) {
+            return `${Number(hour) - 12}pm`;
+        } else {
+            return `${Number(hour)}am`;
+        }
     } else {
         return originalDate.split("T")[0];
     }

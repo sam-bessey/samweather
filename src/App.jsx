@@ -4,6 +4,7 @@ import {
     getIcon,
     getPrecipitation,
     getFeelsLike,
+    formatDate,
 } from "./fetch.js";
 
 function TitleBar() {
@@ -112,12 +113,26 @@ function DayForecast({ data, selectedDay, setSelectedDay }) {
     );
 }
 
+function Hour({ data }) {
+    // Hour
+    // Data should be the data for JUST THIS HOUR
+    // Will return a li for that hour
+
+    return (
+        <li className="flex justify-evenly">
+            <p>{formatDate(data.time)}</p>
+            <p>{data.temperature + "°"}</p>
+            <img src={data.icon} className="w-11 h-11 -translate-y-2.5" />
+        </li>
+    );
+}
+
 function HourlyForecast({ data, dayIndex }) {
     return (
         <div className="w-1/2 h-full">
             <ul>
                 {data?.hours?.[dayIndex]?.hours?.map((item) => (
-                    <li key={item?.time}>{item?.temperature}</li>
+                    <Hour key={item?.time} data={item} />
                 ))}
             </ul>
         </div>
@@ -136,7 +151,6 @@ export default function App() {
         <div className="m-0 p-0 h-screen">
             <TitleBar></TitleBar>
 
-            <p className="p-2">{data?.days?.[0]?.detailedForecast}</p>
             <div className="inline-flex w-full">
                 <DayForecast
                     data={data}
