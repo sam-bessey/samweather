@@ -14,9 +14,7 @@ function TitleBar() {
     );
 }
 
-function DayOverview({ data, startExpanded = false }) {
-    const [expanded, setExpanded] = useState(startExpanded);
-
+function DayOverview({ data, expanded }) {
     if (!data) {
         return <p>Loading...</p>;
     }
@@ -39,52 +37,76 @@ function DayOverview({ data, startExpanded = false }) {
             </div>
             <div>
                 {expanded ? (
-                <>
-                    <p>{data.detailedForecast}</p>
-                    <p>{"Precipitation " + data.precipitation + "%"}</p>
-                </>
+                    <>
+                        <p>{data.detailedForecast}</p>
+                        <p>{"Precipitation " + data.precipitation + "%"}</p>
+                    </>
                 ) : (
                     <></>
-            )}
-        </div>
+                )}
+            </div>
         </div>
     );
 }
 
-function DayForecast({ data }) {
+function DayForecast({ data, selectedDay, setSelectedDay }) {
     return (
         <div className={"w-1/2 h-full"}>
             <DayOverview
                 data={data?.days?.[0]}
-                expanded={false}
+                expanded={selectedDay === 0}
+                onShow={() => {
+                    setSelectedDay(0);
+                }}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[1]}
-                expanded={true}
+                expanded={selectedDay === 1}
+                onShow={() => {
+                    setSelectedDay(1);
+                }}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[2]}
-                expanded={false}
+                expanded={selectedDay === 2}
+                onShow={() => {
+                    setSelectedDay(2);
+                }}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[3]}
-                expanded={false}
+                expanded={selectedDay === 3}
+                onShow={() => {
+                    setSelectedDay(3);
+                }}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[4]}
-                expanded={false}
+                expanded={selectedDay === 4}
+                onShow={() => {
+                    setSelectedDay(4);
+                }}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[5]}
-                expanded={false}
+                expanded={selectedDay === 5}
+                onShow={() => {
+                    setSelectedDay(5);
+                }}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[6]}
-                expanded={false}
+                expanded={selectedDay === 6}
+                onShow={() => {
+                    setSelectedDay(6);
+                }}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[7]}
-                expanded={false}
+                expanded={selectedDay === 7}
+                onShow={() => {
+                    setSelectedDay(7);
+                }}
             ></DayOverview>
         </div>
     );
@@ -116,7 +138,11 @@ export default function App() {
 
             <p className="p-2">{data?.days?.[0]?.detailedForecast}</p>
             <div className="inline-flex w-full">
-                <DayForecast data={data} selectedDay={selectedDay} />
+                <DayForecast
+                    data={data}
+                    selectedDay={selectedDay}
+                    setSelectedDay={setSelectedDay}
+                />
                 <HourlyForecast data={data} dayIndex={selectedDay} />
             </div>
         </div>
