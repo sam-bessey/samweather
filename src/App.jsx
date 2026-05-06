@@ -14,14 +14,14 @@ function TitleBar() {
     );
 }
 
-function DayOverview({ data, expanded }) {
+function DayOverview({ data, expanded, onShow }) {
     if (!data) {
         return <p>Loading...</p>;
     }
 
     return (
         <div
-            onClick={() => setExpanded(!expanded)}
+            onClick={onShow}
             className={
                 "transition-all p-1 m-1 rounded-md " +
                 (expanded ? "bg-gray-300" : "bg-transparent")
