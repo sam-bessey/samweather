@@ -10,7 +10,7 @@ import {
 function TitleBar() {
     return (
         <div className="bg-blue-300 w-full m-0 p-3">
-            <p className="text-center">SamWeather</p>
+            <h1 className="text-center">SamWeather</h1>
         </div>
     );
 }
