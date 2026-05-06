@@ -398,7 +398,7 @@ export function getFeelsLike(
 ) {
     const T = temperature;
     const RH = humidity;
-    const feelsLike = 0;
+    let feelsLike = 0;
     if (!dontPrintInfo) {
         console.log("t", T, "rh", RH);
     }

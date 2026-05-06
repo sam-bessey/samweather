@@ -14,46 +14,50 @@ function TitleBar() {
     );
 }
 
-function DayOverview({ data, startExpanded = false }) {
-    const [expanded, setExpanded] = useState(startExpanded);
-
+function DayOverview({ data, expanded = false, onToggle }) {
     if (!data) {
         return <p>Loading...</p>;
     }
 
     return (
         <div
-            onClick={() => setExpanded(!expanded)}
+            onClick={onToggle}
             className={
-                "transition-all p-1 m-1 rounded-md " +
+                "transition-all p-1 m-1 rounded-md cursor-pointer " +
                 (expanded ? "bg-gray-300" : "bg-transparent")
             }
         >
-            <div className={"flex"}>
+            <div className="flex">
                 <h3>{data.name}</h3>
                 <img
                     src={getIcon(data.shortForecast, data.isDaytime)}
                     className="w-10 h-10 -translate-y-2"
                     title={data.shortForecast}
+                    alt={data.shortForecast}
                 />
             </div>
-            <div>
-                {expanded ? (
-                    <>
-                        <p>{data.detailedForecast}</p>
-                        <p>{"Precipitation " + data.precipitation + "%"}</p>
-                    </>
-                ) : (
-                    <></>
-                )}
-            </div>
+
+            {expanded && (
+                <>
+                    <p>{data.detailedForecast}</p>
+                    <p>{"Precipitation " + data.precipitation + "%"}</p>
+                </>
+            )}
         </div>
     );
 }
 
-function DayForecast({ data }) {
+function DayForecast({ data, selectedDay, setSelectedDay }) {
     return (
         <div className={"w-1/2 h-full"}>
+            <DayOverview
+                data={data?.days?.[0]}
+                expanded={false}
+                onClick={() => {
+                    setSelectedDay(0);
+                    this.expanded={true};
+                }}
+            ></DayOverview>
             <DayOverview
                 data={data?.days?.[1]}
                 startExpanded={true}
@@ -64,10 +68,6 @@ function DayForecast({ data }) {
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[3]}
-                startExpanded={false}
-            ></DayOverview>
-            <DayOverview
-                data={data?.days?.[0]}
                 startExpanded={false}
             ></DayOverview>
             <DayOverview
@@ -94,7 +94,7 @@ function HourlyForecast({ data, dayIndex }) {
     return (
         <div className="w-1/2 h-full">
             <ul>
-                {data?.hours?.[dayIndex]?.hours.map((item) => (
+                {data?.hours?.[dayIndex]?.hours?.map((item) => (
                     <li key={item?.time}>{item?.temperature}</li>
                 ))}
             </ul>
@@ -116,8 +116,8 @@ export default function App() {
 
             <p className="p-2">{data?.days?.[0]?.detailedForecast}</p>
             <div className="inline-flex w-full">
-                <DayForecast data={data} />
-                <HourlyForecast data={data} dayIndex={0} />
+                <DayForecast data={data} selectedDay={selectedDay} setSelectedDay={setSelectedDay}/>
+                <HourlyForecast data={data} dayIndex={selectedDay} />
             </div>
         </div>
     );
