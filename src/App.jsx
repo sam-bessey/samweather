@@ -35,6 +35,10 @@ function DayOverview({ data, expanded, onShow }) {
                     className="w-10 h-10 -translate-y-2"
                     title={data.shortForecast}
                 />
+                <h4>
+                    <span>{data.highTemp + "° / "}</span>
+                    <span className="text-gray-500">{data.lowTemp}</span>
+                </h4>
             </div>
             <div>
                 {expanded ? (

@@ -2,36 +2,6 @@
 // Split to a separate file just to make things easier
 
 function formatData(infoData, mainData, hourlyData) {
-    ///////////////
-    // MAIN DATA //
-    ///////////////
-
-    // Create array of days
-    let formattedDays = [];
-
-    // Put days in order
-    for (let i = 0; i < mainData.properties.periods.length; i++) {
-        const thisPeriod = mainData.properties.periods[i];
-
-        // Only include if it is daytime or the first item (in case its night right now)
-        if (thisPeriod.isDaytime || i === 0) {
-            formattedDays.push({
-                name: thisPeriod.name,
-                date: formatDate(thisPeriod.startTime, false),
-                isDaytime: thisPeriod.isDaytime,
-                temperature: thisPeriod.temperature,
-                precipitation: thisPeriod.probabilityOfPrecipitation.value,
-                wind: {
-                    speed: thisPeriod.windSpeed,
-                    direction: thisPeriod.windDirection,
-                },
-                shortForecast: thisPeriod.shortForecast,
-                detailedForecast: thisPeriod.detailedForecast,
-                icon: getIcon(thisPeriod.shortForecast, thisPeriod.isDaytime),
-            });
-        }
-    }
-
     /////////////////
     // HOURLY DATA //
     /////////////////
@@ -92,6 +62,51 @@ function formatData(infoData, mainData, hourlyData) {
                     hours: [formattedThisHour],
                 });
             }
+        }
+    }
+
+    ///////////////
+    // MAIN DATA //
+    ///////////////
+
+    // Create array of days
+    let formattedDays = [];
+
+    for (let i = 0; i < mainData.properties.periods.length; i++) {
+        const thisPeriod = mainData.properties.periods[i];
+        const dayDate = formatDate(thisPeriod.startTime, false);
+
+        const matchingHourGroup = formattedHours.find(
+            (day) => day.date === dayDate,
+        );
+
+        let high = -Infinity;
+        let low = Infinity;
+
+        if (matchingHourGroup) {
+            for (const hour of matchingHourGroup.hours) {
+                const thisTemp = hour.temperature;
+                if (thisTemp > high) high = thisTemp;
+                if (thisTemp < low) low = thisTemp;
+            }
+        }
+
+        if (thisPeriod.isDaytime || i === 0) {
+            formattedDays.push({
+                name: thisPeriod.name,
+                date: dayDate,
+                isDaytime: thisPeriod.isDaytime,
+                precipitation: thisPeriod.probabilityOfPrecipitation.value,
+                wind: {
+                    speed: thisPeriod.windSpeed,
+                    direction: thisPeriod.windDirection,
+                },
+                shortForecast: thisPeriod.shortForecast,
+                detailedForecast: thisPeriod.detailedForecast,
+                icon: getIcon(thisPeriod.shortForecast, thisPeriod.isDaytime),
+                highTemp: high,
+                lowTemp: low,
+            });
         }
     }
 
