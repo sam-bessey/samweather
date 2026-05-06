@@ -14,77 +14,77 @@ function TitleBar() {
     );
 }
 
-function DayOverview({ data, expanded = false, onToggle }) {
+function DayOverview({ data, startExpanded = false }) {
+    const [expanded, setExpanded] = useState(startExpanded);
+
     if (!data) {
         return <p>Loading...</p>;
     }
 
     return (
         <div
-            onClick={onToggle}
+            onClick={() => setExpanded(!expanded)}
             className={
-                "transition-all p-1 m-1 rounded-md cursor-pointer " +
+                "transition-all p-1 m-1 rounded-md " +
                 (expanded ? "bg-gray-300" : "bg-transparent")
             }
         >
-            <div className="flex">
+            <div className={"flex"}>
                 <h3>{data.name}</h3>
                 <img
                     src={getIcon(data.shortForecast, data.isDaytime)}
                     className="w-10 h-10 -translate-y-2"
                     title={data.shortForecast}
-                    alt={data.shortForecast}
                 />
             </div>
-
-            {expanded && (
+            <div>
+                {expanded ? (
                 <>
                     <p>{data.detailedForecast}</p>
                     <p>{"Precipitation " + data.precipitation + "%"}</p>
                 </>
+                ) : (
+                    <></>
             )}
+        </div>
         </div>
     );
 }
 
-function DayForecast({ data, selectedDay, setSelectedDay }) {
+function DayForecast({ data }) {
     return (
         <div className={"w-1/2 h-full"}>
             <DayOverview
                 data={data?.days?.[0]}
                 expanded={false}
-                onClick={() => {
-                    setSelectedDay(0);
-                    this.expanded={true};
-                }}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[1]}
-                startExpanded={true}
+                expanded={true}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[2]}
-                startExpanded={false}
+                expanded={false}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[3]}
-                startExpanded={false}
+                expanded={false}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[4]}
-                startExpanded={false}
+                expanded={false}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[5]}
-                startExpanded={false}
+                expanded={false}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[6]}
-                startExpanded={false}
+                expanded={false}
             ></DayOverview>
             <DayOverview
                 data={data?.days?.[7]}
-                startExpanded={false}
+                expanded={false}
             ></DayOverview>
         </div>
     );
@@ -116,7 +116,7 @@ export default function App() {
 
             <p className="p-2">{data?.days?.[0]?.detailedForecast}</p>
             <div className="inline-flex w-full">
-                <DayForecast data={data} selectedDay={selectedDay} setSelectedDay={setSelectedDay}/>
+                <DayForecast data={data} selectedDay={selectedDay} />
                 <HourlyForecast data={data} dayIndex={selectedDay} />
             </div>
         </div>
