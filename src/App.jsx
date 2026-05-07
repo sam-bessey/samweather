@@ -98,62 +98,16 @@ function DayOverview({ data, expanded, onShow }) {
 function DayForecast({ data, selectedDay, setSelectedDay }) {
     return (
         <div className={"w-1/2 h-full"}>
-            <DayOverview
-                data={data?.days?.[0]}
-                expanded={selectedDay === 0}
-                onShow={() => {
-                    setSelectedDay(0);
-                }}
-            ></DayOverview>
-            <DayOverview
-                data={data?.days?.[1]}
-                expanded={selectedDay === 1}
-                onShow={() => {
-                    setSelectedDay(1);
-                }}
-            ></DayOverview>
-            <DayOverview
-                data={data?.days?.[2]}
-                expanded={selectedDay === 2}
-                onShow={() => {
-                    setSelectedDay(2);
-                }}
-            ></DayOverview>
-            <DayOverview
-                data={data?.days?.[3]}
-                expanded={selectedDay === 3}
-                onShow={() => {
-                    setSelectedDay(3);
-                }}
-            ></DayOverview>
-            <DayOverview
-                data={data?.days?.[4]}
-                expanded={selectedDay === 4}
-                onShow={() => {
-                    setSelectedDay(4);
-                }}
-            ></DayOverview>
-            <DayOverview
-                data={data?.days?.[5]}
-                expanded={selectedDay === 5}
-                onShow={() => {
-                    setSelectedDay(5);
-                }}
-            ></DayOverview>
-            <DayOverview
-                data={data?.days?.[6]}
-                expanded={selectedDay === 6}
-                onShow={() => {
-                    setSelectedDay(6);
-                }}
-            ></DayOverview>
-            <DayOverview
-                data={data?.days?.[7]}
-                expanded={selectedDay === 7}
-                onShow={() => {
-                    setSelectedDay(7);
-                }}
-            ></DayOverview>
+            {data?.days?.map((item, index) => (
+                <DayOverview
+                    key={index}
+                    data={item}
+                    expanded={selectedDay === index}
+                    onShow={() => {
+                        setSelectedDay(index);
+                    }}
+                />
+            ))}
         </div>
     );
 }
