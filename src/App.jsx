@@ -6,22 +6,52 @@ import {
     getPrecipitation,
     getFeelsLike,
     formatDate,
+    fetchLocation,
 } from "./fetch.js";
 
 function SearchBar() {
+    const [text, setText] = useState("");
+    const [locations, setLocations] = useState([]);
+
+    useEffect(() => {
+        if (text.trim() === "") return;
+
+        const timer = setTimeout(() => {
+            fetchLocation(text).then((data) => {
+                console.log("Search results:", data);
+                setLocations(data);
+            });
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [text]);
+
     return (
-        <div className="border rounded-lg w-50">
-<Search />
-            <input type="text"/>
+        <div>
+            <div className="border rounded-lg w-50 flex">
+                <Search className="m-1.5" />
+                <input
+                    type="text"
+                    placeholder="Search"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                />
+            </div>
+            <ul className="absolute backdrop-blur-md z-1 rounded-xl w-50">
+                {locations?.map((item) => (
+                    <li key={item?.place_id}>{item.name}</li>
+                ))}
+            </ul>
         </div>
-    )
+    );
 }
 
 function TitleBar() {
     return (
-        <div className="bg-blue-300 w-full m-0 p-3">
-            <SearchBar/>
+        <div className="bg-blue-300 w-full m-0 p-3 flex text-center justify-between items-center">
+            <SearchBar />
             <h1 className="text-center">SamWeather</h1>
+            <p>Version 8.0 beta</p>
         </div>
     );
 }

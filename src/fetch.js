@@ -214,6 +214,38 @@ export async function fetchWeather(coordinates) {
     }
 }
 
+export async function fetchLocation(address) {
+    try {
+        const trimmedAddress = address.trim();
+
+        if (trimmedAddress === "") {
+            return [];
+        }
+
+        const url =
+            "https://nominatim.openstreetmap.org/search?q=" +
+            encodeURIComponent(trimmedAddress) +
+            "&format=jsonv2";
+
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Location lookup failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Location search data for", trimmedAddress, data);
+        return data;
+    } catch (error) {
+        console.error(
+            "Error getting location data for",
+            address,
+            "Error was:",
+            error,
+        );
+        return [];
+    }
+}
+
 export function getIcon(description, isDaytime, getThemeInstead = false) {
     let bg_top;
     let bg;
