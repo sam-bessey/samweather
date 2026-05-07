@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Search } from "lucide-react";
 import {
     fetchWeather,
     getIcon,
@@ -10,6 +11,7 @@ import {
 function SearchBar() {
     return (
         <div className="border rounded-lg w-50">
+<Search />
             <input type="text"/>
         </div>
     )
