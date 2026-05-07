@@ -7,9 +7,18 @@ import {
     formatDate,
 } from "./fetch.js";
 
+function SearchBar() {
+    return (
+        <div className="border rounded-lg w-50">
+            <input type="text"/>
+        </div>
+    )
+}
+
 function TitleBar() {
     return (
         <div className="bg-blue-300 w-full m-0 p-3">
+            <SearchBar/>
             <h1 className="text-center">SamWeather</h1>
         </div>
     );
