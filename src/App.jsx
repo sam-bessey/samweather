@@ -9,7 +9,7 @@ import {
     fetchLocation,
 } from "./fetch.js";
 
-function SearchBar() {
+function SearchBar({ setData }) {
     const [text, setText] = useState("");
     const [locations, setLocations] = useState([]);
 
@@ -39,17 +39,30 @@ function SearchBar() {
             </div>
             <ul className="absolute backdrop-blur-md z-1 rounded-xl w-50">
                 {locations?.map((item) => (
-                    <li key={item?.place_id}>{item.name}</li>
+                    <li
+                        key={item?.place_id}
+                        onClick={() => {
+                            console.log(
+                                "fetching weather for",
+                                item.name,
+                                item.lat,
+                                item.lon,
+                            );
+                            fetchWeather([item.lat, item.lon]).then(setData);
+                        }}
+                    >
+                        {item.name}
+                    </li>
                 ))}
             </ul>
         </div>
     );
 }
 
-function TitleBar() {
+function TitleBar({ setData }) {
     return (
         <div className="bg-blue-300 w-full m-0 p-3 flex text-center justify-between items-center">
-            <SearchBar />
+            <SearchBar setData={setData} />
             <h1 className="text-center">SamWeather</h1>
             <p>Version 8.0 beta</p>
         </div>
@@ -148,7 +161,7 @@ export default function App() {
 
     return (
         <div className="m-0 p-0 h-screen">
-            <TitleBar></TitleBar>
+            <TitleBar setData={setData}></TitleBar>
 
             <div className="inline-flex w-full">
                 <DayForecast
