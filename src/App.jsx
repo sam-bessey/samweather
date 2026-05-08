@@ -85,7 +85,7 @@ function DayOverview({ data, expanded, onShow }) {
         <div
             onClick={onShow}
             className={
-                "transition-all p-1 m-1 rounded-md " +
+                "transition-all p-3 rounded-xl " +
                 (expanded ? "bg-gray-300" : "bg-transparent")
             }
         >
@@ -117,7 +117,7 @@ function DayOverview({ data, expanded, onShow }) {
 
 function DayForecast({ data, selectedDay, setSelectedDay }) {
     return (
-        <div className={"w-1/2 h-full"}>
+        <div className={"w-1/2 h-full overflow-y-auto min-h-0"}>
             {data?.days?.map((item, index) => (
                 <DayOverview
                     key={index}
@@ -148,7 +148,7 @@ function Hour({ data }) {
 
 function HourlyForecast({ data, dayIndex }) {
     return (
-        <div className="w-1/2 h-full">
+        <div className="w-1/2 h-full bg-gray-200 ml-3 rounded-tl-xl pt-5 overflow-y-auto min-h-0">
             <ul>
                 {data?.hours?.[dayIndex]?.hours?.map((item) => (
                     <Hour key={item?.time} data={item} />
@@ -167,10 +167,10 @@ export default function App() {
     }, []);
 
     return (
-        <div className="m-0 p-0 h-screen">
+        <div className="m-0 p-0 h-screen flex flex-col">
             <TitleBar setData={setData}></TitleBar>
 
-            <div className="inline-flex w-full">
+            <div className="flex flex-1 min-h-0 w-full pt-5 pl-3">
                 <DayForecast
                     data={data}
                     selectedDay={selectedDay}
