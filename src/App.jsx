@@ -138,17 +138,33 @@ function Hour({ data }) {
     // Will return a li for that hour
 
     return (
-        <li className="flex justify-evenly">
+        <li className="flex justify-evenly align-middle">
             <p>{formatDate(data.time)}</p>
-            <p>{data.temperature + "°"}</p>
             <img src={data.icon} className="w-11 h-11 -translate-y-2.5" />
+            <p>{data.temperature + "°"}</p>
         </li>
     );
 }
 
 function HourlyForecast({ data, dayIndex }) {
+    const [infoShown, setInfoShown] = useState("Temperature");
+
     return (
         <div className="w-1/2 h-full bg-gray-200 ml-3 rounded-tl-xl pt-5 overflow-y-auto min-h-0">
+            <div className="flex justify-between align-middle">
+                <h2 className="ml-7">Hourly</h2>
+                <select
+                    className="mr-5"
+                    onChange={(e) => {
+                        setInfoShown(e.target.value);
+                        console.log(e.target.value);
+                    }}
+                >
+                    <option>Temperature</option>
+                    <option>Feels like</option>
+                    <option>Precipitation</option>
+                </select>
+            </div>
             <ul>
                 {data?.hours?.[dayIndex]?.hours?.map((item) => (
                     <Hour key={item?.time} data={item} />
