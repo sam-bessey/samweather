@@ -42,13 +42,20 @@ function SearchBar({ setData }) {
                     <li
                         key={item?.place_id}
                         onClick={() => {
+                            // Log to console
                             console.log(
                                 "fetching weather for",
                                 item.name,
                                 item.lat,
                                 item.lon,
                             );
+
+                            // Actually fetch and display new data
                             fetchWeather([item.lat, item.lon]).then(setData);
+
+                            // Clear search bar
+                            setText("");
+                            setLocations([]);
                         }}
                     >
                         {item.name}
