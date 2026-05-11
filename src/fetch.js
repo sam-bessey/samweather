@@ -149,10 +149,45 @@ function formatData(infoData, mainData, hourlyData) {
     return formattedData;
 }
 
+export async function fetchAlerts(coordinates) {
+    // Coordinates: [lat, long]
+    try {
+        // Fetch the data
+        fetch(
+            "https://api.weather.gov/alerts/active?point=" +
+                Number(coordinates[0]).toFixed(4) +
+                "," +
+                Number(coordinates[1]).toFixed(4),
+        ).then(async (response) => {
+            const data = await response.json();
+            console.log(data);
+
+            // Format the data
+            let formattedAlerts = [];
+            for (let i = 0; i < data.features.length; i++) {
+                thisAlert = data.features[i].properties;
+                formattedAlerts.push({
+                    title: thisAlert.event,
+                    description: thisAlert.description,
+                    instructions: thisAlert.instructions,
+                    severity: thisAlert.severity,
+                    urgency: thisAlert.urgency,
+                });
+            }
+
+            // Return the data
+            console.log("FORMATTED ALERTS", formattedAlerts);
+            return formattedAlerts;
+        });
+    } catch (error) {
+        console.error("Error getting alerts", error);
+    }
+}
+
 export async function fetchWeather(coordinates) {
     // Coordinates: [lat, long]
     try {
-        // Format the coordinates correctly. Api only support up to 4 decimal points
+        // Format the coordinates correctly. Api only supports up to 4 decimal points
         const formattedCoordinates = [
             Number(coordinates[0]).toFixed(4),
             Number(coordinates[1]).toFixed(4),

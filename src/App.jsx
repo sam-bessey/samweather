@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
-import { fetchWeather, getIcon, formatDate, fetchLocation } from "./fetch.js";
+import {
+    fetchWeather,
+    getIcon,
+    formatDate,
+    fetchLocation,
+    fetchAlerts,
+} from "./fetch.js";
 
-function SearchBar({ setData }) {
+function SearchBar({ setData, setAlerts }) {
     const [text, setText] = useState("");
     const [locations, setLocations] = useState([]);
 
@@ -34,7 +40,7 @@ function SearchBar({ setData }) {
                     className="w-full focus:outline-none"
                 />
             </div>
-            <ul className="absolute backdrop-blur-md z-1 rounded-xl w-50">
+            <ul className="absolute backdrop-blur-md z-1 rounded-xl w-70">
                 {locations?.map((item) => (
                     <li
                         key={item?.place_id}
@@ -49,6 +55,7 @@ function SearchBar({ setData }) {
 
                             // Actually fetch and display new data
                             fetchWeather([item.lat, item.lon]).then(setData);
+                            fetchAlerts([item.lat, item.lon]).then(setAlerts);
 
                             // Clear search bar
                             setText("");
@@ -63,12 +70,25 @@ function SearchBar({ setData }) {
     );
 }
 
-function TitleBar({ setData }) {
+function TitleBar({ setData, setAlerts }) {
     return (
         <div className="bg-blue-300 w-full m-0 p-3 flex text-center justify-between items-center">
-            <SearchBar setData={setData} />
+            <SearchBar setData={setData} setAlerts={setAlerts} />
             <h1 className="text-center">SamWeather</h1>
             <p>Version 8.0 beta</p>
+        </div>
+    );
+}
+
+function Alerts({ alerts }) {
+    return (
+        <div>
+            {alerts?.map((item) => {
+                <div>
+                    <h4>{item.title}</h4>
+                    <p>{item.description + item.instructions}</p>
+                </div>;
+            })}
         </div>
     );
 }
@@ -112,9 +132,10 @@ function DayOverview({ data, expanded, onShow }) {
     );
 }
 
-function DayForecast({ data, selectedDay, setSelectedDay }) {
+function DayForecast({ data, alerts, selectedDay, setSelectedDay }) {
     return (
         <div className={"w-1/2 h-full overflow-y-auto min-h-0"}>
+            <Alerts alerts={alerts} />
             {data?.days?.map((item, index) => (
                 <DayOverview
                     key={index}
@@ -135,7 +156,7 @@ function Hour({ data, infoShown }) {
             <p>{formatDate(data.time)}</p>
             <img
                 src={data.icon}
-                alt=""
+                title={data.shortForecast}
                 className="w-11 h-11 -translate-y-2.5"
             />
             <p>
@@ -162,7 +183,6 @@ function HourlyForecast({ data, dayIndex }) {
                     className="mr-5"
                     onChange={(e) => {
                         setInfoShown(e.target.value);
-                        console.log(e.target.value);
                     }}
                 >
                     <option>Temperature</option>
@@ -181,19 +201,22 @@ function HourlyForecast({ data, dayIndex }) {
 
 export default function App() {
     const [data, setData] = useState(null);
+    const [alerts, setAlerts] = useState(null);
     const [selectedDay, setSelectedDay] = useState(0);
 
     useEffect(() => {
         fetchWeather([44, -70]).then(setData);
+        fetchAlerts([44, -70]).then(setAlerts);
     }, []);
 
     return (
         <div className="m-0 p-0 h-screen flex flex-col">
-            <TitleBar setData={setData}></TitleBar>
+            <TitleBar setData={setData} setAlerts={setAlerts}></TitleBar>
 
             <div className="flex flex-1 min-h-0 w-full pt-5 pl-3">
                 <DayForecast
                     data={data}
+                    alerts={alerts}
                     selectedDay={selectedDay}
                     setSelectedDay={setSelectedDay}
                 />
