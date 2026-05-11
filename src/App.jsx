@@ -7,20 +7,20 @@ function SearchBar({ setData }) {
     const [locations, setLocations] = useState([]);
 
     useEffect(() => {
-    if (text.trim() === "") {
-        setLocations([]);
-        return;
-    }
+        if (text.trim() === "") {
+            setLocations([]);
+            return;
+        }
 
-    const timer = setTimeout(() => {
-        fetchLocation(text).then((data) => {
-            console.log("Search results:", data);
-            setLocations(data);
-        });
-    }, 500);
+        const timer = setTimeout(() => {
+            fetchLocation(text).then((data) => {
+                console.log("Search results:", data);
+                setLocations(data);
+            });
+        }, 500);
 
-    return () => clearTimeout(timer);
-}, [text]);
+        return () => clearTimeout(timer);
+    }, [text]);
 
     return (
         <div>
