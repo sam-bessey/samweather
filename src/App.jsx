@@ -7,27 +7,31 @@ function SearchBar({ setData }) {
     const [locations, setLocations] = useState([]);
 
     useEffect(() => {
-        if (text.trim() === "") return;
+    if (text.trim() === "") {
+        setLocations([]);
+        return;
+    }
 
-        const timer = setTimeout(() => {
-            fetchLocation(text).then((data) => {
-                console.log("Search results:", data);
-                setLocations(data);
-            });
-        }, 500);
+    const timer = setTimeout(() => {
+        fetchLocation(text).then((data) => {
+            console.log("Search results:", data);
+            setLocations(data);
+        });
+    }, 500);
 
-        return () => clearTimeout(timer);
-    }, [text]);
+    return () => clearTimeout(timer);
+}, [text]);
 
     return (
         <div>
-            <div className="border rounded-lg w-50 flex">
+            <div className="border rounded-lg w-70 flex">
                 <Search className="m-1.5" />
                 <input
                     type="text"
                     placeholder="Search"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
+                    className="w-full focus:outline-none"
                 />
             </div>
             <ul className="absolute backdrop-blur-md z-1 rounded-xl w-50">
