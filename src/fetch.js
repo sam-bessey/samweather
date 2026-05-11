@@ -420,14 +420,6 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
     }
 }
 
-export function getPrecipitation(probability) {
-    if (probability == null) {
-        return "0%";
-    } else {
-        return `${probability}%`;
-    }
-}
-
 export function formatDate(originalDate, returnTime) {
     // Formats a date to a more readable format. Including the time will return just the time
     // originalDate: The original non-formatted date
@@ -520,6 +512,6 @@ export function getFeelsLike(
         if (!dontPrintInfo) {
             console.log("Returning feels like:", HI);
         }
-        return `${Math.round(HI)}°`;
+        return Math.round(HI);
     }
 }

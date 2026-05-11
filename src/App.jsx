@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
-import {
-    fetchWeather,
-    getIcon,
-    getPrecipitation,
-    getFeelsLike,
-    formatDate,
-    fetchLocation,
-} from "./fetch.js";
+import { fetchWeather, getIcon, formatDate, fetchLocation } from "./fetch.js";
 
 function SearchBar({ setData }) {
     const [text, setText] = useState("");
@@ -132,16 +125,24 @@ function DayForecast({ data, selectedDay, setSelectedDay }) {
     );
 }
 
-function Hour({ data }) {
-    // Hour
-    // Data should be the data for JUST THIS HOUR
-    // Will return a li for that hour
-
+function Hour({ data, infoShown }) {
     return (
-        <li className="flex justify-evenly align-middle">
+        <li className="flex justify-evenly items-center">
             <p>{formatDate(data.time)}</p>
-            <img src={data.icon} className="w-11 h-11 -translate-y-2.5" />
-            <p>{data.temperature + "°"}</p>
+            <img
+                src={data.icon}
+                alt=""
+                className="w-11 h-11 -translate-y-2.5"
+            />
+            <p>
+                {infoShown === "Temperature"
+                    ? `${data.temperature}°`
+                    : infoShown === "Precipitation"
+                      ? `${data.precipitation}%`
+                      : infoShown === "Feels like"
+                        ? `${data.feelsLike}°`
+                        : "N/A"}
+            </p>
         </li>
     );
 }
@@ -167,7 +168,7 @@ function HourlyForecast({ data, dayIndex }) {
             </div>
             <ul>
                 {data?.hours?.[dayIndex]?.hours?.map((item) => (
-                    <Hour key={item?.time} data={item} />
+                    <Hour key={item?.time} data={item} infoShown={infoShown} />
                 ))}
             </ul>
         </div>
