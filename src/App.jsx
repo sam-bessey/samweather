@@ -8,7 +8,7 @@ import {
     fetchAlerts,
 } from "./fetch.js";
 
-function SearchBar({ setData, setAlerts }) {
+function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
     const [locations, setLocations] = useState([]);
 
@@ -54,7 +54,10 @@ function SearchBar({ setData, setAlerts }) {
                             );
 
                             // Actually fetch and display new data
-                            fetchWeather([item.lat, item.lon]).then(setData);
+                            setLoading(true);
+                            fetchWeather([item.lat, item.lon])
+                                .then(setData)
+                                .finally(() => setLoading(false));
                             fetchAlerts([item.lat, item.lon]).then(setAlerts);
 
                             // Clear search bar
@@ -70,10 +73,14 @@ function SearchBar({ setData, setAlerts }) {
     );
 }
 
-function TitleBar({ setData, setAlerts }) {
+function TitleBar({ setData, setAlerts, setLoading }) {
     return (
         <div className="bg-blue-300 w-full m-0 p-3 flex text-center justify-between items-center">
-            <SearchBar setData={setData} setAlerts={setAlerts} />
+            <SearchBar
+                setData={setData}
+                setAlerts={setAlerts}
+                setLoading={setLoading}
+            />
             <h1 className="text-center">SamWeather</h1>
             <p>Version 8.0 beta</p>
         </div>
@@ -199,19 +206,38 @@ function HourlyForecast({ data, dayIndex }) {
     );
 }
 
+function Loading({ hidden }) {
+    if (hidden) {
+        return (
+            <div className="fixed z-999 w-screen h-screen bg-transparent backdrop-blur-lg">
+                SamWeather
+            </div>
+        );
+    }
+    return;
+}
+
 export default function App() {
     const [data, setData] = useState(null);
     const [alerts, setAlerts] = useState(null);
     const [selectedDay, setSelectedDay] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchWeather([44, -70]).then(setData);
+        fetchWeather([44, -70])
+            .then(setData)
+            .finally(() => setLoading(false));
         fetchAlerts([44, -70]).then(setAlerts);
     }, []);
 
     return (
         <div className="m-0 p-0 h-screen flex flex-col">
-            <TitleBar setData={setData} setAlerts={setAlerts}></TitleBar>
+            <Loading hidden={loading}></Loading>
+            <TitleBar
+                setData={setData}
+                setAlerts={setAlerts}
+                setLoading={setLoading}
+            ></TitleBar>
 
             <div className="flex flex-1 min-h-0 w-full pt-5 pl-3">
                 <DayForecast
