@@ -89,13 +89,13 @@ function TitleBar({ setData, setAlerts, setLoading }) {
 
 function Alerts({ alerts }) {
     return (
-        <div>
-            {alerts?.map((item) => {
-                <div>
-                    <h4>{item.title}</h4>
+        <div className="transition-all p-3 rounded-xl bg-red-200 mb-3">
+            {alerts?.map((item, index) => (
+                <div key={index}>
+                    <h4 className="text-xl">{item.title}</h4>
                     <p>{item.description + item.instructions}</p>
-                </div>;
-            })}
+                </div>
+            ))}
         </div>
     );
 }

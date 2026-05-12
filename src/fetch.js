@@ -153,23 +153,23 @@ export async function fetchAlerts(coordinates) {
     // Coordinates: [lat, long]
     try {
         // Fetch the data
-        fetch(
+        return fetch(
             "https://api.weather.gov/alerts/active?point=" +
                 Number(coordinates[0]).toFixed(4) +
                 "," +
                 Number(coordinates[1]).toFixed(4),
         ).then(async (response) => {
             const data = await response.json();
-            console.log(data);
 
+            console.log(data)
             // Format the data
             let formattedAlerts = [];
             for (let i = 0; i < data.features.length; i++) {
-                thisAlert = data.features[i].properties;
+                const thisAlert = data.features[i].properties;
                 formattedAlerts.push({
                     title: thisAlert.event,
                     description: thisAlert.description,
-                    instructions: thisAlert.instructions,
+                    instructions: thisAlert.instruction,
                     severity: thisAlert.severity,
                     urgency: thisAlert.urgency,
                 });
