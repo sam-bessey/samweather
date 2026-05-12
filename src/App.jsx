@@ -210,7 +210,9 @@ function Loading({ hidden }) {
     if (hidden) {
         return (
             <div className="fixed z-999 w-screen h-screen bg-transparent backdrop-blur-lg">
-                SamWeather
+                <h1 className="flex items-center justify-center w-screen h-screen text-[50px]">
+                    SamWeather
+                </h1>
             </div>
         );
     }
