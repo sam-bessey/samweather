@@ -40,7 +40,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                     className="w-full focus:outline-none"
                 />
             </div>
-            <ul className="absolute backdrop-blur-md z-1 rounded-xl w-70">
+            <ul className="absolute backdrop-blur-md z-1 rounded-xl w-70 mt-1">
                 {locations?.map((item) => (
                     <li
                         key={item?.place_id}
@@ -88,7 +88,7 @@ function TitleBar({ setData, setAlerts, setLoading }) {
 }
 
 function Alerts({ alerts }) {
-    if (alerts.length === 0) {
+    if (alerts?.length === 0) {
         return;
     } else {
         return (
@@ -177,7 +177,9 @@ function Hour({ data, infoShown }) {
                       ? `${data.precipitation}%`
                       : infoShown === "Feels like"
                         ? `${data.feelsLike}°`
-                        : "N/A"}
+                        : infoShown === "Wind"
+                          ? `${data.wind.speed} ${data.wind.direction}`
+                          : "N/A"}
             </p>
         </li>
     );
@@ -199,6 +201,7 @@ function HourlyForecast({ data, dayIndex }) {
                     <option>Temperature</option>
                     <option>Feels like</option>
                     <option>Precipitation</option>
+                    <option>Wind</option>
                 </select>
             </div>
             <ul>
