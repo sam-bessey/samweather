@@ -88,16 +88,20 @@ function TitleBar({ setData, setAlerts, setLoading }) {
 }
 
 function Alerts({ alerts }) {
-    return (
-        <div className="transition-all p-3 rounded-xl bg-red-200 mb-3">
-            {alerts?.map((item, index) => (
-                <div key={index}>
-                    <h4 className="text-xl">{item.title}</h4>
-                    <p>{item.description + item.instructions}</p>
-                </div>
-            ))}
-        </div>
-    );
+    if (alerts.length === 0) {
+        return;
+    } else {
+        return (
+            <div className="transition-all p-3 rounded-xl bg-red-200 mb-3">
+                {alerts?.map((item, index) => (
+                    <div key={index}>
+                        <h4 className="text-xl">{item.title}</h4>
+                        <p>{item.description + item.instructions}</p>
+                    </div>
+                ))}
+            </div>
+        );
+    }
 }
 
 function DayOverview({ data, expanded, onShow }) {
