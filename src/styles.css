@@ -1,0 +1,8 @@
+.cutoff {
+    /* Cuts off the text with a ... at the end */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: left;
+}
