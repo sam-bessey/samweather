@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
-import { Search, Building2, MapPin, House, Earth } from "lucide-react";
+import {
+    Search,
+    Building2,
+    MapPin,
+    House,
+    Earth,
+    WavesHorizontal,
+    Road,
+    PlaneTakeoff
+} from "lucide-react";
 import {
     fetchWeather,
     getIcon,
@@ -68,17 +77,25 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                         className="flex my-2"
                     >
                         <>
-                            {item.addresstype === "town" ? (
+                            {item.addresstype === "town" || item.addresstype === "village" ? (
                                 <House />
                             ) : item.addresstype === "city" ? (
                                 <Building2 />
-                            ) : item.addresstype === "state" ? (
+                            ) : item.addresstype === "state" || item.addresstype === "country" ? (
                                 <Earth />
+                            ) : item.addresstype === "bay" ? (
+                                <WavesHorizontal />
+                            ) : item.addresstype === "road" ? (
+                                <Road />
+                            ) : item.addresstype === "aeroway" ? (
+                                <PlaneTakeoff />
                             ) : (
                                 <MapPin />
                             )}
                         </>
-                        <p className="ml-2 w-full cutoff">{item.display_name}</p>
+                        <p className="ml-2 w-full cutoff">
+                            {item.display_name}
+                        </p>
                     </li>
                 ))}
             </ul>
