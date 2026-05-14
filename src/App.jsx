@@ -14,7 +14,7 @@ import {
     Church,
     MountainSnow,
     Utensils,
-    TreePine
+    TreePine,
 } from "lucide-react";
 import {
     fetchWeather,
@@ -122,7 +122,9 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                             ) : item.type === "restaurant" ||
                               item.type === "pub" ? (
                                 <Utensils />
-                            ) : item.addresstype === "nature_reserve" ?(<TreePine />):(
+                            ) : item.addresstype === "nature_reserve" ? (
+                                <TreePine />
+                            ) : (
                                 <MapPin />
                             )}
                         </>
