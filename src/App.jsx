@@ -7,7 +7,14 @@ import {
     Earth,
     WavesHorizontal,
     Road,
-    PlaneTakeoff
+    PlaneTakeoff,
+    Store,
+    Building,
+    GraduationCap,
+    Church,
+    MountainSnow,
+    Utensils,
+    TreePine
 } from "lucide-react";
 import {
     fetchWeather,
@@ -17,6 +24,8 @@ import {
     fetchAlerts,
 } from "./fetch.js";
 import "./styles.css";
+import Bridge from "../icons/bridge.svg";
+import Island from "../icons/island.svg";
 
 function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
@@ -77,19 +86,43 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                         className="flex my-2"
                     >
                         <>
-                            {item.addresstype === "town" || item.addresstype === "village" ? (
+                            {item.addresstype === "town" ||
+                            item.addresstype === "village" ||
+                            item.addresstype === "hamlet" ||
+                            item.addresstype === "neighbourhood" ||
+                            item.type === "house" ? (
                                 <House />
                             ) : item.addresstype === "city" ? (
                                 <Building2 />
-                            ) : item.addresstype === "state" || item.addresstype === "country" ? (
+                            ) : item.addresstype === "state" ||
+                              item.addresstype === "country" ? (
                                 <Earth />
-                            ) : item.addresstype === "bay" ? (
+                            ) : item.addresstype === "bay" ||
+                              item.addresstype === "sea" ||
+                              item.addresstype === "ocean" ? (
                                 <WavesHorizontal />
                             ) : item.addresstype === "road" ? (
                                 <Road />
                             ) : item.addresstype === "aeroway" ? (
                                 <PlaneTakeoff />
-                            ) : (
+                            ) : item.addresstype === "bridge" ? (
+                                <img src={Bridge} />
+                            ) : item.addresstype === "shop" ? (
+                                <Store />
+                            ) : item.addresstype === "building" ? (
+                                <Building />
+                            ) : item.type === "school" ? (
+                                <GraduationCap />
+                            ) : item.type === "place_of_worship" ? (
+                                <Church />
+                            ) : item.addresstype === "beach" ? (
+                                <img src={Island} />
+                            ) : item.addresstype === "peak" ? (
+                                <MountainSnow />
+                            ) : item.type === "restaurant" ||
+                              item.type === "pub" ? (
+                                <Utensils />
+                            ) : item.addresstype === "nature_reserve" ?(<TreePine />):(
                                 <MapPin />
                             )}
                         </>
@@ -118,7 +151,7 @@ function TitleBar({ setData, setAlerts, setLoading }) {
 }
 
 function Alerts({ alerts }) {
-    if (alerts?.length === 0) {
+    if (alerts?.length === 0 || alerts === null) {
         return;
     } else {
         return (
