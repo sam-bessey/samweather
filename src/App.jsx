@@ -26,6 +26,7 @@ import {
 import "./styles.css";
 import Bridge from "../icons/bridge.svg";
 import Island from "../icons/island.svg";
+import Treetest from "../icons/treetest.JPEG"
 
 function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
@@ -140,7 +141,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
 
 function TitleBar({ setData, setAlerts, setLoading }) {
     return (
-        <div className="bg-blue-300 w-full m-0 p-3 flex text-center justify-between items-center">
+        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg">
             <SearchBar
                 setData={setData}
                 setAlerts={setAlerts}
@@ -178,8 +179,8 @@ function DayOverview({ data, expanded, onShow }) {
         <div
             onClick={onShow}
             className={
-                "transition-all p-3 rounded-xl " +
-                (expanded ? "bg-gray-300" : "bg-transparent")
+                "transition-all p-3 mb-3 rounded-xl backdrop-blur-lg " +
+                (expanded ? "bg-gray-300/60" : "bg-transparent")
             }
         >
             <div className={"flex"}>
@@ -254,7 +255,7 @@ function HourlyForecast({ data, dayIndex }) {
     const [infoShown, setInfoShown] = useState("Temperature");
 
     return (
-        <div className="w-1/2 h-full bg-gray-200 ml-3 rounded-tl-xl pt-5 overflow-y-auto min-h-0">
+        <div className="w-1/2 h-full bg-gray-200/50 ml-3 rounded-tl-xl pt-5 overflow-y-auto min-h-0 backdrop-blur-lg">
             <div className="flex justify-between align-middle">
                 <h2 className="ml-7">Hourly</h2>
                 <select
@@ -305,13 +306,15 @@ export default function App() {
     }, []);
 
     return (
-        <div className="m-0 p-0 h-screen flex flex-col">
+        <div className="relative m-0 p-0 h-screen flex flex-col overflow-hidden">
             <Loading hidden={loading}></Loading>
             <TitleBar
                 setData={setData}
                 setAlerts={setAlerts}
                 setLoading={setLoading}
             ></TitleBar>
+            
+            <div className="absolute w-full h-full bg-fixed inset-0 -z-10"><img src={Treetest}/></div>
 
             <div className="flex flex-1 min-h-0 w-full pt-5 pl-3">
                 <DayForecast
