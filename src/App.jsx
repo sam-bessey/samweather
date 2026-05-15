@@ -26,7 +26,7 @@ import {
 import "./styles.css";
 import Bridge from "../icons/bridge.svg";
 import Island from "../icons/island.svg";
-import Treetest from "../icons/treetest.JPEG"
+import Treetest from "../icons/treetest.JPEG";
 
 function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
@@ -313,8 +313,10 @@ export default function App() {
                 setAlerts={setAlerts}
                 setLoading={setLoading}
             ></TitleBar>
-            
-            <div className="absolute w-full h-full bg-fixed inset-0 -z-10"><img src={Treetest}/></div>
+
+            <div className="absolute w-full h-full bg-fixed inset-0 -z-10">
+                <img src={Treetest} />
+            </div>
 
             <div className="flex flex-1 min-h-0 w-full pt-5 pl-3">
                 <DayForecast
