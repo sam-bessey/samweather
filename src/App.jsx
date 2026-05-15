@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { useState, useEffect } from "react";
 import {
     Search,
@@ -229,7 +230,13 @@ function DayForecast({ data, alerts, selectedDay, setSelectedDay }) {
 
 function Hour({ data, infoShown }) {
     return (
-        <li className="flex justify-evenly items-center">
+        <motion.li
+            variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+            className="flex justify-evenly items-center"
+        >
             <p>{formatDate(data.time)}</p>
             <img
                 src={data.icon}
@@ -247,7 +254,7 @@ function Hour({ data, infoShown }) {
                           ? `${data.wind.speed} ${data.wind.direction}`
                           : "N/A"}
             </p>
-        </li>
+        </motion.li>
     );
 }
 
@@ -270,11 +277,25 @@ function HourlyForecast({ data, dayIndex }) {
                     <option>Wind</option>
                 </select>
             </div>
-            <ul>
+            <motion.ul
+                initial="hidden"
+                key={dayIndex}
+                animate="visible"
+                
+                variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                        opacity: 1,
+                        transition: {
+                            staggerChildren: 0.1, // Staggers the entry of each child by 0.1s
+                        },
+                    },
+                }}
+            >
                 {data?.hours?.[dayIndex]?.hours?.map((item) => (
                     <Hour key={item?.time} data={item} infoShown={infoShown} />
                 ))}
-            </ul>
+            </motion.ul>
         </div>
     );
 }
