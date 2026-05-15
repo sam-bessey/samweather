@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="snow.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="22.627417"
+     inkscape:cx="13.921165"
+     inkscape:cy="14.230524"
+     inkscape:window-width="1888"
+     inkscape:window-height="1018"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 12 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="24 : 12 : 1"
+       inkscape:persp3d-origin="12 : 8 : 1"
+       id="perspective1" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:2.10038;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect9"
+       width="0.16478308"
+       height="7.0590744"
+       x="12.032869"
+       y="5.1941953"
+       inkscape:transform-center-y="-3.6079713" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:2.10038;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect12"
+       width="0.16478308"
+       height="7.0590744"
+       x="17.204224"
+       y="-6.9844608"
+       inkscape:transform-center-y="-2.5512203"
+       transform="rotate(45)"
+       inkscape:transform-center-x="-2.5512214" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:2.10038;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect13"
+       width="0.16478308"
+       height="7.0590744"
+       x="12.249312"
+       y="-19.252769"
+       inkscape:transform-center-y="1.1679399e-06"
+       transform="rotate(90)"
+       inkscape:transform-center-x="-3.6079714" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:2.10038;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect14"
+       width="0.16478308"
+       height="7.0590744"
+       x="0.070657268"
+       y="-24.424124"
+       inkscape:transform-center-y="2.5512224"
+       transform="rotate(135)"
+       inkscape:transform-center-x="-2.5512208" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:2.10038;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect15"
+       width="0.16478308"
+       height="7.0590744"
+       x="-12.197651"
+       y="-19.469212"
+       inkscape:transform-center-y="3.6079716"
+       transform="scale(-1)"
+       inkscape:transform-center-x="1.4526365e-06" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:2.10038;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect16"
+       width="0.16478308"
+       height="7.0590744"
+       x="-17.369005"
+       y="-7.2905564"
+       inkscape:transform-center-y="2.5512208"
+       transform="rotate(-135)"
+       inkscape:transform-center-x="2.5512218" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:2.10038;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect17"
+       width="0.16478308"
+       height="7.0590744"
+       x="-12.414094"
+       y="4.9777522"
+       transform="rotate(-90)"
+       inkscape:transform-center-x="3.6079719" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:2.10038;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect18"
+       width="0.16478308"
+       height="7.0590744"
+       x="-0.23543902"
+       y="10.149104"
+       transform="rotate(-45)"
+       inkscape:transform-center-x="2.5512214"
+       inkscape:transform-center-y="-2.5512214" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect19"
+       width="0.36003044"
+       height="2.6581278"
+       x="11.922302"
+       y="-7.7189107"
+       inkscape:transform-center-y="-0.96067401"
+       transform="rotate(45)"
+       inkscape:transform-center-x="-0.96067416" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect20"
+       width="0.36003044"
+       height="2.6581278"
+       x="4.851233"
+       y="9.4146547"
+       transform="rotate(-45)"
+       inkscape:transform-center-x="0.96067422"
+       inkscape:transform-center-y="-0.96067453" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect21"
+       width="0.36003044"
+       height="2.6581278"
+       x="6.499362"
+       y="4.212688"
+       inkscape:transform-center-y="-1.3585987" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect22"
+       width="0.36003044"
+       height="2.6581278"
+       x="-7.0803657"
+       y="3.991715"
+       inkscape:transform-center-x="1.3585986"
+       transform="rotate(-90)" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect23"
+       width="0.36003044"
+       height="2.6581278"
+       x="-5.3675175"
+       y="9.5709057"
+       transform="rotate(-45)"
+       inkscape:transform-center-x="0.96067412"
+       inkscape:transform-center-y="-0.96067428" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect24"
+       width="0.36003044"
+       height="2.6581278"
+       x="-12.438583"
+       y="-7.875165"
+       transform="rotate(-135)"
+       inkscape:transform-center-y="0.9606742"
+       inkscape:transform-center-x="0.96067448" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect25"
+       width="0.36003044"
+       height="2.6581278"
+       x="-4.8920078"
+       y="-24.845728"
+       transform="rotate(135)"
+       inkscape:transform-center-x="-0.96067447"
+       inkscape:transform-center-y="0.96067436" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect26"
+       width="0.36003044"
+       height="2.6581278"
+       x="21.97805"
+       y="-7.3996563"
+       inkscape:transform-center-y="-0.9606742"
+       transform="rotate(45)"
+       inkscape:transform-center-x="-0.96067447" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect27"
+       width="0.36003044"
+       height="2.6581278"
+       x="-16.859392"
+       y="-19.588013"
+       transform="scale(-1)"
+       inkscape:transform-center-y="1.3585986" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect28"
+       width="0.36003044"
+       height="2.6581278"
+       x="16.720335"
+       y="-19.367039"
+       transform="rotate(90)"
+       inkscape:transform-center-x="-1.3585989" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect29"
+       width="0.36003044"
+       height="2.6581278"
+       x="-22.181826"
+       y="-7.5559092"
+       transform="rotate(-135)"
+       inkscape:transform-center-y="0.96067425"
+       inkscape:transform-center-x="0.96067422" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect30"
+       width="0.36003044"
+       height="2.6581278"
+       x="4.6882319"
+       y="-24.689472"
+       transform="rotate(135)"
+       inkscape:transform-center-x="-0.96067404"
+       inkscape:transform-center-y="0.96067428" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect31"
+       width="0.36003044"
+       height="2.6581278"
+       x="6.9092288"
+       y="-19.941563"
+       transform="rotate(90)"
+       inkscape:transform-center-x="-1.3585989" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect32"
+       width="0.36003044"
+       height="2.6581278"
+       x="17.073883"
+       y="4.4015832"
+       inkscape:transform-center-y="-1.3585976" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect33"
+       width="0.36003044"
+       height="2.6581278"
+       x="-17.26926"
+       y="4.5662374"
+       transform="rotate(-90)"
+       inkscape:transform-center-x="1.3585976" />
+    <rect
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.90513;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect34"
+       width="0.36003044"
+       height="2.6581278"
+       x="-7.4339161"
+       y="-19.776905"
+       transform="scale(-1)"
+       inkscape:transform-center-y="1.3585984" />
+  </g>
+</svg>

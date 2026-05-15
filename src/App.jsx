@@ -159,7 +159,7 @@ function Alerts({ alerts }) {
         return;
     } else {
         return (
-            <div className="transition-all p-3 rounded-xl bg-red-200 mb-3">
+            <div className="transition-all p-3 rounded-xl bg-red-200 mb-3 w-full">
                 {alerts?.map((item, index) => (
                     <div key={index}>
                         <h4 className="text-xl">{item.title}</h4>
