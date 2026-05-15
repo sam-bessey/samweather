@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="sun.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="18.58365"
+     inkscape:cx="11.058107"
+     inkscape:cy="9.7128389"
+     inkscape:window-width="1253"
+     inkscape:window-height="1018"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.64268;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="path1"
+       cx="12"
+       cy="12"
+       rx="5.9622498"
+       ry="6.1334748" />
+    <path
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.56727;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       d="M 12,3.2396601 V 1.4404835"
+       id="path2"
+       inkscape:transform-center-y="-9.6646849" />
+    <path
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.56727;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       d="m 18.197859,5.8068975 1.27221,-1.27221"
+       id="path8"
+       inkscape:transform-center-y="-6.8339642"
+       inkscape:transform-center-x="-6.833964" />
+    <path
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.56727;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       d="m 20.765096,12.004757 h 1.799177"
+       id="path9"
+       inkscape:transform-center-x="-9.6646845" />
+    <path
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.56727;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       d="m 18.197859,18.202616 1.27221,1.27221"
+       id="path10"
+       inkscape:transform-center-x="-6.833964"
+       inkscape:transform-center-y="6.833964" />
+    <path
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.56727;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       d="M 12,20.769853 V 22.56903"
+       id="path11"
+       inkscape:transform-center-y="9.6646845" />
+    <path
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.56727;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       d="m 5.8021412,18.202616 -1.2722103,1.27221"
+       id="path12"
+       inkscape:transform-center-y="6.833964"
+       inkscape:transform-center-x="6.8339639" />
+    <path
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.56727;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       d="M 3.2349039,12.004757 H 1.435727"
+       id="path13"
+       inkscape:transform-center-x="9.6646845" />
+    <path
+       style="fill:none;fill-opacity:0.508268;stroke:#000000;stroke-width:1.56727;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       d="M 5.8021411,5.8068981 4.5299309,4.534688"
+       id="path14"
+       inkscape:transform-center-x="6.8339639"
+       inkscape:transform-center-y="-6.8339639" />
+  </g>
+</svg>
