@@ -25,9 +25,9 @@ import {
     fetchAlerts,
 } from "./fetch.js";
 import "./styles.css";
-import Bridge from "../icons/bridge.svg";
-import Island from "../icons/island.svg";
-import Treetest from "../icons/treetest.JPEG";
+import Bridge from "/src/icons/bridge.svg";
+import Island from "/src/icons/island.svg";
+import Treetest from "/src/icons/treetest.JPEG";
 
 function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
@@ -61,7 +61,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                     className="w-full focus:outline-none"
                 />
             </div>
-            <ul className="absolute backdrop-blur-md z-1 rounded-xl w-70 mt-1">
+            <ul className="absolute backdrop-blur-md z-2 rounded-xl w-70 mt-1 bg-gray-300">
                 {locations?.map((item) => (
                     <li
                         key={item?.place_id}
@@ -159,13 +159,18 @@ function Alerts({ alerts }) {
         return;
     } else {
         return (
-            <div className="transition-all p-3 rounded-xl bg-red-200 mb-3 w-full">
-                {alerts?.map((item, index) => (
-                    <div key={index}>
-                        <h4 className="text-xl">{item.title}</h4>
-                        <p>{item.description + item.instructions}</p>
-                    </div>
-                ))}
+            <div>
+                <div>
+                    {alerts?.map((item, index) => (
+                        <div
+                            key={index}
+                            className="transition-all p-3 rounded-xl bg-red-200 mb-3 w-full"
+                        >
+                            <h4 className="text-xl">{item.title}</h4>
+                            <p>{item.description + item.instructions}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     }
@@ -281,7 +286,6 @@ function HourlyForecast({ data, dayIndex }) {
                 initial="hidden"
                 key={dayIndex}
                 animate="visible"
-                
                 variants={{
                     hidden: { opacity: 0 },
                     visible: {

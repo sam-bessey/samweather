@@ -1,3 +1,5 @@
+import partcloudIcon from "./icons/partcloud.svg";
+
 // Fetch weather data and return it (And some other stuff)
 // Split to a separate file just to make things easier
 
@@ -304,6 +306,7 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             icon = "https://openweathermap.org/img/wn/02n@2x.png";
             whiteText = true;
         }
+        // icon = partcloudIcon;
     } else if (
         description.includes("Snow") ||
         description.includes("Blizzard") ||
