@@ -1,4 +1,17 @@
 import partcloudIcon from "./icons/partcloud.svg";
+import {
+    Cloud,
+    CloudRain,
+    CloudLightning,
+    CloudSun,
+    CloudFog,
+    Snowflake,
+    Sun,
+    CloudMoon,
+    CloudMoonRain,
+    CloudSunRain,
+    Moon,
+} from "lucide-react";
 
 // Fetch weather data and return it (And some other stuff)
 // Split to a separate file just to make things easier
@@ -163,7 +176,7 @@ export async function fetchAlerts(coordinates) {
         ).then(async (response) => {
             const data = await response.json();
 
-            console.log(data)
+            console.log(data);
             // Format the data
             let formattedAlerts = [];
             for (let i = 0; i < data.features.length; i++) {
@@ -299,11 +312,11 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = "linear-gradient(#a6c0ed, #7d9cd1)";
-            icon = "https://openweathermap.org/img/wn/02d@2x.png";
+            icon = CloudSun;
         } else {
             bg_top = "#4e5c8a";
             bg = "linear-gradient(#4e5c8a, #434859)";
-            icon = "https://openweathermap.org/img/wn/02n@2x.png";
+            icon = CloudMoon;
             whiteText = true;
         }
         // icon = partcloudIcon;
@@ -316,14 +329,14 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
     ) {
         bg_top = "#d7d9de";
         bg = "linear-gradient(#d7d9de, #f0f0f0)";
-        icon = "https://openweathermap.org/img/wn/13d@2x.png";
+        icon = Snowflake;
     } else if (
         description.includes("Thunder") ||
         description.includes("T-storm")
     ) {
         bg_top = "#434343";
         bg = "linear-gradient(#434343, #2e2d2d)";
-        icon = "https://openweathermap.org/img/wn/11d@2x.png";
+        icon = CloudLightning;
         whiteText = true;
     } else if (
         description.includes("Showers") ||
@@ -338,11 +351,11 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             if (isDaytime) {
                 bg_top = "#95a6de";
                 bg = "linear-gradient(#95a6de, #c0caeb)";
-                icon = "https://openweathermap.org/img/wn/10d@2x.png";
+                icon = CloudSunRain;
             } else {
                 bg_top = "#444a5e";
                 bg = "linear-gradient(#444a5e, #293354)";
-                icon = "https://openweathermap.org/img/wn/10n@2x.png";
+                icon = CloudMoonRain;
                 whiteText = true;
             }
         } else {
@@ -354,7 +367,7 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
                 bg = "linear-gradient(#444a5e, #131621)";
                 whiteText = true;
             }
-            icon = "https://openweathermap.org/img/wn/09d@2x.png";
+            icon = CloudRain;
         }
     } else if (description.includes("Cloud") || description.includes("Frost")) {
         if (isDaytime) {
@@ -365,7 +378,7 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             bg = "linear-gradient(#38383b, #767682)";
             whiteText = true;
         }
-        icon = "https://openweathermap.org/img/wn/03d@2x.png";
+        icon = Cloud;
     } else if (
         description.includes("Sunny") ||
         description === "Sunny" ||
@@ -375,11 +388,11 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = "linear-gradient(#a6c0ed, #5e99ff)";
-            icon = "https://openweathermap.org/img/wn/01d@2x.png";
+            icon = Sun;
         } else {
             bg_top = "#041d47";
             bg = "linear-gradient(#041d47, #06378a)";
-            icon = "https://openweathermap.org/img/wn/01n@2x.png";
+            icon = Moon;
             whiteText = true;
         }
     } else if (
@@ -396,7 +409,7 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             bg = "linear-gradient(#6e6e6e, #363636)";
             whiteText = true;
         }
-        icon = "https://openweathermap.org/img/wn/50d@2x.png";
+        icon = CloudFog;
     } else {
         console.log("Could not find correct icon for ", description);
     }

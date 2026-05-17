@@ -191,11 +191,7 @@ function DayOverview({ data, expanded, onShow }) {
         >
             <div className={"flex"}>
                 <h3>{data.name}</h3>
-                <img
-                    src={getIcon(data.shortForecast, data.isDaytime)}
-                    className="w-10 h-10 -translate-y-2"
-                    title={data.shortForecast}
-                />
+                <data.icon size="40" className="px-2 -translate-y-2.5" />
                 <h4>
                     <span>{data.highTemp + "° / "}</span>
                     <span className="text-gray-500">{data.lowTemp}</span>
@@ -240,14 +236,10 @@ function Hour({ data, infoShown }) {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
             }}
-            className="flex justify-evenly items-center"
+            className="flex justify-evenly items-center p-2"
         >
             <p>{formatDate(data.time)}</p>
-            <img
-                src={data.icon}
-                title={data.shortForecast}
-                className="w-11 h-11 -translate-y-2.5"
-            />
+            <data.icon size="25" className="" />
             <p>
                 {infoShown === "Temperature"
                     ? `${data.temperature}°`
