@@ -61,7 +61,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                     className="w-full focus:outline-none"
                 />
             </div>
-            <ul className="absolute backdrop-blur-md z-2 rounded-xl w-70 mt-1 bg-gray-300">
+            <ul className="absolute backdrop-blur-md z-50 rounded-xl w-70 mt-1 bg-gray-300">
                 {locations?.map((item) => (
                     <li
                         key={item?.place_id}
@@ -142,7 +142,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
 
 function TitleBar({ setData, setAlerts, setLoading }) {
     return (
-        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg">
+        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50">
             <SearchBar
                 setData={setData}
                 setAlerts={setAlerts}
