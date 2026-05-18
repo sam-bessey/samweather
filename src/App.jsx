@@ -249,7 +249,9 @@ function Hour({ data, infoShown }) {
                         ? `${data.feelsLike}°`
                         : infoShown === "Wind"
                           ? `${data.wind.speed} ${data.wind.direction}`
-                          : "N/A"}
+                          : infoShown === "Description"
+                            ? `${data.shortForecast}`
+                            : "N/A"}
             </p>
         </motion.li>
     );
@@ -272,6 +274,7 @@ function HourlyForecast({ data, dayIndex }) {
                     <option>Feels like</option>
                     <option>Precipitation</option>
                     <option>Wind</option>
+                    <option>Description</option>
                 </select>
             </div>
             <motion.ul
