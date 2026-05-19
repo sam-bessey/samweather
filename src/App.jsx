@@ -189,9 +189,9 @@ function DayOverview({ data, expanded, onShow }) {
                 (expanded ? "bg-gray-300/60" : "bg-transparent")
             }
         >
-            <div className={"flex"}>
+            <div className={"flex justify-around items-center"}>
                 <h3>{data.name}</h3>
-                <data.icon size="40" className="px-2 -translate-y-2.5" />
+                <data.icon size="40" className="px-2" />
                 <h4>
                     <span>{data.highTemp + "° / "}</span>
                     <span className="text-gray-500">{data.lowTemp}</span>
