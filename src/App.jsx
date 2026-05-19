@@ -164,7 +164,7 @@ function Alerts({ alerts }) {
                     {alerts?.map((item, index) => (
                         <div
                             key={index}
-                            className="transition-all p-3 rounded-xl bg-red-200 mb-3 w-full"
+                            className="transition-all p-3 rounded-xl bg-red-200/60 mb-3 w-full backdrop-blur-xl"
                         >
                             <h4 className="text-xl">{item.title}</h4>
                             <p>{item.description + item.instructions}</p>
