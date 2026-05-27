@@ -64,9 +64,33 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                     className="w-full focus:outline-none"
                 />
             </div>
-            <ul className="absolute backdrop-blur-md z-50 rounded-xl w-70 mt-1 bg-gray-300">
+            <motion.ul
+                initial="hidden"
+                key={locations.length}
+                animate="visible"
+                variants={{
+                    hidden: { opacity: 0, height: 0 },
+                    visible: {
+                        opacity: 1,
+                        height: "auto",
+                        transition: {
+                            duration: 0.1 * locations.length,
+                            staggerChildren: 0.1, // Staggers the entry of each child by 0.1s
+                        },
+                    },
+                }}
+                className="absolute backdrop-blur-md z-50 rounded-xl w-70 mt-1 bg-gray-300 overflow-hidden"
+            >
                 {locations?.map((item) => (
-                    <li
+                    <motion.li
+                        variants={{
+                            hidden: { opacity: 0, y: 20 },
+                            visible: {
+                                opacity: 1,
+                                y: 0,
+                                transition: { duration: 0.5 },
+                            },
+                        }}
                         key={item?.place_id}
                         onClick={() => {
                             // Log to console
@@ -136,9 +160,9 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                         <p className="ml-2 w-full cutoff">
                             {item.display_name}
                         </p>
-                    </li>
+                    </motion.li>
                 ))}
-            </ul>
+            </motion.ul>
         </div>
     );
 }
