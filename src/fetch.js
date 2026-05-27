@@ -110,7 +110,6 @@ function formatData(infoData, mainData, hourlyData) {
             formattedDays.push({
                 name: thisPeriod.name,
                 date: dayDate,
-                isDaytime: thisPeriod.isDaytime,
                 precipitation: thisPeriod.probabilityOfPrecipitation.value,
                 wind: {
                     speed: thisPeriod.windSpeed,
