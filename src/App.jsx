@@ -17,7 +17,8 @@ import {
     Utensils,
     TreePine,
     Droplet,
-    Sunset
+    Sunset,
+    Wind,
 } from "lucide-react";
 import {
     fetchWeather,
@@ -203,9 +204,20 @@ function DayOverview({ data, expanded, onShow }) {
                 {expanded ? (
                     <>
                         <p>{data.detailedForecast}</p>
-                        <div>
-                            <div className="flex">
-                                <Droplet /> <p>{data.precipitation + "%"}</p>
+                        <div className="flex justify-evenly items-center">
+                            <div className="flex items-center">
+                                <Droplet />
+                                <p className="p-2">
+                                    {data.precipitation + "%"}
+                                </p>
+                            </div>
+                            <div className="flex items-center">
+                                <Wind />
+                                <p className="p-2">
+                                    {data.wind.speed +
+                                        " " +
+                                        data.wind.direction}
+                                </p>
                             </div>
                         </div>
                     </>
