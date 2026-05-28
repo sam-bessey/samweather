@@ -53,7 +53,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
     }, [text]);
 
     return (
-        <div className="w-full md:w-70">
+        <div className="w-full md:w-auto">
             <div className="border rounded-lg w-full md:w-70 flex">
                 <Search className="m-1.5" />
                 <input
