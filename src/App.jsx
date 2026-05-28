@@ -53,8 +53,8 @@ function SearchBar({ setData, setAlerts, setLoading }) {
     }, [text]);
 
     return (
-        <div>
-            <div className="border rounded-lg w-70 flex">
+        <div className="w-full md:w-70">
+            <div className="border rounded-lg w-full md:w-70 flex">
                 <Search className="m-1.5" />
                 <input
                     type="text"
@@ -79,7 +79,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                         },
                     },
                 }}
-                className="absolute backdrop-blur-md z-50 rounded-xl w-70 mt-1 bg-gray-300 overflow-hidden"
+                className="absolute backdrop-blur-md z-50 rounded-xl w-full md:w-70 mt-1 bg-gray-300 overflow-hidden"
             >
                 {locations?.map((item) => (
                     <motion.li
@@ -175,8 +175,8 @@ function TitleBar({ setData, setAlerts, setLoading }) {
                 setAlerts={setAlerts}
                 setLoading={setLoading}
             />
-            <h1 className="text-center">SamWeather</h1>
-            <p>Version 8.0 beta</p>
+            <h1 className="text-center hidden md:inline">SamWeather</h1>
+            <p className="hidden md:inline">Version 8.0 beta</p>
         </div>
     );
 }
