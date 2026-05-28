@@ -216,7 +216,7 @@ function DayOverview({ data, expanded, onShow }) {
                 (expanded ? "bg-gray-300/60" : "bg-transparent")
             }
         >
-            <div className={"flex justify-around items-center"}>
+            <div className={"flex md:block md:justify-around items-center md:w-full"}>
                 <h3>{data.name}</h3>
                 <data.icon size="40" className="px-2" />
                 <h4>
@@ -226,7 +226,7 @@ function DayOverview({ data, expanded, onShow }) {
             </div>
             <div>
                 {expanded ? (
-                    <>
+                    <div className="hidden md:block">
                         <p>{data.detailedForecast}</p>
                         <div className="flex justify-evenly items-center">
                             <div className="flex items-center">
@@ -244,7 +244,8 @@ function DayOverview({ data, expanded, onShow }) {
                                 </p>
                             </div>
                         </div>
-                    </>
+                        <div />
+                    </div>
                 ) : (
                     <></>
                 )}
@@ -255,7 +256,11 @@ function DayOverview({ data, expanded, onShow }) {
 
 function DayForecast({ data, alerts, selectedDay, setSelectedDay }) {
     return (
-        <div className={"w-1/2 h-full overflow-y-auto min-h-0"}>
+        <div
+            className={
+                "w-full h-auto md:w-1/2 md:h-full md:overflow-y-auto min-h-0 flex"
+            }
+        >
             <Alerts alerts={alerts} />
             {data?.days?.map((item, index) => (
                 <DayOverview
@@ -380,7 +385,7 @@ export default function App() {
                 <img src={Treetest} />
             </div>
 
-            <div className="flex flex-1 min-h-0 w-full pt-5 pl-3">
+            <div className="block md:flex md:flex-1 min-h-0 md:w-full pt-5 pl-3">
                 <DayForecast
                     data={data}
                     alerts={alerts}
