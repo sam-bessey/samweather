@@ -53,7 +53,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
     }, [text]);
 
     return (
-        <div className="w-full md:w-auto">
+        <div className="w-full relative md:w-auto">
             <div className="border rounded-lg w-full md:w-70 flex">
                 <Search className="m-1.5" />
                 <input
@@ -64,105 +64,109 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                     className="w-full focus:outline-none"
                 />
             </div>
-            <motion.ul
-                initial="hidden"
-                key={locations.length}
-                animate="visible"
-                variants={{
-                    hidden: { opacity: 0, height: 0 },
-                    visible: {
-                        opacity: 1,
-                        height: "auto",
-                        transition: {
-                            duration: 0.1 * locations.length,
-                            staggerChildren: 0.1, // Staggers the entry of each child by 0.1s
-                        },
-                    },
-                }}
-                className="absolute backdrop-blur-md z-50 rounded-xl w-full md:w-70 mt-1 bg-gray-300 overflow-hidden"
-            >
-                {locations?.map((item) => (
-                    <motion.li
-                        variants={{
-                            hidden: { opacity: 0, y: 20 },
-                            visible: {
-                                opacity: 1,
-                                y: 0,
-                                transition: { duration: 0.5 },
+            <div className="w-full absolute">
+                <motion.ul
+                    initial="hidden"
+                    key={locations.length}
+                    animate="visible"
+                    variants={{
+                        hidden: { opacity: 0, height: 0 },
+                        visible: {
+                            opacity: 1,
+                            height: "auto",
+                            transition: {
+                                duration: 0.1 * locations.length,
+                                staggerChildren: 0.1, // Staggers the entry of each child by 0.1s
                             },
-                        }}
-                        key={item?.place_id}
-                        onClick={() => {
-                            // Log to console
-                            console.log(
-                                "fetching weather for",
-                                item.name,
-                                item.lat,
-                                item.lon,
-                            );
+                        },
+                    }}
+                    className="w-full backdrop-blur-md z-50 rounded-xl md:w-70 mt-1 bg-gray-300 overflow-hidden"
+                >
+                    {locations?.map((item) => (
+                        <motion.li
+                            variants={{
+                                hidden: { opacity: 0, y: 20 },
+                                visible: {
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: { duration: 0.5 },
+                                },
+                            }}
+                            key={item?.place_id}
+                            onClick={() => {
+                                // Log to console
+                                console.log(
+                                    "fetching weather for",
+                                    item.name,
+                                    item.lat,
+                                    item.lon,
+                                );
 
-                            // Actually fetch and display new data
-                            setLoading(true);
-                            fetchWeather([item.lat, item.lon])
-                                .then(setData)
-                                .finally(() => setLoading(false));
-                            fetchAlerts([item.lat, item.lon]).then(setAlerts);
+                                // Actually fetch and display new data
+                                setLoading(true);
+                                fetchWeather([item.lat, item.lon])
+                                    .then(setData)
+                                    .finally(() => setLoading(false));
+                                fetchAlerts([item.lat, item.lon]).then(
+                                    setAlerts,
+                                );
 
-                            // Clear search bar
-                            setText("");
-                            setLocations([]);
-                        }}
-                        className="flex my-2"
-                    >
-                        <>
-                            {item.addresstype === "town" ||
-                            item.addresstype === "village" ||
-                            item.addresstype === "hamlet" ||
-                            item.addresstype === "neighbourhood" ||
-                            item.type === "house" ? (
-                                <House />
-                            ) : item.addresstype === "city" ? (
-                                <Building2 />
-                            ) : item.addresstype === "state" ||
-                              item.addresstype === "country" ? (
-                                <Earth />
-                            ) : item.addresstype === "bay" ||
-                              item.addresstype === "sea" ||
-                              item.addresstype === "ocean" ? (
-                                <WavesHorizontal />
-                            ) : item.addresstype === "road" ? (
-                                <Road />
-                            ) : item.addresstype === "aeroway" ? (
-                                <PlaneTakeoff />
-                            ) : item.addresstype === "bridge" ? (
-                                <img src={Bridge} />
-                            ) : item.addresstype === "shop" ? (
-                                <Store />
-                            ) : item.addresstype === "building" ? (
-                                <Building />
-                            ) : item.type === "school" ? (
-                                <GraduationCap />
-                            ) : item.type === "place_of_worship" ? (
-                                <Church />
-                            ) : item.addresstype === "beach" ? (
-                                <img src={Island} />
-                            ) : item.addresstype === "peak" ? (
-                                <MountainSnow />
-                            ) : item.type === "restaurant" ||
-                              item.type === "pub" ? (
-                                <Utensils />
-                            ) : item.addresstype === "nature_reserve" ? (
-                                <TreePine />
-                            ) : (
-                                <MapPin />
-                            )}
-                        </>
-                        <p className="ml-2 w-full cutoff">
-                            {item.display_name}
-                        </p>
-                    </motion.li>
-                ))}
-            </motion.ul>
+                                // Clear search bar
+                                setText("");
+                                setLocations([]);
+                            }}
+                            className="flex my-2"
+                        >
+                            <>
+                                {item.addresstype === "town" ||
+                                item.addresstype === "village" ||
+                                item.addresstype === "hamlet" ||
+                                item.addresstype === "neighbourhood" ||
+                                item.type === "house" ? (
+                                    <House />
+                                ) : item.addresstype === "city" ? (
+                                    <Building2 />
+                                ) : item.addresstype === "state" ||
+                                  item.addresstype === "country" ? (
+                                    <Earth />
+                                ) : item.addresstype === "bay" ||
+                                  item.addresstype === "sea" ||
+                                  item.addresstype === "ocean" ? (
+                                    <WavesHorizontal />
+                                ) : item.addresstype === "road" ? (
+                                    <Road />
+                                ) : item.addresstype === "aeroway" ? (
+                                    <PlaneTakeoff />
+                                ) : item.addresstype === "bridge" ? (
+                                    <img src={Bridge} />
+                                ) : item.addresstype === "shop" ? (
+                                    <Store />
+                                ) : item.addresstype === "building" ? (
+                                    <Building />
+                                ) : item.type === "school" ? (
+                                    <GraduationCap />
+                                ) : item.type === "place_of_worship" ? (
+                                    <Church />
+                                ) : item.addresstype === "beach" ? (
+                                    <img src={Island} />
+                                ) : item.addresstype === "peak" ? (
+                                    <MountainSnow />
+                                ) : item.type === "restaurant" ||
+                                  item.type === "pub" ? (
+                                    <Utensils />
+                                ) : item.addresstype === "nature_reserve" ? (
+                                    <TreePine />
+                                ) : (
+                                    <MapPin />
+                                )}
+                            </>
+                            <p className="ml-2 w-full cutoff">
+                                {item.display_name}
+                            </p>
+                        </motion.li>
+                    ))}
+                </motion.ul>
+            </div>
         </div>
     );
 }
@@ -194,7 +198,7 @@ function Alerts({ alerts }) {
                             className="transition-all p-3 rounded-xl bg-red-200/60 mb-3 w-full backdrop-blur-xl"
                         >
                             <h4 className="text-xl">{item.title}</h4>
-                            <p>{item.description + item.instructions}</p>
+                            <p>{item.description}</p>
                         </div>
                     ))}
                 </div>
