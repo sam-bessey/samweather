@@ -295,11 +295,93 @@ export async function fetchLocation(address) {
     }
 }
 
-export function getIcon(description, isDaytime, getThemeInstead = false) {
+export function getIcon(description, isDaytime) {
+    // Gets the icon for the current weather conditions
+    // description: the shortForecast for the hour you would like to use
+    // isDaytime: true or false, whether its daytime
+    let icon;
+
+    if (
+        description.includes("Mostly Sunny") ||
+        description.includes("Partly Cloudy") ||
+        description.includes("Mostly Clear") ||
+        description.includes("Mostly Cloudy") ||
+        description.includes("Partly Sunny")
+    ) {
+        if (isDaytime) {
+            icon = CloudSun;
+        } else {
+            icon = CloudMoon;
+        }
+    } else if (
+        description.includes("Snow") ||
+        description.includes("Blizzard") ||
+        description.includes("Flurries") ||
+        description.includes("Hail") ||
+        description.includes("Sleet")
+    ) {
+        icon = Snowflake;
+    } else if (
+        description.includes("Thunder") ||
+        description.includes("T-storm")
+    ) {
+        icon = CloudLightning;
+    } else if (
+        description.includes("Showers") ||
+        description.includes("Rain") ||
+        description.includes("Drizzle")
+    ) {
+        if (
+            description.includes("Sun") ||
+            description.includes("Partly Cloudy") ||
+            description.includes("Mostly Sunny")
+        ) {
+            if (isDaytime) {
+                icon = CloudSunRain;
+            } else {
+                icon = CloudMoonRain;
+            }
+        } else {
+            icon = CloudRain;
+        }
+    } else if (description.includes("Cloud") || description.includes("Frost")) {
+        icon = Cloud;
+    } else if (
+        description.includes("Sunny") ||
+        description === "Sunny" ||
+        description.includes("Sun") ||
+        description.includes("Clear")
+    ) {
+        if (isDaytime) {
+            icon = Sun;
+        } else {
+            icon = Moon;
+        }
+    } else if (
+        description.includes("Mist") ||
+        description.includes("Fog") ||
+        description.includes("Haze") ||
+        description.includes("Smoke")
+    ) {
+        icon = CloudFog;
+    } else {
+        console.log("Could not find correct icon for ", description);
+    }
+    return icon;
+}
+export function getBg(description, isDaytime, astronomical) {
+    // Gets the background for the current weather conditions
+    // description: the shortForecast for the hour you would like to use
+    // isDaytime: true or false, whether its daytime
+    // astronomical: the astronomical data for sunset and stuff. Only needed if getBgInstead is true.
+    // UPDATE BG comment means I need a new picture for it
     let bg_top;
     let bg;
-    let icon;
     let whiteText = false;
+    const now = new Date();
+    const time = formatDate(now.toLocaleTimeString(), true);
+    console.log("Current time is ", time);
+    const sunset = formatDate(astronomical.sunset, true);
 
     if (
         description.includes("Mostly Sunny") ||
@@ -310,15 +392,14 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
     ) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
-            bg = "linear-gradient(#a6c0ed, #7d9cd1)";
-            icon = CloudSun;
+            bg = description.includes("Mostly Cloudy")
+                ? "./images/mostlyCloudyDayT.JPEG"
+                : "./images.partlyCloudyDay";
         } else {
             bg_top = "#4e5c8a";
-            bg = "linear-gradient(#4e5c8a, #434859)";
-            icon = CloudMoon;
+            bg = "./images.clearNight.JPEG";
             whiteText = true;
         }
-        // icon = partcloudIcon;
     } else if (
         description.includes("Snow") ||
         description.includes("Blizzard") ||
@@ -327,15 +408,14 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
         description.includes("Sleet")
     ) {
         bg_top = "#d7d9de";
-        bg = "linear-gradient(#d7d9de, #f0f0f0)";
-        icon = Snowflake;
+        bg = "./images/snow.JPEG";
     } else if (
         description.includes("Thunder") ||
         description.includes("T-storm")
     ) {
         bg_top = "#434343";
-        bg = "linear-gradient(#434343, #2e2d2d)";
-        icon = CloudLightning;
+        // UPDATE BG
+        bg = "cloudyNight.JPEG";
         whiteText = true;
     } else if (
         description.includes("Showers") ||
@@ -349,11 +429,10 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
         ) {
             if (isDaytime) {
                 bg_top = "#95a6de";
-                bg = "linear-gradient(#95a6de, #c0caeb)";
-                icon = CloudSunRain;
+                bg = "./images/clearDayT.JPEG";
             } else {
                 bg_top = "#444a5e";
-                bg = "linear-gradient(#444a5e, #293354)";
+                bg = "./images/clearNight.JPEG";
                 icon = CloudMoonRain;
                 whiteText = true;
             }
@@ -366,7 +445,6 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
                 bg = "linear-gradient(#444a5e, #131621)";
                 whiteText = true;
             }
-            icon = CloudRain;
         }
     } else if (description.includes("Cloud") || description.includes("Frost")) {
         if (isDaytime) {
@@ -377,7 +455,6 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             bg = "linear-gradient(#38383b, #767682)";
             whiteText = true;
         }
-        icon = Cloud;
     } else if (
         description.includes("Sunny") ||
         description === "Sunny" ||
@@ -387,11 +464,9 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = "linear-gradient(#a6c0ed, #5e99ff)";
-            icon = Sun;
         } else {
             bg_top = "#041d47";
             bg = "linear-gradient(#041d47, #06378a)";
-            icon = Moon;
             whiteText = true;
         }
     } else if (
@@ -408,66 +483,11 @@ export function getIcon(description, isDaytime, getThemeInstead = false) {
             bg = "linear-gradient(#6e6e6e, #363636)";
             whiteText = true;
         }
-        icon = CloudFog;
     } else {
         console.log("Could not find correct icon for ", description);
     }
 
-    if (getThemeInstead) {
-        let textColor;
-        if (whiteText) {
-            textColor = "#ffffff";
-        } else {
-            textColor = "#000000";
-        }
-
-        // Update text color
-        for (
-            let i = 0;
-            i < document.getElementsByClassName("text").length;
-            i++
-        ) {
-            let element = document.getElementsByClassName("text")[i];
-            element.style.color = textColor;
-        }
-
-        // Update top background color
-        for (
-            let i = 0;
-            i < document.getElementsByClassName("bgTop").length;
-            i++
-        ) {
-            let element = document.getElementsByClassName("bgTop")[i];
-            element.style.backgroundColor = bg_top;
-        }
-
-        document.getElementById("body").style.backgroundImage = bg;
-        if (mobile) {
-            for (
-                let i = 0;
-                i < document.getElementsByClassName("titleBarMOBILE").length;
-                i++
-            ) {
-                document.getElementsByClassName("titleBarMOBILE")[
-                    i
-                ].style.backgroundImage =
-                    "linear-gradient(" +
-                    bg_top +
-                    ", " +
-                    bg_top +
-                    ", " +
-                    bg_top +
-                    ", " +
-                    "rgba(0, 0, 0, 0)";
-            }
-        } else {
-            document.getElementById("sectionsContainer").style.backgroundImage =
-                bg;
-            // document.getElementById("mainMenu").style.backgroundImage = bg;
-        }
-    } else {
-        return icon;
-    }
+    return bg;
 }
 
 export function formatDate(originalDate, returnTime) {

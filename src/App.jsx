@@ -26,11 +26,11 @@ import {
     formatDate,
     fetchLocation,
     fetchAlerts,
+    getBg,
 } from "./fetch.js";
 import "./styles.css";
 import Bridge from "/src/icons/bridge.svg";
 import Island from "/src/icons/island.svg";
-import Treetest from "/src/icons/treetest.JPEG";
 
 function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
@@ -386,7 +386,13 @@ export default function App() {
             ></TitleBar>
 
             <div className="absolute w-full h-full bg-fixed inset-0 -z-10">
-                <img src={Treetest} />
+                <img
+                    src={getBg(
+                        data?.hours?.[0]?.hours?.[0]?.[0]?.shortForecast,
+                        data?.hours?.[0]?.hours?.[0]?.[0]?.isDaytime,
+                        data?.info?.astronomical,
+                    )}
+                />
             </div>
 
             <div className="block md:flex md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
