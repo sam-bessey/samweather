@@ -216,7 +216,7 @@ function DayOverview({ data, expanded, onShow }) {
                 (expanded ? "bg-gray-300/60" : "bg-transparent")
             }
         >
-            <div className={"flex md:block md:justify-around items-center md:w-full"}>
+            <div className={"flex md:justify-around items-center md:w-full"}>
                 <h3>{data.name}</h3>
                 <data.icon size="40" className="px-2" />
                 <h4>
@@ -258,7 +258,7 @@ function DayForecast({ data, alerts, selectedDay, setSelectedDay }) {
     return (
         <div
             className={
-                "w-full h-auto md:w-1/2 md:h-full md:overflow-y-auto min-h-0 flex"
+                "flex w-full h-auto overflow-y-scroll md:w-1/2 md:h-full md:overflow-y-auto min-h-0 md:block"
             }
         >
             <Alerts alerts={alerts} />
