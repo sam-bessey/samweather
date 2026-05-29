@@ -212,7 +212,7 @@ function DayOverview({ data, expanded, onShow }) {
         <div
             onClick={onShow}
             className={
-                "transition-all p-3 mb-3 rounded-xl backdrop-blur-lg " +
+                "transition-all p-3 ml-3 mb-3 rounded-3xl backdrop-blur-lg " +
                 (expanded ? "bg-gray-300/60" : "bg-transparent")
             }
         >
@@ -308,7 +308,7 @@ function HourlyForecast({ data, dayIndex }) {
     const [infoShown, setInfoShown] = useState("Temperature");
 
     return (
-        <div className="w-1/2 h-full bg-gray-200/50 ml-3 rounded-tl-xl pt-5 overflow-y-auto min-h-0 backdrop-blur-lg">
+        <div className="w-full md:w-1/2 h-full bg-gray-200/50 md:ml-3 rounded-t-3xl md:rounded-tr-none pt-5 overflow-y-auto min-h-0 backdrop-blur-lg">
             <div className="flex justify-between align-middle">
                 <h2 className="ml-7">Hourly</h2>
                 <select
@@ -385,7 +385,7 @@ export default function App() {
                 <img src={Treetest} />
             </div>
 
-            <div className="block md:flex md:flex-1 min-h-0 md:w-full pt-5 pl-3">
+            <div className="block md:flex md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
                 <DayForecast
                     data={data}
                     alerts={alerts}
