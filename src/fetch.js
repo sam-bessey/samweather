@@ -420,7 +420,7 @@ export function getBg(description, isDaytime, astronomical) {
     ) {
         bg_top = "#434343";
         // UPDATE BG
-        bg = "cloudyNight.JPEG";
+        bg = "/samweather/images/cloudyNight.JPEG";
         whiteText = true;
     } else if (
         description.includes("Showers") ||
@@ -478,9 +478,7 @@ export function getBg(description, isDaytime, astronomical) {
     } else {
         console.log("Could not find correct icon for ", description);
     }
-  console.log(
-"BG", bg
-)
+    console.log("BG", bg);
     return bg;
 }
 
