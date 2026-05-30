@@ -398,11 +398,11 @@ export function getBg(description, isDaytime, astronomical) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = description.includes("Mostly Cloudy")
-                ? "./images/mostlyCloudyDayT.JPEG"
-                : "./images/partlyCloudyDay.JPEG";
+                ? "/samweather/images/mostlyCloudyDayT.JPEG"
+                : "/samweather/images/partlyCloudyDay.JPEG";
         } else {
             bg_top = "#4e5c8a";
-            bg = "./images.clearNight.JPEG";
+            bg = "/images.clearNight.JPEG";
             whiteText = true;
         }
     } else if (
@@ -413,7 +413,7 @@ export function getBg(description, isDaytime, astronomical) {
         description.includes("Sleet")
     ) {
         bg_top = "#d7d9de";
-        bg = "./images/snow.JPEG";
+        bg = "/samweather/images/snow.JPEG";
     } else if (
         description.includes("Thunder") ||
         description.includes("T-storm")
@@ -429,20 +429,20 @@ export function getBg(description, isDaytime, astronomical) {
     ) {
         if (isDaytime) {
             bg_top = "#95a6de";
-            bg = "./images/oceanDay.JPEG";
+            bg = "/samweather/images/oceanDay.JPEG";
         } else {
             bg_top = "#444a5e";
-            bg = "./images/cloudyNightT.JPEG";
+            bg = "/samweather/images/cloudyNightT.JPEG";
             icon = CloudMoonRain;
             whiteText = true;
         }
     } else if (description.includes("Cloud") || description.includes("Frost")) {
         if (isDaytime) {
             bg_top = "#a7a8ab";
-            bg = "./images/cloudyDay.JPEG";
+            bg = "/samweather/images/cloudyDay.JPEG";
         } else {
             bg_top = "#38383b";
-            bg = "./images/cloudyNightT.JPEG";
+            bg = "/samweather/images/cloudyNightT.JPEG";
             whiteText = true;
         }
     } else if (
@@ -453,12 +453,12 @@ export function getBg(description, isDaytime, astronomical) {
     ) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
-            bg = "./images/clearDayT.JPEG";
+            bg = "/samweather/images/clearDayT.JPEG";
         } else {
             bg_top = "#041d47";
             isSunset
-                ? (bg = "./images/clearSunset.JPEG")
-                : (bg = "./images/clearNight.JPEG");
+                ? (bg = "/samweather/images/clearSunset.JPEG")
+                : (bg = "/samweather/images/clearNight.JPEG");
             whiteText = true;
         }
     } else if (
@@ -469,10 +469,10 @@ export function getBg(description, isDaytime, astronomical) {
     ) {
         if (isDaytime) {
             bg_top = "#adadad";
-            bg = "./images/cloudyDayT.JPEG";
+            bg = "/samweather/images/cloudyDayT.JPEG";
         } else {
             bg_top = "#6e6e6e";
-            bg = "./images/cloudyNightT.JPEG";
+            bg = "/samweather/images/cloudyNightT.JPEG";
             whiteText = true;
         }
     } else {
