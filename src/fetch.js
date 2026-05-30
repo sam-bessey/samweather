@@ -378,10 +378,15 @@ export function getBg(description, isDaytime, astronomical) {
     let bg_top;
     let bg;
     let whiteText = false;
+
+    // Check if data is loaded
+    if (!astronomical?.sunset) return "";
+
+    // Format dates and calculate sunset
     const now = new Date();
-    const time = formatDate(now.toLocaleTimeString(), true);
-    console.log("Current time is ", time);
-    const sunset = formatDate(astronomical.sunset, true);
+    const sunset = new Date(astronomical.sunset);
+    const isSunset = Math.abs(sunset - now) <= 30 * 60 * 1000;
+    console.log("Is sunset", isSunset);
 
     if (
         description.includes("Mostly Sunny") ||
@@ -394,7 +399,7 @@ export function getBg(description, isDaytime, astronomical) {
             bg_top = "#a6c0ed";
             bg = description.includes("Mostly Cloudy")
                 ? "./images/mostlyCloudyDayT.JPEG"
-                : "./images.partlyCloudyDay";
+                : "./images/partlyCloudyDay.JPEG";
         } else {
             bg_top = "#4e5c8a";
             bg = "./images.clearNight.JPEG";
@@ -422,37 +427,22 @@ export function getBg(description, isDaytime, astronomical) {
         description.includes("Rain") ||
         description.includes("Drizzle")
     ) {
-        if (
-            description.includes("Sun") ||
-            description.includes("Partly Cloudy") ||
-            description.includes("Mostly Sunny")
-        ) {
-            if (isDaytime) {
-                bg_top = "#95a6de";
-                bg = "./images/clearDayT.JPEG";
-            } else {
-                bg_top = "#444a5e";
-                bg = "./images/clearNight.JPEG";
-                icon = CloudMoonRain;
-                whiteText = true;
-            }
+        if (isDaytime) {
+            bg_top = "#95a6de";
+            bg = "./images/oceanDay.JPEG";
         } else {
-            if (isDaytime) {
-                bg_top = "#9a9fb3";
-                bg = "linear-gradient(#9a9fb3, #6c7080)";
-            } else {
-                bg_top = "#444a5e";
-                bg = "linear-gradient(#444a5e, #131621)";
-                whiteText = true;
-            }
+            bg_top = "#444a5e";
+            bg = "./images/cloudyNightT.JPEG";
+            icon = CloudMoonRain;
+            whiteText = true;
         }
     } else if (description.includes("Cloud") || description.includes("Frost")) {
         if (isDaytime) {
             bg_top = "#a7a8ab";
-            bg = "linear-gradient(#a7a8ab, #7e8087)";
+            bg = "./images/cloudyDay.JPEG";
         } else {
             bg_top = "#38383b";
-            bg = "linear-gradient(#38383b, #767682)";
+            bg = "./images/cloudyNightT.JPEG";
             whiteText = true;
         }
     } else if (
@@ -463,10 +453,12 @@ export function getBg(description, isDaytime, astronomical) {
     ) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
-            bg = "linear-gradient(#a6c0ed, #5e99ff)";
+            bg = "./images/clearDayT.JPEG";
         } else {
             bg_top = "#041d47";
-            bg = "linear-gradient(#041d47, #06378a)";
+            isSunset
+                ? (bg = "./images/clearSunset.JPEG")
+                : (bg = "./images/clearNight.JPEG");
             whiteText = true;
         }
     } else if (
@@ -477,16 +469,18 @@ export function getBg(description, isDaytime, astronomical) {
     ) {
         if (isDaytime) {
             bg_top = "#adadad";
-            bg = "linear-gradient(#adadad, #dbdbdb)";
+            bg = "./images/cloudyDayT.JPEG";
         } else {
             bg_top = "#6e6e6e";
-            bg = "linear-gradient(#6e6e6e, #363636)";
+            bg = "./images/cloudyNightT.JPEG";
             whiteText = true;
         }
     } else {
         console.log("Could not find correct icon for ", description);
     }
-
+  console.log(
+"BG", bg
+)
     return bg;
 }
 

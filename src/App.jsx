@@ -386,13 +386,15 @@ export default function App() {
             ></TitleBar>
 
             <div className="absolute w-full h-full bg-fixed inset-0 -z-10">
-                <img
-                    src={getBg(
-                        data?.hours?.[0]?.hours?.[0]?.[0]?.shortForecast,
-                        data?.hours?.[0]?.hours?.[0]?.[0]?.isDaytime,
-                        data?.info?.astronomical,
-                    )}
-                />
+                {data?.hours?.[0]?.hours?.[0] && data?.info?.astronomical && (
+                    <img
+                        src={getBg(
+                            data?.hours?.[0]?.hours?.[0]?.shortForecast,
+                            data?.hours?.[0]?.hours?.[0]?.isDaytime,
+                            data?.info?.astronomical,
+                        )}
+                    />
+                )}
             </div>
 
             <div className="block md:flex md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
