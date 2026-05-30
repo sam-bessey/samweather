@@ -420,7 +420,7 @@ export function getBg(description, isDaytime, astronomical) {
     ) {
         bg_top = "#434343";
         // UPDATE BG
-        bg = "/samweather/images/cloudyNight.JPEG";
+        bg = "/samweather/images/cloudyNightT.JPEG";
         whiteText = true;
     } else if (
         description.includes("Showers") ||
