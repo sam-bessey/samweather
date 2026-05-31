@@ -385,9 +385,10 @@ export default function App() {
                 setLoading={setLoading}
             ></TitleBar>
 
-            <div className="absolute w-full h-full bg-fixed inset-0 -z-10">
+            <div className="absolute w-full h-full inset-0 -z-10">
                 {data?.hours?.[0]?.hours?.[0] && data?.info?.astronomical && (
                     <img
+                        className="absolute w-full h-full inset-0 -z-10 object-cover object-center overflow-hidden"
                         src={getBg(
                             data?.hours?.[0]?.hours?.[0]?.shortForecast,
                             data?.hours?.[0]?.hours?.[0]?.isDaytime,
