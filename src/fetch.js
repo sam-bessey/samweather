@@ -403,7 +403,7 @@ export function getBg(description, isDaytime, astronomical) {
                 : "/samweather/images/partlyCloudyDay.JPEG";
         } else {
             bg_top = "#4e5c8a";
-            bg = "/images.clearNight.JPEG";
+            bg = "/images/clearNight.JPEG";
             darkMode = true;
         }
     } else if (
