@@ -12,6 +12,7 @@ import {
     CloudSunRain,
     Moon,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 // Fetch weather data and return it (And some other stuff)
 // Split to a separate file just to make things easier
@@ -454,6 +455,7 @@ export function getBg(description, isDaytime, astronomical) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = "/samweather/images/clearDayT.JPEG";
+            whiteText = true;
         } else {
             bg_top = "#041d47";
             isSunset
@@ -478,8 +480,27 @@ export function getBg(description, isDaytime, astronomical) {
     } else {
         console.log("Could not find correct icon for ", description);
     }
+
+    if (whiteText) {
+        setDarkMode(true)
+    } else {
+        setDarkMode(false)
+    }
     console.log("BG", bg);
     return bg;
+}
+
+function setDarkMode(darkMode) {
+    useEffect(() => {
+        const root = window.document.documentElement;
+        if (darkMode) {
+            root.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+        } else {
+            root.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+        }
+    }, [darkMode]);
 }
 
 export function formatDate(originalDate, returnTime) {
