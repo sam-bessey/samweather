@@ -80,7 +80,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                             },
                         },
                     }}
-                    className="w-full backdrop-blur-md z-50 rounded-xl md:w-70 mt-1 bg-gray-300 overflow-hidden"
+                    className="w-full backdrop-blur-md z-50 rounded-xl md:w-70 mt-1 bg-gray-300 dark:bg-gray-500 overflow-hidden"
                 >
                     {locations?.map((item) => (
                         <motion.li
@@ -217,7 +217,9 @@ function DayOverview({ data, expanded, onShow }) {
             onClick={onShow}
             className={
                 "transition-all p-3 ml-3 mb-3 rounded-3xl backdrop-blur-lg " +
-                (expanded ? "bg-gray-300/60" : "bg-transparent")
+                (expanded
+                    ? "bg-gray-300/60 dark:bg-gray-600/60"
+                    : "bg-transparent")
             }
         >
             <div className={"flex md:justify-around items-center md:w-full"}>
@@ -312,7 +314,7 @@ function HourlyForecast({ data, dayIndex }) {
     const [infoShown, setInfoShown] = useState("Temperature");
 
     return (
-        <div className="w-full md:w-1/2 h-full bg-gray-200/50 md:ml-3 rounded-t-3xl md:rounded-tr-none pt-5 overflow-y-auto min-h-0 backdrop-blur-lg">
+        <div className="w-full md:w-1/2 h-full bg-gray-200/50 dark:bg-gray-900/50 md:ml-3 rounded-t-3xl md:rounded-tr-none pt-5 overflow-y-auto min-h-0 backdrop-blur-lg">
             <div className="flex justify-between align-middle">
                 <h2 className="ml-7">Hourly</h2>
                 <select
@@ -377,7 +379,7 @@ export default function App() {
     }, []);
 
     return (
-        <div className="relative m-0 p-0 h-screen flex flex-col overflow-hidden">
+        <div className="relative m-0 p-0 h-screen flex flex-col overflow-hidden dark:text-white">
             <Loading hidden={loading}></Loading>
             <TitleBar
                 setData={setData}

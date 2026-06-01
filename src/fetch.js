@@ -378,7 +378,7 @@ export function getBg(description, isDaytime, astronomical) {
     // UPDATE BG comment means I need a new picture for it
     let bg_top;
     let bg;
-    let whiteText = false;
+    let darkMode = false;
 
     // Check if data is loaded
     if (!astronomical?.sunset) return "";
@@ -404,7 +404,7 @@ export function getBg(description, isDaytime, astronomical) {
         } else {
             bg_top = "#4e5c8a";
             bg = "/images.clearNight.JPEG";
-            whiteText = true;
+            darkMode = true;
         }
     } else if (
         description.includes("Snow") ||
@@ -422,7 +422,7 @@ export function getBg(description, isDaytime, astronomical) {
         bg_top = "#434343";
         // UPDATE BG
         bg = "/samweather/images/cloudyNightT.JPEG";
-        whiteText = true;
+        darkMode = true;
     } else if (
         description.includes("Showers") ||
         description.includes("Rain") ||
@@ -435,7 +435,7 @@ export function getBg(description, isDaytime, astronomical) {
             bg_top = "#444a5e";
             bg = "/samweather/images/cloudyNightT.JPEG";
             icon = CloudMoonRain;
-            whiteText = true;
+            darkMode = true;
         }
     } else if (description.includes("Cloud") || description.includes("Frost")) {
         if (isDaytime) {
@@ -444,7 +444,7 @@ export function getBg(description, isDaytime, astronomical) {
         } else {
             bg_top = "#38383b";
             bg = "/samweather/images/cloudyNightT.JPEG";
-            whiteText = true;
+            darkMode = true;
         }
     } else if (
         description.includes("Sunny") ||
@@ -455,13 +455,14 @@ export function getBg(description, isDaytime, astronomical) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
             bg = "/samweather/images/clearDayT.JPEG";
-            whiteText = true;
         } else {
             bg_top = "#041d47";
-            isSunset
-                ? (bg = "/samweather/images/clearSunset.JPEG")
-                : (bg = "/samweather/images/clearNight.JPEG");
-            whiteText = true;
+            if (isSunset) {
+                bg = "/samweather/images/clearSunset.JPEG";
+            } else {
+                bg = "/samweather/images/clearNight.JPEG";
+                darkMode = true;
+            }
         }
     } else if (
         description.includes("Mist") ||
@@ -475,32 +476,31 @@ export function getBg(description, isDaytime, astronomical) {
         } else {
             bg_top = "#6e6e6e";
             bg = "/samweather/images/cloudyNightT.JPEG";
-            whiteText = true;
+            darkMode = true;
         }
     } else {
-        console.log("Could not find correct icon for ", description);
+        console.log("Could not find correct background for ", description);
     }
 
-    if (whiteText) {
-        setDarkMode(true)
+    if (darkMode) {
+        setDarkMode(true);
     } else {
-        setDarkMode(false)
+        setDarkMode(false);
     }
     console.log("BG", bg);
+    console.log("dark mode", darkMode);
     return bg;
 }
 
 function setDarkMode(darkMode) {
-    useEffect(() => {
-        const root = window.document.documentElement;
-        if (darkMode) {
-            root.classList.add("dark");
-            localStorage.setItem("theme", "dark");
-        } else {
-            root.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-        }
-    }, [darkMode]);
+    const root = window.document.documentElement;
+    if (darkMode) {
+        root.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+    } else {
+        root.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+    }
 }
 
 export function formatDate(originalDate, returnTime) {
