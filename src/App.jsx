@@ -379,7 +379,7 @@ export default function App() {
     }, []);
 
     return (
-        <div className="relative m-0 p-0 h-screen flex flex-col overflow-hidden dark:text-white">
+        <div className="relative m-0 p-0 h-screen flex flex-col overflow-hidden text-black dark:text-white">
             <Loading hidden={loading}></Loading>
             <TitleBar
                 setData={setData}

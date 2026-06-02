@@ -434,7 +434,6 @@ export function getBg(description, isDaytime, astronomical) {
         } else {
             bg_top = "#444a5e";
             bg = "/samweather/images/cloudyNightT.JPEG";
-            icon = CloudMoonRain;
             darkMode = true;
         }
     } else if (description.includes("Cloud") || description.includes("Frost")) {
@@ -493,13 +492,14 @@ export function getBg(description, isDaytime, astronomical) {
 }
 
 function setDarkMode(darkMode) {
+    // setDarkMode
+    // darkMode: true or false, if it should be dark mode.
     const root = window.document.documentElement;
+    console.log("setting")
     if (darkMode) {
         root.classList.add("dark");
-        localStorage.setItem("theme", "dark");
     } else {
         root.classList.remove("dark");
-        localStorage.setItem("theme", "light");
     }
 }
 
