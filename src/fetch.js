@@ -495,7 +495,7 @@ function setDarkMode(darkMode) {
     // setDarkMode
     // darkMode: true or false, if it should be dark mode.
     const root = window.document.documentElement;
-    console.log("setting")
+    console.log("setting");
     if (darkMode) {
         root.classList.add("dark");
     } else {

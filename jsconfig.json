@@ -1,6 +1,6 @@
 {
-  "compilerOptions": {
-    "moduleResolution": "node",
-    "jsx": "react-jsx"
-  }
+    "compilerOptions": {
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx"
+    }
 }
