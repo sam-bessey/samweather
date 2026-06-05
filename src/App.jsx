@@ -80,7 +80,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                             },
                         },
                     }}
-                    className="w-full backdrop-blur-md z-50 rounded-xl md:w-70 mt-1 bg-gray-300 dark:bg-gray-500 overflow-hidden"
+                    className="w-full backdrop-blur-md z-50 rounded-3xl md:w-70 mt-1 bg-gray-300 dark:bg-gray-500 overflow-hidden"
                 >
                     {locations?.map((item) => (
                         <motion.li
@@ -171,13 +171,10 @@ function SearchBar({ setData, setAlerts, setLoading }) {
     );
 }
 
-function TitleBar({ setData, setAlerts, setLoading, className }) {
+function TitleBar({ setData, setAlerts, setLoading }) {
     return (
         <div
-            className={
-                "transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50 " +
-                className
-            }
+                className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50 "
         >
             <SearchBar
                 setData={setData}
@@ -190,7 +187,7 @@ function TitleBar({ setData, setAlerts, setLoading, className }) {
     );
 }
 
-function Alerts({ alerts }) {
+function Alerts({ alerts, className = "" }) {
     if (alerts?.length === 0 || alerts === null) {
         return;
     } else {
@@ -200,7 +197,10 @@ function Alerts({ alerts }) {
                     {alerts?.map((item, index) => (
                         <div
                             key={index}
-                            className="transition-all p-3 rounded-xl bg-red-200/60 mb-3 w-full backdrop-blur-xl"
+                            className={
+                                "transition-all p-3 rounded-3xl bg-red-200/60 mb-3 w-full backdrop-blur-xl " +
+                                className
+                            }
                         >
                             <h4 className="text-xl">{item.title}</h4>
                             <p>{item.description}</p>
@@ -272,7 +272,7 @@ function DayForecast({ data, alerts, selectedDay, setSelectedDay }) {
                 "flex w-full h-auto overflow-y-scroll md:w-1/2 md:h-full md:overflow-y-auto min-h-0 md:block"
             }
         >
-            <Alerts className="md:hidden" alerts={alerts} />
+            <Alerts className="hidden md:block" alerts={alerts} />
             {data?.days?.map((item, index) => (
                 <DayOverview
                     key={index}
@@ -406,7 +406,7 @@ export default function App() {
             </div>
 
             <div className="block md:flex md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
-                <Alerts alerts={alerts} className="hidden md:block"/>
+                <Alerts alerts={alerts} className="block md:hidden w-full" />
                 <DayForecast
                     data={data}
                     alerts={alerts}
