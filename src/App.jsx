@@ -171,9 +171,14 @@ function SearchBar({ setData, setAlerts, setLoading }) {
     );
 }
 
-function TitleBar({ setData, setAlerts, setLoading }) {
+function TitleBar({ setData, setAlerts, setLoading, className }) {
     return (
-        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50">
+        <div
+            className={
+                "transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50 " +
+                className
+            }
+        >
             <SearchBar
                 setData={setData}
                 setAlerts={setAlerts}
@@ -267,7 +272,7 @@ function DayForecast({ data, alerts, selectedDay, setSelectedDay }) {
                 "flex w-full h-auto overflow-y-scroll md:w-1/2 md:h-full md:overflow-y-auto min-h-0 md:block"
             }
         >
-            <Alerts alerts={alerts} />
+            <Alerts className="md:hidden" alerts={alerts} />
             {data?.days?.map((item, index) => (
                 <DayOverview
                     key={index}
@@ -401,6 +406,7 @@ export default function App() {
             </div>
 
             <div className="block md:flex md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
+                <Alerts alerts={alerts} className="hidden md:block"/>
                 <DayForecast
                     data={data}
                     alerts={alerts}
