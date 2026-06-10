@@ -173,9 +173,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
 
 function TitleBar({ setData, setAlerts, setLoading }) {
     return (
-        <div
-                className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50 "
-        >
+        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50 ">
             <SearchBar
                 setData={setData}
                 setAlerts={setAlerts}
@@ -319,7 +317,7 @@ function HourlyForecast({ data, dayIndex }) {
     const [infoShown, setInfoShown] = useState("Temperature");
 
     return (
-        <div className="w-full md:w-1/2 h-full bg-gray-200/50 dark:bg-gray-900/50 md:ml-3 rounded-t-3xl md:rounded-tr-none pt-5 overflow-y-auto min-h-0 backdrop-blur-lg">
+        <div className="w-full flex-1 md:w-1/2 md:flex-none bg-gray-200/50 dark:bg-gray-900/50 md:ml-3 rounded-t-3xl md:rounded-tr-none pt-5 overflow-y-auto min-h-0 backdrop-blur-lg">
             <div className="flex justify-between align-middle">
                 <h2 className="ml-7">Hourly</h2>
                 <select
@@ -405,7 +403,7 @@ export default function App() {
                 )}
             </div>
 
-            <div className="block md:flex md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
+            <div className="flex flex-col md:flex md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
                 <Alerts alerts={alerts} className="block md:hidden w-full" />
                 <DayForecast
                     data={data}
