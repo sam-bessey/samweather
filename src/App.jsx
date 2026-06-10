@@ -318,6 +318,28 @@ function HourlyForecast({ data, dayIndex }) {
 
     return (
         <div className="w-full flex-1 md:w-1/2 md:flex-none bg-gray-200/50 dark:bg-gray-900/50 md:ml-3 rounded-t-3xl md:rounded-tr-none pt-5 overflow-y-auto min-h-0 backdrop-blur-lg">
+            <div className="block md:hidden px-4 mb-4">
+                <p>{data?.days?.[dayIndex]?.detailedForecast}</p>
+
+                <div className="flex justify-evenly items-center">
+                    <div className="flex items-center">
+                        <Droplet />
+                        <p className="p-2">
+                            {data?.days?.[dayIndex]?.precipitation + "%"}
+                        </p>
+                    </div>
+
+                    <div className="flex items-center">
+                        <Wind />
+                        <p className="p-2">
+                            {data?.days?.[dayIndex]?.wind.speed +
+                                " " +
+                                data?.days?.[dayIndex]?.wind.direction}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div className="flex justify-between align-middle">
                 <h2 className="ml-7">Hourly</h2>
                 <select
@@ -333,6 +355,7 @@ function HourlyForecast({ data, dayIndex }) {
                     <option>Description</option>
                 </select>
             </div>
+
             <motion.ul
                 initial="hidden"
                 key={dayIndex}
