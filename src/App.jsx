@@ -403,7 +403,7 @@ export default function App() {
                 )}
             </div>
 
-            <div className="flex flex-col md:flex md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
+            <div className="flex flex-col md:flex-row md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
                 <Alerts alerts={alerts} className="block md:hidden w-full" />
                 <DayForecast
                     data={data}
