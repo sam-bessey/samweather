@@ -20,17 +20,12 @@ import {
     Sunset,
     Wind,
 } from "lucide-react";
-import {
-    fetchWeather,
-    getIcon,
-    formatDate,
-    fetchLocation,
-    fetchAlerts,
-    getBg,
-} from "./fetch.js";
+import { fetchWeather, fetchAlerts } from "./fetch.js";
 import "./styles.css";
 import Bridge from "/src/icons/bridge.svg";
 import Island from "/src/icons/island.svg";
+import { getBg } from "./themes.js";
+import { formatDate } from "./formatting.js";
 
 function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
