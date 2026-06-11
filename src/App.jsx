@@ -180,7 +180,7 @@ function TitleBar({ setData, setAlerts, setLoading }) {
                 setLoading={setLoading}
             />
             <h1 className="text-center hidden md:inline">SamWeather</h1>
-            <p className="hidden md:inline">Version 8.0 beta</p>
+            <p className="hidden md:inline">Version 8.0</p>
         </div>
     );
 }
