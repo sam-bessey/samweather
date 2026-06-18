@@ -393,7 +393,7 @@ export default function App() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchWeather([44, -70])
+        fetchWeather([43.8009, -70.1876])
             .then(setData)
             .finally(() => setLoading(false));
         fetchAlerts([44, -70]).then(setAlerts);
