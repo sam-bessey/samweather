@@ -1,3 +1,17 @@
+import partcloudIcon from "./icons/partcloud.svg";
+import {
+    Cloud,
+    CloudRain,
+    CloudLightning,
+    CloudSun,
+    CloudFog,
+    Snowflake,
+    Sun,
+    CloudMoon,
+    CloudMoonRain,
+    CloudSunRain,
+    Moon,
+} from "lucide-react";
 export function getIcon(description, isDaytime) {
     // Gets the icon for the current weather conditions
     // description: the shortForecast for the hour you would like to use
