@@ -20,7 +20,7 @@ import {
     Sunset,
     Wind,
 } from "lucide-react";
-import { fetchWeather, fetchAlerts } from "./fetch.js";
+import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
 import "./styles.css";
 import Bridge from "/src/icons/bridge.svg";
 import Island from "/src/icons/island.svg";
