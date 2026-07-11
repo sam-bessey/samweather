@@ -21,6 +21,7 @@ import {
     Wind,
     Clock,
     Target,
+    CalendarDays,
 } from "lucide-react";
 import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
 import "./styles.css";
@@ -207,78 +208,26 @@ function Alerts({ alerts, className = "" }) {
     }
 }
 
-function DayOverview({ data, expanded, onShow }) {
-    if (!data) {
-        return <p>Loading...</p>;
-    }
-
+function DayForecast({ data }) {
     return (
-        <div
-            onClick={onShow}
-            className={
-                "transition-all p-3 ml-3 mb-3 rounded-3xl backdrop-blur-lg " +
-                (expanded
-                    ? "bg-gray-300/60 dark:bg-gray-600/60"
-                    : "bg-transparent")
-            }
-        >
-            <div className={"flex md:justify-around items-center md:w-full"}>
-                <h3>{data.name}</h3>
-                <data.icon size="40" className="px-2" />
-                <h4>
-                    <span>{data.highTemp + "° / "}</span>
-                    <span className="text-gray-500">{data.lowTemp}</span>
-                </h4>
-            </div>
-            <div>
-                {expanded ? (
-                    <div className="hidden md:block">
-                        <p>{data.detailedForecast}</p>
-                        <div className="flex justify-evenly items-center">
-                            <div className="flex items-center">
-                                <Droplet />
-                                <p className="p-2">
-                                    {data.precipitation + "%"}
-                                </p>
-                            </div>
-                            <div className="flex items-center">
-                                <Wind />
-                                <p className="p-2">
-                                    {data.wind.speed +
-                                        " " +
-                                        data.wind.direction}
-                                </p>
-                            </div>
-                        </div>
-                        <div />
-                    </div>
-                ) : (
-                    <></>
-                )}
-            </div>
-        </div>
-    );
-}
-
-function DayForecast({ data, alerts, selectedDay, setSelectedDay }) {
-    return (
-        <div
+        <Card
+            title="Daily"
+            titleIcon={<CalendarDays />}
             className={
                 "flex w-full h-auto overflow-y-scroll md:w-1/2 md:h-full md:overflow-y-auto min-h-0 md:block"
             }
         >
-            <Alerts className="hidden md:block" alerts={alerts} />
             {data?.days?.map((item, index) => (
-                <DayOverview
-                    key={index}
-                    data={item}
-                    expanded={selectedDay === index}
-                    onShow={() => {
-                        setSelectedDay(index);
-                    }}
-                />
+                <div className="flex flex-row justify-between items-center mb-1.5">
+                    <p>{item.name}</p>
+                    <item.icon size="25" />
+                    <p>
+                        <span>{item.highTemp + "° / "}</span>
+                        <span className="text-gray-500">{item.lowTemp}</span>
+                    </p>
+                </div>
             ))}
-        </div>
+        </Card>
     );
 }
 
@@ -428,13 +377,7 @@ export default function App() {
                 <Card title="Hourly" titleIcon={<Clock />}>
                     <HourlyForecast data={data} dayIndex={0} />
                 </Card>
-                <DayForecast
-                    data={data}
-                    alerts={alerts}
-                    selectedDay={selectedDay}
-                    setSelectedDay={setSelectedDay}
-                />
-                <HourlyForecast data={data} dayIndex={selectedDay} />
+                <DayForecast data={data} />
             </div>
         </div>
     );
