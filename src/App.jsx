@@ -20,6 +20,7 @@ import {
     Sunset,
     Wind,
     Clock,
+    Target,
 } from "lucide-react";
 import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
 import "./styles.css";
@@ -314,8 +315,6 @@ function HourlyForecast({ data, dayIndex }) {
 
     return (
         <div className="w-full flex-1 overflow-y-auto min-h-0">
-            
-
             <div className="flex justify-between align-middle">
                 <select
                     className="mr-5"
@@ -351,6 +350,15 @@ function HourlyForecast({ data, dayIndex }) {
                 ))}
             </motion.ul>
         </div>
+    );
+}
+
+function Now({ data }) {
+    return (
+        <Card title="Now" titleIcon={<Target />}>
+            <h1>{data?.hours?.[0]?.hours?.[0]?.temperature + "°"}</h1>
+            <p>{data?.days?.[0]?.detailedForecast}</p>
+        </Card>
     );
 }
 
@@ -416,9 +424,7 @@ export default function App() {
 
             <div className="flex flex-col md:flex-row md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
                 <Alerts alerts={alerts} className="block md:hidden w-full" />
-                <Card title="f" titleIcon={<Search />}>
-                    f
-                </Card>
+                <Now data={data} />
                 <Card title="Hourly" titleIcon={<Clock />}>
                     <HourlyForecast data={data} dayIndex={0} />
                 </Card>
