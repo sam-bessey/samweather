@@ -19,6 +19,7 @@ import {
     Droplet,
     Sunset,
     Wind,
+    Clock,
 } from "lucide-react";
 import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
 import "./styles.css";
@@ -287,10 +288,10 @@ function Hour({ data, infoShown }) {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
             }}
-            className="flex justify-evenly items-center p-2"
+            className="flex flex-col justify-evenly items-center p-2"
         >
             <p>{formatDate(data.time)}</p>
-            <data.icon size="25" className="" />
+            <data.icon size="25" className="m-3" />
             <p>
                 {infoShown === "Temperature"
                     ? `${data.temperature}°`
@@ -312,31 +313,10 @@ function HourlyForecast({ data, dayIndex }) {
     const [infoShown, setInfoShown] = useState("Temperature");
 
     return (
-        <div className="w-full flex-1 md:w-1/2 md:flex-none bg-gray-200/50 dark:bg-gray-900/50 md:ml-3 rounded-t-3xl md:rounded-tr-none pt-5 overflow-y-auto min-h-0 backdrop-blur-lg">
-            <div className="block md:hidden px-4 mb-4">
-                <p>{data?.days?.[dayIndex]?.detailedForecast}</p>
-
-                <div className="flex justify-evenly items-center">
-                    <div className="flex items-center">
-                        <Droplet />
-                        <p className="p-2">
-                            {data?.days?.[dayIndex]?.precipitation + "%"}
-                        </p>
-                    </div>
-
-                    <div className="flex items-center">
-                        <Wind />
-                        <p className="p-2">
-                            {data?.days?.[dayIndex]?.wind.speed +
-                                " " +
-                                data?.days?.[dayIndex]?.wind.direction}
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div className="w-full flex-1 overflow-y-auto min-h-0">
+            
 
             <div className="flex justify-between align-middle">
-                <h2 className="ml-7">Hourly</h2>
                 <select
                     className="mr-5"
                     onChange={(e) => {
@@ -364,6 +344,7 @@ function HourlyForecast({ data, dayIndex }) {
                         },
                     },
                 }}
+                className="flex flex-row"
             >
                 {data?.hours?.[dayIndex]?.hours?.map((item) => (
                     <Hour key={item?.time} data={item} infoShown={infoShown} />
@@ -437,6 +418,9 @@ export default function App() {
                 <Alerts alerts={alerts} className="block md:hidden w-full" />
                 <Card title="f" titleIcon={<Search />}>
                     f
+                </Card>
+                <Card title="Hourly" titleIcon={<Clock />}>
+                    <HourlyForecast data={data} dayIndex={0} />
                 </Card>
                 <DayForecast
                     data={data}
