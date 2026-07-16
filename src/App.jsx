@@ -387,6 +387,7 @@ export default function App() {
                 )}
             </div>
 
+            {/* Actual forecast */}
             <div className="flex flex-col min-h-0 h-full pt-5">
                 <Alerts alerts={alerts} className="block w-full" />
                 <Now data={data} />
