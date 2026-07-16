@@ -52,8 +52,8 @@ function SearchBar({ setData, setAlerts, setLoading }) {
     }, [text]);
 
     return (
-        <div className="w-full relative md:w-auto">
-            <div className="border rounded-lg w-full md:w-70 flex">
+        <div className="w-full relative">
+            <div className="border rounded-lg w-full flex">
                 <Search className="m-1.5" />
                 <input
                     type="text"
@@ -79,7 +79,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                             },
                         },
                     }}
-                    className="w-full backdrop-blur-md z-50 rounded-3xl md:w-70 mt-1 bg-gray-300 dark:bg-gray-500 overflow-hidden"
+                    className="w-full backdrop-blur-md z-50 rounded-3xl mt-1 bg-gray-300 dark:bg-gray-500 overflow-hidden"
                 >
                     {locations?.map((item) => (
                         <motion.li
@@ -172,14 +172,12 @@ function SearchBar({ setData, setAlerts, setLoading }) {
 
 function TitleBar({ setData, setAlerts, setLoading }) {
     return (
-        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50 ">
+        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50 fixed">
             <SearchBar
                 setData={setData}
                 setAlerts={setAlerts}
                 setLoading={setLoading}
             />
-            <h1 className="text-center hidden md:inline">SamWeather</h1>
-            <p className="hidden md:inline">Version 8.0</p>
         </div>
     );
 }
@@ -246,9 +244,7 @@ function DailyForecast({ data }) {
         <Card
             title="Daily"
             titleIcon={<CalendarDays />}
-            className={
-                "flex w-full h-auto overflow-y-scroll md:w-1/2 md:h-full md:overflow-y-auto min-h-0 md:block"
-            }
+            className={"flex w-full h-auto overflow-y-scroll min-h-0"}
             cardClass="p-0!"
         >
             {data?.days?.map((item, index) => (
@@ -265,13 +261,7 @@ function DailyForecast({ data }) {
 
 function Hour({ data, infoShown }) {
     return (
-        <motion.li
-            variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-            }}
-            className="flex flex-col justify-evenly items-center p-2"
-        >
+        <li className="flex flex-col justify-evenly items-center p-2">
             <p>{formatDate(data.time)}</p>
             <data.icon size="25" className="m-3" />
             <p>
@@ -287,7 +277,7 @@ function Hour({ data, infoShown }) {
                             ? `${data.shortForecast}`
                             : "N/A"}
             </p>
-        </motion.li>
+        </li>
     );
 }
 
@@ -311,25 +301,11 @@ function HourlyForecast({ data, dayIndex }) {
                 </select>
             </div>
 
-            <motion.ul
-                initial="hidden"
-                key={dayIndex}
-                animate="visible"
-                variants={{
-                    hidden: { opacity: 0 },
-                    visible: {
-                        opacity: 1,
-                        transition: {
-                            staggerChildren: 0.1, // Staggers the entry of each child by 0.1s
-                        },
-                    },
-                }}
-                className="flex flex-row"
-            >
+            <ul className="flex flex-row">
                 {data?.hours?.[dayIndex]?.hours?.map((item) => (
                     <Hour key={item?.time} data={item} infoShown={infoShown} />
                 ))}
-            </motion.ul>
+            </ul>
         </div>
     );
 }
@@ -394,6 +370,7 @@ export default function App() {
                 setAlerts={setAlerts}
                 setLoading={setLoading}
             ></TitleBar>
+            <div className="mt-10"></div>
 
             <div className="fixed inset-0 -z-10">
                 {data?.hours?.[0]?.hours?.[0] && data?.info?.astronomical && (
@@ -408,8 +385,8 @@ export default function App() {
                 )}
             </div>
 
-            <div className="flex flex-col md:flex-row md:flex-1 min-h-0 h-full md:w-full pt-5 md:pl-3">
-                <Alerts alerts={alerts} className="block md:hidden w-full" />
+            <div className="flex flex-col min-h-0 h-full pt-5">
+                <Alerts alerts={alerts} className="block w-full" />
                 <Now data={data} />
                 <Card title="Hourly" titleIcon={<Clock />}>
                     <HourlyForecast data={data} dayIndex={0} />
