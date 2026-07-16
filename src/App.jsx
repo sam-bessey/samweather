@@ -341,13 +341,24 @@ function Card({ title, titleIcon, cardClass = "", children }) {
     cardClass: Optional, use to add a class to the content of the card itself (not card title). Consider adding ! to the end of the tailwind className if needed.
     */
     return (
-        <div className="flex flex-col bg-gray-200/50 dark:bg-gray-900/50 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-lg m-3">
+        <motion.div
+            variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.5 },
+                },
+            }}
+
+            className="flex flex-col bg-gray-200/50 dark:bg-gray-900/50 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-lg m-3"
+        >
             <div className="flex w-full text-gray-700 dark:text-gray-300 pt-3 px-3">
                 <div className="scale-80 mt-0.5">{titleIcon}</div>
                 <h2 className="text-[1px] ml-2">{title}</h2>
             </div>
             <div className={"mt-2 px-5 pb-5 " + cardClass}>{children}</div>
-        </div>
+        </motion.div>
     );
 }
 
@@ -388,14 +399,26 @@ export default function App() {
             </div>
 
             {/* Actual forecast */}
-            <div className="flex flex-col min-h-0 h-full pt-5">
+            <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={{
+                    hidden: {},
+                    visible: {
+                        transition: {
+                            staggerChildren: 0.1,
+                        },
+                    },
+                }}
+                className="flex flex-col min-h-0 h-full pt-5"
+            >
                 <Alerts alerts={alerts} className="block w-full" />
                 <Now data={data} />
                 <Card title="Hourly" titleIcon={<Clock />}>
                     <HourlyForecast data={data} dayIndex={0} />
                 </Card>
                 <DailyForecast data={data} />
-            </div>
+            </motion.div>
         </div>
     );
 }
