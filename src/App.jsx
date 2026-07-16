@@ -211,7 +211,7 @@ function Day({ data, dayIndex, Dayicon }) {
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div className="flex flex-col mb-1.5">
+        <li className="flex flex-col mb-1.5">
             <div
                 className="flex flex-row justify-between items-center px-3 pb-1"
                 onClick={() => setExpanded((prev) => !prev)}
@@ -235,7 +235,7 @@ function Day({ data, dayIndex, Dayicon }) {
                     <div></div>
                 )}
             </div>
-        </div>
+        </li>
     );
 }
 
@@ -247,14 +247,16 @@ function DailyForecast({ data }) {
             className={"flex w-full h-auto overflow-y-scroll min-h-0"}
             cardClass="p-0!"
         >
-            {data?.days?.map((item, index) => (
-                <Day
-                    data={data}
-                    dayIndex={index}
-                    key={index}
-                    Dayicon={item.icon}
-                />
-            ))}
+            <ul>
+                {data?.days?.map((item, index) => (
+                    <Day
+                        data={data}
+                        dayIndex={index}
+                        key={index}
+                        Dayicon={item.icon}
+                    />
+                ))}
+            </ul>
         </Card>
     );
 }
