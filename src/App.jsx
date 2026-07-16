@@ -208,7 +208,23 @@ function Alerts({ alerts, className = "" }) {
     }
 }
 
-function DayForecast({ data }) {
+function Day({ itemData }) {
+    const [expanded, setExpanded] = useState(false);
+
+    return (
+        <div className="flex flex-row justify-between items-center mb-1.5" onClick={() => setExpanded((prev) => !prev)}>
+            <p>{itemData.name}</p>
+            <itemData.icon size="25" />
+            <p>
+                <span>{itemData.highTemp + "° / "}</span>
+                <span className="text-gray-500">{itemData.lowTemp}</span>
+            </p>
+            
+        </div>
+    );
+}
+
+function DailyForecast({ data }) {
     return (
         <Card
             title="Daily"
@@ -218,14 +234,7 @@ function DayForecast({ data }) {
             }
         >
             {data?.days?.map((item, index) => (
-                <div className="flex flex-row justify-between items-center mb-1.5">
-                    <p>{item.name}</p>
-                    <item.icon size="25" />
-                    <p>
-                        <span>{item.highTemp + "° / "}</span>
-                        <span className="text-gray-500">{item.lowTemp}</span>
-                    </p>
-                </div>
+                <Day itemData={item} />
             ))}
         </Card>
     );
@@ -350,7 +359,7 @@ export default function App() {
     }, []);
 
     return (
-        <div className="relative m-0 p-0 h-screen flex flex-col overflow-hidden text-black dark:text-white">
+        <div className="relative m-0 p-0 flex flex-col overflow-hidden text-black dark:text-white">
             <Loading hidden={loading}></Loading>
             <TitleBar
                 setData={setData}
@@ -377,7 +386,7 @@ export default function App() {
                 <Card title="Hourly" titleIcon={<Clock />}>
                     <HourlyForecast data={data} dayIndex={0} />
                 </Card>
-                <DayForecast data={data} />
+                <DailyForecast data={data} />
             </div>
         </div>
     );
