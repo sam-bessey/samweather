@@ -350,7 +350,6 @@ function Card({ title, titleIcon, cardClass = "", children }) {
                     transition: { duration: 0.5 },
                 },
             }}
-
             className="flex flex-col bg-gray-200/50 dark:bg-gray-900/50 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-lg m-3"
         >
             <div className="flex w-full text-gray-700 dark:text-gray-300 pt-3 px-3">
@@ -400,6 +399,7 @@ export default function App() {
 
             {/* Actual forecast */}
             <motion.div
+                key={data?.info?.city}
                 initial="hidden"
                 animate="visible"
                 variants={{
