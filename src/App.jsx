@@ -213,11 +213,11 @@ function Day({ data, dayIndex, Dayicon }) {
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div
-            className="flex flex-col mb-1.5"
-            
-        >
-            <div className="flex flex-row justify-between items-center px-3 pb-1" onClick={() => setExpanded((prev) => !prev)}>
+        <div className="flex flex-col mb-1.5">
+            <div
+                className="flex flex-row justify-between items-center px-3 pb-1"
+                onClick={() => setExpanded((prev) => !prev)}
+            >
                 <p>{data?.days?.[dayIndex]?.name}</p>
                 <Dayicon size="25" />
                 <p>
