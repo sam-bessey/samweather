@@ -29,6 +29,7 @@ import Bridge from "/src/icons/bridge.svg";
 import Island from "/src/icons/island.svg";
 import { getBg } from "./themes.js";
 import { formatDate } from "./formatting.js";
+import { data } from "motion/react-client";
 
 function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
@@ -208,18 +209,34 @@ function Alerts({ alerts, className = "" }) {
     }
 }
 
-function Day({ itemData }) {
+function Day({ data, dayIndex, Dayicon }) {
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div className="flex flex-row justify-between items-center mb-1.5" onClick={() => setExpanded((prev) => !prev)}>
-            <p>{itemData.name}</p>
-            <itemData.icon size="25" />
-            <p>
-                <span>{itemData.highTemp + "° / "}</span>
-                <span className="text-gray-500">{itemData.lowTemp}</span>
-            </p>
+        <div
+            className="flex flex-col mb-1.5"
             
+        >
+            <div className="flex flex-row justify-between items-center px-3 pb-1" onClick={() => setExpanded((prev) => !prev)}>
+                <p>{data?.days?.[dayIndex]?.name}</p>
+                <Dayicon size="25" />
+                <p>
+                    <span>{data?.days?.[dayIndex]?.highTemp + "° / "}</span>
+                    <span className="text-gray-500">
+                        {data?.days?.[dayIndex]?.lowTemp}
+                    </span>
+                </p>
+            </div>
+            <div>
+                {expanded ? (
+                    <div className="bg-gray-500/40">
+                        <p className="text-xl pt-3 pl-3 pb-1">Hourly</p>
+                        <HourlyForecast data={data} dayIndex={dayIndex} />
+                    </div>
+                ) : (
+                    <div></div>
+                )}
+            </div>
         </div>
     );
 }
@@ -232,9 +249,15 @@ function DailyForecast({ data }) {
             className={
                 "flex w-full h-auto overflow-y-scroll md:w-1/2 md:h-full md:overflow-y-auto min-h-0 md:block"
             }
+            cardClass="p-0!"
         >
             {data?.days?.map((item, index) => (
-                <Day itemData={item} />
+                <Day
+                    data={data}
+                    dayIndex={index}
+                    key={index}
+                    Dayicon={item.icon}
+                />
             ))}
         </Card>
     );
@@ -333,14 +356,19 @@ function Loading({ hidden }) {
     return;
 }
 
-function Card({ title, titleIcon, children }) {
+function Card({ title, titleIcon, cardClass = "", children }) {
+    /* Use this for cards in the UI
+    title: Title of the card. For example, "Hourly"
+    titleIcon: Icon for the title bar next to the card.
+    cardClass: Optional, use to add a class to the content of the card itself (not card title). Consider adding ! to the end of the tailwind className if needed.
+    */
     return (
-        <div className="flex flex-col bg-gray-200/50 dark:bg-gray-900/50 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-lg p-3 m-3">
-            <div className="flex w-full text-gray-700 dark:text-gray-300">
+        <div className="flex flex-col bg-gray-200/50 dark:bg-gray-900/50 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-lg m-3">
+            <div className="flex w-full text-gray-700 dark:text-gray-300 pt-3 px-3">
                 <div className="scale-80 mt-0.5">{titleIcon}</div>
                 <h2 className="text-[1px] ml-2">{title}</h2>
             </div>
-            <div className="mt-2 p-2">{children}</div>
+            <div className={"mt-2 px-5 pb-5 " + cardClass}>{children}</div>
         </div>
     );
 }
