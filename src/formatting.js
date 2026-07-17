@@ -94,8 +94,8 @@ export function getFeelsLike(
     }
 }
 
-export function formatSuncalc(timestring){
-    const time =  timestring.split(" ")[1]
-    const ampm = timestring.split(" ")[2]
-    return time.split(":")[0] + ":" + time.split(":")[1] + " " + ampm
+export function formatSuncalc(timestring) {
+    const time = timestring.toLocaleString().split(" ")[1];
+    const ampm = timestring.toLocaleString().split(" ")[2];
+    return time.split(":")[0] + ":" + time.split(":")[1] + " " + ampm;
 }

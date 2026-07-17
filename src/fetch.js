@@ -140,8 +140,10 @@ function formatData(infoData, mainData, hourlyData) {
 
     const formattedAstronomical = {
         sun: {
-            sunrise: formatSuncalc(times.sunrise.toLocaleString()),
-            sunset: formatSuncalc(times.sunset.toLocaleString()),
+            sunrise: formatSuncalc(times.sunrise),
+            sunset: formatSuncalc(times.sunset),
+            noon: formatSuncalc(times.solarNoon),
+            goldenHour: formatSuncalc(times.goldenHour),
         },
     };
 

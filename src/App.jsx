@@ -18,6 +18,8 @@ import {
     TreePine,
     Droplet,
     Sunset,
+    Sunrise,
+    Sparkles,
     Wind,
     Clock,
     Target,
@@ -210,8 +212,37 @@ function Alerts({ alerts, className = "" }) {
 
 function SunCard({ data }) {
     return (
-        <Card title="Sun" titleIcon={<Sun />}>
-            {data?.astronomical?.sun?.sunrise}
+        <Card
+            title="Sun"
+            titleIcon={<Sun />}
+            cardClass="flex space-evenly w-full"
+        >
+            <div className="flex flex-col w-full">
+                <div className="flex space-evenly w-full">
+                    <Detail
+                        title="Sunrise"
+                        titleIcon={<Sunrise />}
+                        text={data?.astronomical?.sun?.sunrise}
+                    />
+                    <Detail
+                        title="Sunset"
+                        titleIcon={<Sunset />}
+                        text={data?.astronomical?.sun?.sunset}
+                    />
+                </div>
+                <div className="flex space-evenly w-full">
+                    <Detail
+                        title="Noon"
+                        titleIcon={<Sun />}
+                        text={data?.astronomical?.sun?.noon}
+                    />
+                    <Detail
+                        title="Golden Hour"
+                        titleIcon={<Sparkles />}
+                        text={data?.astronomical?.sun?.goldenHour}
+                    />
+                </div>
+            </div>
         </Card>
     );
 }
@@ -339,6 +370,24 @@ function Loading({ hidden }) {
         );
     }
     return;
+}
+
+function Detail({ title, titleIcon, text }) {
+    /* Use this for weather details, probably within card
+    title: What it is. For example, "Sunrise"
+    titleIcon: The icon to be shown next to it
+    text: The text that is the actual data. */
+    return (
+        <div className="flex-1 flex flex-row items-center">
+            <div className="scale-110">{titleIcon}</div>
+            <div className="ml-4">
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                    {title}
+                </p>
+                <p>{text}</p>
+            </div>
+        </div>
+    );
 }
 
 function Card({ title, titleIcon, cardClass = "", children }) {
