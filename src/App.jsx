@@ -29,7 +29,6 @@ import Bridge from "/src/icons/bridge.svg";
 import Island from "/src/icons/island.svg";
 import { getBg } from "./themes.js";
 import { formatDate } from "./formatting.js";
-import { data } from "motion/react-client";
 
 function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
