@@ -93,3 +93,9 @@ export function getFeelsLike(
         return Math.round(HI);
     }
 }
+
+export function formatSuncalc(timestring){
+    const time =  timestring.split(" ")[1]
+    const ampm = timestring.split(" ")[2]
+    return time.split(":")[0] + ":" + time.split(":")[1] + " " + ampm
+}

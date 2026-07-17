@@ -22,7 +22,9 @@ import {
     Clock,
     Target,
     CalendarDays,
+    Sun,
 } from "lucide-react";
+import * as SunCalc from "suncalc";
 import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
 import "./styles.css";
 import Bridge from "/src/icons/bridge.svg";
@@ -206,6 +208,14 @@ function Alerts({ alerts, className = "" }) {
     }
 }
 
+function SunCard({ data }) {
+    return (
+        <Card title="Sun" titleIcon={<Sun />}>
+            {data?.astronomical?.sun?.sunrise}
+        </Card>
+    );
+}
+
 function Day({ data, dayIndex, Dayicon }) {
     const [expanded, setExpanded] = useState(false);
 
@@ -382,13 +392,13 @@ export default function App() {
             <div className="mt-10"></div>
 
             <div className="fixed inset-0 -z-10">
-                {data?.hours?.[0]?.hours?.[0] && data?.info?.astronomical && (
+                {data?.hours?.[0]?.hours?.[0] && data?.astronomical && (
                     <img
                         className="absolute w-full h-full inset-0 -z-10 object-cover object-center overflow-hidden"
                         src={getBg(
                             data?.hours?.[0]?.hours?.[0]?.shortForecast,
                             data?.hours?.[0]?.hours?.[0]?.isDaytime,
-                            data?.info?.astronomical,
+                            data?.astronomical?.sun,
                         )}
                     />
                 )}
@@ -415,6 +425,7 @@ export default function App() {
                     <HourlyForecast data={data} dayIndex={0} />
                 </Card>
                 <DailyForecast data={data} />
+                <SunCard data={data} />
             </motion.div>
         </div>
     );

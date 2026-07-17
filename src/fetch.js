@@ -13,8 +13,9 @@ import {
     Moon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import * as SunCalc from "suncalc";
 import { getIcon } from "./themes";
-import { formatDate, getFeelsLike } from "./formatting";
+import { formatDate, getFeelsLike, formatSuncalc } from "./formatting";
 
 // Fetch weather data and return it (And some other stuff)
 // Split to a separate file just to make things easier
@@ -127,6 +128,23 @@ function formatData(infoData, mainData, hourlyData) {
         }
     }
 
+    ///////////////////////////////
+    // ASTRONOMICAL (sun / moon) //
+    ///////////////////////////////
+    const times = SunCalc.getTimes(
+        new Date(),
+        infoData.geometry.coordinates[1],
+        infoData.geometry.coordinates[0],
+    ); // get today's sunlight times for London
+    console.log(`Sunrise time: ${times.sunrise.toLocaleString()}`);
+
+    const formattedAstronomical = {
+        sun: {
+            sunrise: formatSuncalc(times.sunrise.toLocaleString()),
+            sunset: formatSuncalc(times.sunset.toLocaleString()),
+        },
+    };
+
     ////////////////
     // FINAL DATA //
     ////////////////
@@ -139,27 +157,16 @@ function formatData(infoData, mainData, hourlyData) {
             forecastHourlyURL: infoData.properties.forecastHourly,
             city: infoData.properties.relativeLocation.properties.city,
             state: infoData.properties.relativeLocation.properties.state,
-            astronomical: {
-                sunrise: infoData.properties.astronomicalData.sunrise,
-                sunset: infoData.properties.astronomicalData.sunset,
-                civilTwilightBegin:
-                    infoData.properties.astronomicalData.civilTwilightBegin,
-                civilTwilightEnd:
-                    infoData.properties.astronomicalData.civilTwilightEnd,
-                nauticalTwilightBegin:
-                    infoData.properties.astronomicalData.nauticalTwilightBegin,
-                nauticalTwilightEnd:
-                    infoData.properties.astronomicalData.nauticalTwilightEnd,
-                astronomicalTwilightBegin:
-                    infoData.properties.astronomicalData
-                        .astronomicalTwilightBegin,
-                astronomicalTwilightEnd:
-                    infoData.properties.astronomicalData
-                        .astronomicalTwilightEnd,
+
+            location: {
+                // NWS has latitude and longitude in other order for some reason
+                lat: infoData.geometry.coordinates[1],
+                long: infoData.geometry.coordinates[0],
             },
         },
         days: formattedDays,
         hours: formattedHours,
+        astronomical: formattedAstronomical,
     };
 
     console.log("FORMATTED DATA FiNAL", formattedData);
