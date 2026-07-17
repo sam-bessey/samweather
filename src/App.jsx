@@ -246,7 +246,7 @@ function DailyForecast({ data }) {
             className={"flex w-full h-auto overflow-y-scroll min-h-0"}
             cardClass="p-0!"
         >
-            <ul>
+            <ul className="p-0!">
                 {data?.days?.map((item, index) => (
                     <Day
                         data={data}
@@ -287,22 +287,20 @@ function HourlyForecast({ data, dayIndex }) {
 
     return (
         <div className="w-full flex-1 overflow-y-auto min-h-0">
-            <div className="flex justify-between align-middle">
-                <select
-                    className="mr-5"
-                    onChange={(e) => {
-                        setInfoShown(e.target.value);
-                    }}
-                >
-                    <option>Temperature</option>
-                    <option>Feels like</option>
-                    <option>Precipitation</option>
-                    <option>Wind</option>
-                    <option>Description</option>
-                </select>
-            </div>
+            <select
+                className="mr-5 flex justify-between align-middle absolute ml-2"
+                onChange={(e) => {
+                    setInfoShown(e.target.value);
+                }}
+            >
+                <option>Temperature</option>
+                <option>Feels like</option>
+                <option>Precipitation</option>
+                <option>Wind</option>
+                <option>Description</option>
+            </select>
 
-            <ul className="flex flex-row">
+            <ul className="flex flex-row mt-5">
                 {data?.hours?.[dayIndex]?.hours?.map((item) => (
                     <Hour key={item?.time} data={item} infoShown={infoShown} />
                 ))}
