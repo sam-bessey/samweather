@@ -25,6 +25,12 @@ import {
     Target,
     CalendarDays,
     Sun,
+    Thermometer,
+    ThermometerSun,
+    ThermometerSnowflake,
+    ChevronRight,
+    ChevronUp,
+    TriangleAlert,
 } from "lucide-react";
 import * as SunCalc from "suncalc";
 import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
@@ -185,7 +191,7 @@ function TitleBar({ setData, setAlerts, setLoading }) {
     );
 }
 
-function Alerts({ alerts, className = "" }) {
+function Alerts({ alerts }) {
     if (alerts?.length === 0 || alerts === null) {
         return;
     } else {
@@ -193,16 +199,15 @@ function Alerts({ alerts, className = "" }) {
             <div>
                 <div>
                     {alerts?.map((item, index) => (
-                        <div
+                        <Card
                             key={index}
-                            className={
-                                "transition-all p-3 rounded-3xl bg-red-200/60 mb-3 w-full backdrop-blur-xl " +
-                                className
-                            }
+                            title={item.title}
+                            titleIcon={<TriangleAlert />}
+                            allowExpand={true}
+                            expandedContent={<p>{item.description}</p>}
                         >
-                            <h4 className="text-xl">{item.title}</h4>
-                            <p>{item.description}</p>
-                        </div>
+                            <p className="cutoff">{item.description}</p>
+                        </Card>
                     ))}
                 </div>
             </div>
@@ -351,8 +356,32 @@ function HourlyForecast({ data, dayIndex }) {
 }
 
 function Now({ data }) {
+    // Find icon to show for feels like
+    const temp = data?.hours?.[0]?.hours?.[0]?.temperature;
+    const feels = data?.hours?.[0]?.hours?.[0]?.feelsLike;
+    let flIcon;
+    if (temp > feels) {
+        flIcon = <ThermometerSnowflake />;
+    } else if (temp < feels) {
+        flIcon = <ThermometerSun />;
+    } else {
+        flIcon = <Thermometer />;
+    }
     return (
-        <Card title="Now" titleIcon={<Target />}>
+        <Card
+            title="Now"
+            titleIcon={<Target />}
+            allowExpand={true}
+            expandedContent={
+                <div>
+                    <Detail
+                        title="Feels like"
+                        titleIcon={flIcon}
+                        text={feels + "°"}
+                    />
+                </div>
+            }
+        >
             <h1>{data?.hours?.[0]?.hours?.[0]?.temperature + "°"}</h1>
             <p>{data?.days?.[0]?.detailedForecast}</p>
         </Card>
@@ -390,12 +419,22 @@ function Detail({ title, titleIcon, text }) {
     );
 }
 
-function Card({ title, titleIcon, cardClass = "", children }) {
+function Card({
+    title,
+    titleIcon,
+    cardClass = "",
+    allowExpand = false,
+    expandedContent = "",
+    children,
+}) {
     /* Use this for cards in the UI
     title: Title of the card. For example, "Hourly"
     titleIcon: Icon for the title bar next to the card.
     cardClass: Optional, use to add a class to the content of the card itself (not card title). Consider adding ! to the end of the tailwind className if needed.
+    allowExpand: Should there be more content in the card that can be expanded?
+    expandedContent: If allowing expand, what content should be shown when card is expanded?
     */
+    const [expanded, setExpanded] = useState(false);
     return (
         <motion.div
             variants={{
@@ -413,6 +452,35 @@ function Card({ title, titleIcon, cardClass = "", children }) {
                 <h2 className="text-[1px] ml-2">{title}</h2>
             </div>
             <div className={"mt-2 px-5 pb-5 " + cardClass}>{children}</div>
+            <>
+                {allowExpand && (
+                    <div>
+                        <button
+                            className=" mx-5 text-left"
+                            onClick={() => setExpanded((prev) => !prev)}
+                        >
+                            {expanded ? (
+                                <div className="flex">
+                                    <p className="mr-2">Less </p>
+                                    <ChevronUp />
+                                </div>
+                            ) : (
+                                <div className="flex">
+                                    <p className="mr-2">More </p>
+                                    <ChevronRight />
+                                </div>
+                            )}
+                        </button>
+                        <div>
+                            {expanded && (
+                                <div className="mt-2 px-5 pb-5">
+                                    {expandedContent}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+            </>
         </motion.div>
     );
 }
@@ -468,7 +536,7 @@ export default function App() {
                 }}
                 className="flex flex-col min-h-0 h-full pt-5"
             >
-                <Alerts alerts={alerts} className="block w-full" />
+                <Alerts alerts={alerts} />
                 <Now data={data} />
                 <Card title="Hourly" titleIcon={<Clock />}>
                     <HourlyForecast data={data} dayIndex={0} />
