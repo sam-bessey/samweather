@@ -95,6 +95,7 @@ export function getFeelsLike(
 }
 
 export function formatSuncalc(timestring) {
+    // Formats from a suncalc string to a time that looks better
     const time = timestring.toLocaleString().split(" ")[1];
     const ampm = timestring.toLocaleString().split(" ")[2];
     return time.split(":")[0] + ":" + time.split(":")[1] + " " + ampm;

@@ -194,7 +194,7 @@ export async function fetchAlerts(coordinates) {
                 const thisAlert = data.features[i].properties;
                 formattedAlerts.push({
                     title: thisAlert.event,
-                    description: thisAlert.description,
+                    description: thisAlert.description.replaceAll("* ", "\n\n"),
                     instructions: thisAlert.instruction,
                     severity: thisAlert.severity,
                     urgency: thisAlert.urgency,
