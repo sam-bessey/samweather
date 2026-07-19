@@ -483,7 +483,7 @@ function Card({
                                 </div>
                             ) : (
                                 <div className="flex">
-                                    <p className="mr-2">More </p>
+                                    <p className="mr-2 mb-3">More </p>
                                     <ChevronRight />
                                 </div>
                             )}
