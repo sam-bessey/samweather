@@ -194,10 +194,11 @@ export async function fetchAlerts(coordinates) {
                 const thisAlert = data.features[i].properties;
                 formattedAlerts.push({
                     title: thisAlert.event,
-                    description: thisAlert.description.replaceAll("* ", "\n\n"),
+                    description: thisAlert.description.replaceAll("* ", ""),
                     instructions: thisAlert.instruction,
                     severity: thisAlert.severity,
                     urgency: thisAlert.urgency,
+                    headline: thisAlert.headline,
                 });
             }
 

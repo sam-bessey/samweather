@@ -203,10 +203,17 @@ function Alerts({ alerts }) {
                             key={index}
                             title={item.title}
                             titleIcon={<TriangleAlert />}
+                            cardClass="whitespace-pre-wrap"
                             allowExpand={true}
-                            expandedContent={<p>{item.description}</p>}
+                            expandedContent={
+                                <p>
+                                    {item.description +
+                                        "\n\n" +
+                                        item.instructions}
+                                </p>
+                            }
                         >
-                            <p className="cutoff">{item.description}</p>
+                            <p className="cutoff">{item.headline}</p>
                         </Card>
                     ))}
                 </div>
@@ -483,7 +490,7 @@ function Card({
                         </button>
                         <div>
                             {expanded && (
-                                <div className="mt-2 px-5 pb-5">
+                                <div className={"mt-2 px-5 pb-5 " + cardClass}>
                                     {expandedContent}
                                 </div>
                             )}
