@@ -356,9 +356,10 @@ function HourlyForecast({ data, dayIndex }) {
 }
 
 function Now({ data }) {
+    const firstHour = data?.hours?.[0]?.hours?.[0];
     // Find icon to show for feels like
-    const temp = data?.hours?.[0]?.hours?.[0]?.temperature;
-    const feels = data?.hours?.[0]?.hours?.[0]?.feelsLike;
+    const temp = firstHour?.temperature;
+    const feels = firstHour?.feelsLike;
     let flIcon;
     if (temp > feels) {
         flIcon = <ThermometerSnowflake />;
@@ -373,16 +374,25 @@ function Now({ data }) {
             titleIcon={<Target />}
             allowExpand={true}
             expandedContent={
-                <div>
+                <div className="flex space-evenly w-full">
                     <Detail
                         title="Feels like"
                         titleIcon={flIcon}
                         text={feels + "°"}
+                    />{" "}
+                    <Detail
+                        title="Wind"
+                        titleIcon={<Wind />}
+                        text={
+                            firstHour?.wind?.speed +
+                            " " +
+                            firstHour?.wind?.direction
+                        }
                     />
                 </div>
             }
         >
-            <h1>{data?.hours?.[0]?.hours?.[0]?.temperature + "°"}</h1>
+            <h1>{firstHour?.temperature + "°"}</h1>
             <p>{data?.days?.[0]?.detailedForecast}</p>
         </Card>
     );
