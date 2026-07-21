@@ -270,7 +270,7 @@ function MoonCard({ data }) {
             <div className="flex flex-col w-full">
                 <div className="flex space-evenly w-full">
                     <Detail
-                        title="Sunrise"
+                        title="Moonrise"
                         titleIcon={<Sunrise />}
                         text={data?.astronomical?.sun?.sunrise}
                     />
