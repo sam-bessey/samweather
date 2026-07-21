@@ -135,8 +135,33 @@ function formatData(infoData, mainData, hourlyData) {
         new Date(),
         infoData.geometry.coordinates[1],
         infoData.geometry.coordinates[0],
-    ); // get today's sunlight times for London
+    );
     console.log(`Sunrise time: ${times.sunrise.toLocaleString()}`);
+
+    //Moon
+    const moonTimes = SunCalc.getMoonTimes(
+        new Date(),
+        infoData.geometry.coordinates[1],
+        infoData.geometry.coordinates[0],
+    );
+    const moonIllumination = SunCalc.getMoonIllumination(new Date());
+    const phaseNames = [
+        "New Moon",
+        "Waxing Crescent",
+        "First Quarter",
+        "Waxing Gibbous",
+        "Full Moon",
+        "Waning Gibbous",
+        "Last Quarter",
+        "Waning Crescent",
+    ];
+    const { phase } = SunCalc.getMoonIllumination(new Date());
+    const phaseName = phaseNames[Math.round(phase * 8) % 8];
+    const moonPosition = SunCalc.getMoonPosition(
+        new Date(),
+        infoData.geometry.coordinates[1],
+        infoData.geometry.coordinates[0],
+    );
 
     const formattedAstronomical = {
         sun: {
@@ -144,6 +169,13 @@ function formatData(infoData, mainData, hourlyData) {
             sunset: formatSuncalc(times.sunset),
             noon: formatSuncalc(times.solarNoon),
             goldenHour: formatSuncalc(times.goldenHour),
+        },
+        moon: {
+            moonrise: formatSuncalc(moonTimes.rise),
+            moonset: formatSuncalc(moonTimes.set),
+            phase: phaseName,
+            distance: moonPosition.distance,
+            altitude: moonPosition.altitude,
         },
     };
 

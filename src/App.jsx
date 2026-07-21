@@ -31,6 +31,7 @@ import {
     ChevronRight,
     ChevronUp,
     TriangleAlert,
+    Moon,
 } from "lucide-react";
 import * as SunCalc from "suncalc";
 import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
@@ -227,6 +228,43 @@ function SunCard({ data }) {
         <Card
             title="Sun"
             titleIcon={<Sun />}
+            cardClass="flex space-evenly w-full"
+        >
+            <div className="flex flex-col w-full">
+                <div className="flex space-evenly w-full">
+                    <Detail
+                        title="Sunrise"
+                        titleIcon={<Sunrise />}
+                        text={data?.astronomical?.sun?.sunrise}
+                    />
+                    <Detail
+                        title="Sunset"
+                        titleIcon={<Sunset />}
+                        text={data?.astronomical?.sun?.sunset}
+                    />
+                </div>
+                <div className="flex space-evenly w-full">
+                    <Detail
+                        title="Solar Noon"
+                        titleIcon={<Sun />}
+                        text={data?.astronomical?.sun?.noon}
+                    />
+                    <Detail
+                        title="Golden Hour"
+                        titleIcon={<Sparkles />}
+                        text={data?.astronomical?.sun?.goldenHour}
+                    />
+                </div>
+            </div>
+        </Card>
+    );
+}
+
+function MoonCard({ data }) {
+    return (
+        <Card
+            title="Moon"
+            titleIcon={<Moon />}
             cardClass="flex space-evenly w-full"
         >
             <div className="flex flex-col w-full">
@@ -560,6 +598,7 @@ export default function App() {
                 </Card>
                 <DailyForecast data={data} />
                 <SunCard data={data} />
+                <MoonCard data={data} />
             </motion.div>
         </div>
     );
