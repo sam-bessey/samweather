@@ -244,7 +244,7 @@ function SunCard({ data }) {
                 </div>
                 <div className="flex space-evenly w-full">
                     <Detail
-                        title="Noon"
+                        title="Solar Noon"
                         titleIcon={<Sun />}
                         text={data?.astronomical?.sun?.noon}
                     />
