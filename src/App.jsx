@@ -188,7 +188,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
 
 function TitleBar({ setData, setAlerts, setLoading }) {
     return (
-        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-lg z-50 fixed">
+        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-3xl z-50 fixed">
             <SearchBar
                 setData={setData}
                 setAlerts={setAlerts}
@@ -521,7 +521,7 @@ function Card({
                     transition: { duration: 0.5 },
                 },
             }}
-            className="flex flex-col bg-gray-200/50 dark:bg-gray-900/50 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-lg m-3"
+            className="flex flex-col bg-gray-200/10 dark:bg-gray-900/10 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-[10px] m-3"
         >
             <div className="flex w-full text-gray-700 dark:text-gray-300 pt-3 px-3">
                 <div className="scale-80 mt-0.5">{titleIcon}</div>
