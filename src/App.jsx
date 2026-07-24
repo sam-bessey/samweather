@@ -36,6 +36,8 @@ import {
     Eclipse,
     ArrowUpFromLine,
     ArrowDownFromLine,
+    SunMoon,
+    SeparatorHorizontal,
 } from "lucide-react";
 import * as SunCalc from "suncalc";
 import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
@@ -270,6 +272,21 @@ function MoonCard({ data }) {
             title="Moon"
             titleIcon={<Moon />}
             cardClass="flex space-evenly w-full"
+            allowExpand={true}
+            expandedContent={
+                <div className="flex space-evenly w-full">
+                    <Detail
+                        title="Illumination"
+                        titleIcon={<SunMoon />}
+                        text={data?.astronomical?.moon?.illumination}
+                    />
+                    <Detail
+                        title="Altitude"
+                        titleIcon={<SeparatorHorizontal />}
+                        text={data?.astronomical?.moon?.altitude + "°"}
+                    />
+                </div>
+            }
         >
             <div className="flex flex-col w-full">
                 <div className="flex space-evenly w-full">
