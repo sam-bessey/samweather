@@ -32,6 +32,10 @@ import {
     ChevronUp,
     TriangleAlert,
     Moon,
+    RulerDimensionLine,
+    Eclipse,
+    ArrowUpFromLine,
+    ArrowDownFromLine,
 } from "lucide-react";
 import * as SunCalc from "suncalc";
 import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
@@ -271,25 +275,25 @@ function MoonCard({ data }) {
                 <div className="flex space-evenly w-full">
                     <Detail
                         title="Moonrise"
-                        titleIcon={<Sunrise />}
-                        text={data?.astronomical?.sun?.sunrise}
+                        titleIcon={<ArrowUpFromLine />}
+                        text={data?.astronomical?.moon?.moonrise}
                     />
                     <Detail
-                        title="Sunset"
-                        titleIcon={<Sunset />}
-                        text={data?.astronomical?.sun?.sunset}
+                        title="Moonset"
+                        titleIcon={<ArrowDownFromLine />}
+                        text={data?.astronomical?.moon?.moonset}
                     />
                 </div>
                 <div className="flex space-evenly w-full">
                     <Detail
-                        title="Solar Noon"
-                        titleIcon={<Sun />}
-                        text={data?.astronomical?.sun?.noon}
+                        title="Phase"
+                        titleIcon={<Eclipse />}
+                        text={data?.astronomical?.moon?.phase}
                     />
                     <Detail
-                        title="Golden Hour"
-                        titleIcon={<Sparkles />}
-                        text={data?.astronomical?.sun?.goldenHour}
+                        title="Distance"
+                        titleIcon={<RulerDimensionLine />}
+                        text={data?.astronomical?.moon?.distance + " km"}
                     />
                 </div>
             </div>

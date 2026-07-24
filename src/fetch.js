@@ -174,8 +174,9 @@ function formatData(infoData, mainData, hourlyData) {
             moonrise: formatSuncalc(moonTimes.rise),
             moonset: formatSuncalc(moonTimes.set),
             phase: phaseName,
-            distance: moonPosition.distance,
-            altitude: moonPosition.altitude,
+            distance: Math.round(moonPosition.distance),
+            altitude: Math.round(moonPosition.altitude),
+            illumination: Math.round(moonIllumination.fraction * 100) + "%",
         },
     };
 
