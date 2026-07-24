@@ -144,6 +144,7 @@ function formatData(infoData, mainData, hourlyData) {
         infoData.geometry.coordinates[1],
         infoData.geometry.coordinates[0],
     );
+    console.log("MOONRISE", moonTimes);
     const moonIllumination = SunCalc.getMoonIllumination(new Date());
     const phaseNames = [
         "New Moon",
