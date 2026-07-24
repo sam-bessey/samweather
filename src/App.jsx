@@ -412,7 +412,7 @@ function HourlyForecast({ data, dayIndex }) {
                 <option>Description</option>
             </select>
 
-            <ul className="flex flex-row mt-5">
+            <ul className="flex flex-row mt-6 -ml-4">
                 {data?.hours?.[dayIndex]?.hours?.map((item) => (
                     <Hour key={item?.time} data={item} infoShown={infoShown} />
                 ))}
