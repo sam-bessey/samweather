@@ -235,6 +235,21 @@ function SunCard({ data }) {
             title="Sun"
             titleIcon={<Sun />}
             cardClass="flex space-evenly w-full"
+            allowExpand={true}
+            expandedContent={
+                <div className="flex space-evenly w-full">
+                    <Detail
+                        title="Morning Golden Hour"
+                        titleIcon={<Sparkles />}
+                        text={data?.astronomical?.sun?.morningGoldenHour}
+                    />
+                    <Detail
+                        title="Altitude"
+                        titleIcon={<SeparatorHorizontal />}
+                        text={data?.astronomical?.sun?.altitude + "°"}
+                    />
+                </div>
+            }
         >
             <div className="flex flex-col w-full">
                 <div className="flex space-evenly w-full">

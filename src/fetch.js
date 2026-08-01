@@ -136,6 +136,12 @@ function formatData(infoData, mainData, hourlyData) {
         infoData.geometry.coordinates[1],
         infoData.geometry.coordinates[0],
     );
+    const position = SunCalc.getPosition(
+        new Date(),
+        infoData.geometry.coordinates[1],
+        infoData.geometry.coordinates[0],
+    );
+
     console.log(`Sunrise time: ${times.sunrise.toLocaleString()}`);
 
     //Moon
@@ -171,6 +177,7 @@ function formatData(infoData, mainData, hourlyData) {
             noon: formatSuncalc(times.solarNoon),
             goldenHour: formatSuncalc(times.goldenHour),
             morningGoldenHour: formatSuncalc(times.goldenHourEnd),
+            altitude: Math.round(position.altitude),
         },
         moon: {
             moonrise: formatSuncalc(moonTimes.rise),
