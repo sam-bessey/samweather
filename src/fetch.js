@@ -170,6 +170,7 @@ function formatData(infoData, mainData, hourlyData) {
             sunset: formatSuncalc(times.sunset),
             noon: formatSuncalc(times.solarNoon),
             goldenHour: formatSuncalc(times.goldenHour),
+            morningGoldenHour: formatSuncalc(times.goldenHourEnd),
         },
         moon: {
             moonrise: formatSuncalc(moonTimes.rise),

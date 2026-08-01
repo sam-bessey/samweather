@@ -275,10 +275,11 @@ function MoonCard({ data }) {
             allowExpand={true}
             expandedContent={
                 <div className="flex space-evenly w-full">
+                    {" "}
                     <Detail
-                        title="Illumination"
-                        titleIcon={<SunMoon />}
-                        text={data?.astronomical?.moon?.illumination}
+                        title="Distance"
+                        titleIcon={<RulerDimensionLine />}
+                        text={data?.astronomical?.moon?.distance + " km"}
                     />
                     <Detail
                         title="Altitude"
@@ -306,11 +307,11 @@ function MoonCard({ data }) {
                         title="Phase"
                         titleIcon={<Eclipse />}
                         text={data?.astronomical?.moon?.phase}
-                    />
+                    />{" "}
                     <Detail
-                        title="Distance"
-                        titleIcon={<RulerDimensionLine />}
-                        text={data?.astronomical?.moon?.distance + " km"}
+                        title="Illumination"
+                        titleIcon={<SunMoon />}
+                        text={data?.astronomical?.moon?.illumination}
                     />
                 </div>
             </div>
