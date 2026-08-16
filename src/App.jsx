@@ -52,6 +52,16 @@ import Island from "/src/icons/island.svg";
 import { getBg } from "./themes.js";
 import { formatDate } from "./formatting.js";
 
+function DetailColumn({ children }) {
+    // Multiple DetailRows.
+    return <div className="flex flex-col w-full">{children}</div>;
+}
+
+function DetailRow({ children }) {
+    // Two Details next to each other.
+    return <div className="flex space-evenly w-full">{children}</div>;
+}
+
 function SearchBar({ setData, setAlerts, setLoading }) {
     const [text, setText] = useState("");
     const [locations, setLocations] = useState([]);
@@ -245,7 +255,7 @@ function SunCard({ data }) {
             cardClass="flex space-evenly w-full"
             allowExpand={true}
             expandedContent={
-                <div className="flex space-evenly w-full">
+                <DetailRow>
                     <Detail
                         title="Morning Golden Hour"
                         titleIcon={<Sparkles />}
@@ -256,7 +266,7 @@ function SunCard({ data }) {
                         titleIcon={<SeparatorHorizontal />}
                         text={astro?.sun?.altitude + "°"}
                     />
-                </div>
+                </DetailRow>
             }
             titleAction={
                 <div>
@@ -278,8 +288,8 @@ function SunCard({ data }) {
                 </div>
             }
         >
-            <div className="flex flex-col w-full">
-                <div className="flex space-evenly w-full">
+            <DetailColumn>
+                <DetailRow>
                     <Detail
                         title="Sunrise"
                         titleIcon={<Sunrise />}
@@ -290,8 +300,8 @@ function SunCard({ data }) {
                         titleIcon={<Sunset />}
                         text={astro?.sun?.sunset}
                     />
-                </div>
-                <div className="flex space-evenly w-full">
+                </DetailRow>
+                <DetailRow>
                     <Detail
                         title="Solar Noon"
                         titleIcon={<Sun />}
@@ -302,8 +312,8 @@ function SunCard({ data }) {
                         titleIcon={<Sparkles />}
                         text={astro?.sun?.goldenHour}
                     />
-                </div>
-            </div>
+                </DetailRow>
+            </DetailColumn>
         </Card>
     );
 }
@@ -319,7 +329,7 @@ function MoonCard({ data }) {
             cardClass="flex space-evenly w-full"
             allowExpand={true}
             expandedContent={
-                <div className="flex space-evenly w-full">
+                <DetailRow>
                     {" "}
                     <Detail
                         title="Distance"
@@ -331,7 +341,7 @@ function MoonCard({ data }) {
                         titleIcon={<SeparatorHorizontal />}
                         text={astro?.moon?.altitude + "°"}
                     />
-                </div>
+                </DetailRow>
             }
             titleAction={
                 <div>
@@ -353,8 +363,8 @@ function MoonCard({ data }) {
                 </div>
             }
         >
-            <div className="flex flex-col w-full">
-                <div className="flex space-evenly w-full">
+            <DetailColumn>
+                <DetailRow>
                     <Detail
                         title="Moonrise"
                         titleIcon={<ArrowUpFromLine />}
@@ -365,8 +375,8 @@ function MoonCard({ data }) {
                         titleIcon={<ArrowDownFromLine />}
                         text={astro?.moon?.moonset}
                     />
-                </div>
-                <div className="flex space-evenly w-full">
+                </DetailRow>
+                <DetailRow>
                     <Detail
                         title="Phase"
                         titleIcon={<Eclipse />}
@@ -377,8 +387,8 @@ function MoonCard({ data }) {
                         titleIcon={<SunMoon />}
                         text={astro?.moon?.illumination}
                     />
-                </div>
-            </div>
+                </DetailRow>
+            </DetailColumn>
         </Card>
     );
 }
@@ -505,7 +515,7 @@ function Now({ data }) {
             titleIcon={<Target />}
             allowExpand={true}
             expandedContent={
-                <div className="flex space-evenly w-full">
+                <DetailRow>
                     <Detail
                         title="Feels like"
                         titleIcon={flIcon}
@@ -520,7 +530,7 @@ function Now({ data }) {
                             firstHour?.wind?.direction
                         }
                     />
-                </div>
+                </DetailRow>
             }
         >
             <h1>{firstHour?.temperature + "°"}</h1>
