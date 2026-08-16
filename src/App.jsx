@@ -517,6 +517,7 @@ function Card({
     cardClass = "",
     allowExpand = false,
     expandedContent = "",
+    titleAction = "",
     children,
 }) {
     /* Use this for cards in the UI
@@ -525,6 +526,7 @@ function Card({
     cardClass: Optional, use to add a class to the content of the card itself (not card title). Consider adding ! to the end of the tailwind className if needed.
     allowExpand: Should there be more content in the card that can be expanded?
     expandedContent: If allowing expand, what content should be shown when card is expanded?
+    titleAction: Optional, something like dropdown menu to put in the title of the Card, all the way to the right side.
     */
     const [expanded, setExpanded] = useState(false);
     return (
@@ -539,9 +541,12 @@ function Card({
             }}
             className="flex flex-col bg-gray-200/10 dark:bg-gray-900/10 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-[10px] m-3"
         >
-            <div className="flex w-full text-gray-700 dark:text-gray-300 pt-3 px-3">
-                <div className="scale-80 mt-0.5">{titleIcon}</div>
-                <h2 className="text-[1px] ml-2">{title}</h2>
+            <div className="flex w-full text-gray-700 dark:text-gray-300 pt-3 px-3 justify-between">
+                <div className="flex">
+                    <div className="scale-80 mt-0.5">{titleIcon}</div>
+                    <h2 className="text-[1px] ml-2">{title}</h2>
+                </div>
+                <div>{titleAction}</div>
             </div>
             <div className={"mt-2 px-5 pb-5 " + cardClass}>{children}</div>
             <>
