@@ -268,8 +268,8 @@ function SunCard({ data }) {
                             setTime(e.target.value);
                             setAstro(
                                 await calcAstro(
-                                    data.info.location.lat,
-                                    data.info.location.long,
+                                    data?.info?.location?.lat,
+                                    data?.info?.location?.long,
                                     new Date(e.target.value),
                                 ),
                             );
@@ -309,6 +309,9 @@ function SunCard({ data }) {
 }
 
 function MoonCard({ data }) {
+    const [time, setTime] = useState(new Date());
+    const [astro, setAstro] = useState(data?.astronomical);
+
     return (
         <Card
             title="Moon"
@@ -321,12 +324,31 @@ function MoonCard({ data }) {
                     <Detail
                         title="Distance"
                         titleIcon={<RulerDimensionLine />}
-                        text={data?.astronomical?.moon?.distance + " km"}
+                        text={astro?.moon?.distance + " km"}
                     />
                     <Detail
                         title="Altitude"
                         titleIcon={<SeparatorHorizontal />}
-                        text={data?.astronomical?.moon?.altitude + "°"}
+                        text={astro?.moon?.altitude + "°"}
+                    />
+                </div>
+            }
+            titleAction={
+                <div>
+                    <input
+                        type="datetime-local"
+                        id="time"
+                        value={time}
+                        onChange={async (e) => {
+                            setTime(e.target.value);
+                            setAstro(
+                                await calcAstro(
+                                    data?.info?.location?.lat,
+                                    data?.info?.location?.long,
+                                    new Date(e.target.value),
+                                ),
+                            );
+                        }}
                     />
                 </div>
             }
@@ -336,24 +358,24 @@ function MoonCard({ data }) {
                     <Detail
                         title="Moonrise"
                         titleIcon={<ArrowUpFromLine />}
-                        text={data?.astronomical?.moon?.moonrise}
+                        text={astro?.moon?.moonrise}
                     />
                     <Detail
                         title="Moonset"
                         titleIcon={<ArrowDownFromLine />}
-                        text={data?.astronomical?.moon?.moonset}
+                        text={astro?.moon?.moonset}
                     />
                 </div>
                 <div className="flex space-evenly w-full">
                     <Detail
                         title="Phase"
                         titleIcon={<Eclipse />}
-                        text={data?.astronomical?.moon?.phase}
+                        text={astro?.moon?.phase}
                     />{" "}
                     <Detail
                         title="Illumination"
                         titleIcon={<SunMoon />}
-                        text={data?.astronomical?.moon?.illumination}
+                        text={astro?.moon?.illumination}
                     />
                 </div>
             </div>

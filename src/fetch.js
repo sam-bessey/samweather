@@ -20,7 +20,7 @@ import { formatDate, getFeelsLike, formatSuncalc } from "./formatting";
 // Fetch weather data and return it (And some other stuff)
 // Split to a separate file just to make things easier
 
-function formatData(infoData, mainData, hourlyData) {
+async function formatData(infoData, mainData, hourlyData) {
     /////////////////
     // HOURLY DATA //
     /////////////////
@@ -128,67 +128,6 @@ function formatData(infoData, mainData, hourlyData) {
         }
     }
 
-    ///////////////////////////////
-    // ASTRONOMICAL (sun / moon) //
-    ///////////////////////////////
-    const times = SunCalc.getTimes(
-        new Date(),
-        infoData.geometry.coordinates[1],
-        infoData.geometry.coordinates[0],
-    );
-    const position = SunCalc.getPosition(
-        new Date(),
-        infoData.geometry.coordinates[1],
-        infoData.geometry.coordinates[0],
-    );
-
-    console.log(`Sunrise time: ${times.sunrise.toLocaleString()}`);
-
-    //Moon
-    const moonTimes = SunCalc.getMoonTimes(
-        new Date(),
-        infoData.geometry.coordinates[1],
-        infoData.geometry.coordinates[0],
-    );
-    console.log("MOONRISE", moonTimes);
-    const moonIllumination = SunCalc.getMoonIllumination(new Date());
-    const phaseNames = [
-        "New Moon",
-        "Waxing Crescent",
-        "First Quarter",
-        "Waxing Gibbous",
-        "Full Moon",
-        "Waning Gibbous",
-        "Last Quarter",
-        "Waning Crescent",
-    ];
-    const { phase } = SunCalc.getMoonIllumination(new Date());
-    const phaseName = phaseNames[Math.round(phase * 8) % 8];
-    const moonPosition = SunCalc.getMoonPosition(
-        new Date(),
-        infoData.geometry.coordinates[1],
-        infoData.geometry.coordinates[0],
-    );
-
-    const formattedAstronomical = {
-        sun: {
-            sunrise: formatSuncalc(times.sunrise),
-            sunset: formatSuncalc(times.sunset),
-            noon: formatSuncalc(times.solarNoon),
-            goldenHour: formatSuncalc(times.goldenHour),
-            morningGoldenHour: formatSuncalc(times.goldenHourEnd),
-            altitude: Math.round(position.altitude),
-        },
-        moon: {
-            moonrise: formatSuncalc(moonTimes.rise),
-            moonset: formatSuncalc(moonTimes.set),
-            phase: phaseName,
-            distance: Math.round(moonPosition.distance),
-            altitude: Math.round(moonPosition.altitude),
-            illumination: Math.round(moonIllumination.fraction * 100) + "%",
-        },
-    };
-
     ////////////////
     // FINAL DATA //
     ////////////////
@@ -210,7 +149,11 @@ function formatData(infoData, mainData, hourlyData) {
         },
         days: formattedDays,
         hours: formattedHours,
-        astronomical: formattedAstronomical,
+        astronomical: await calcAstro(
+            infoData.geometry.coordinates[1],
+            infoData.geometry.coordinates[0],
+            new Date(),
+        ),
     };
 
     console.log("FORMATTED DATA FiNAL", formattedData);
@@ -270,7 +213,7 @@ export async function calcAstro(lat, long, time = new Date()) {
     //Moon
     const moonTimes = SunCalc.getMoonTimes(time, lat, long);
     console.log("MOONRISE", moonTimes);
-    const moonIllumination = SunCalc.getMoonIllumination(new Date());
+    const moonIllumination = SunCalc.getMoonIllumination(time);
     const phaseNames = [
         "New Moon",
         "Waxing Crescent",
