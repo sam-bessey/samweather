@@ -253,6 +253,59 @@ export async function fetchAlerts(coordinates) {
     }
 }
 
+export async function calcAstro(lat, long, time = new Date()) {
+    // calculate astronomical data via suncalc.
+    // lat: latitude of location (obvious)
+    // long: longitude
+    // time: date and time to calculate for
+
+    ///////////////////////////////
+    // ASTRONOMICAL (sun / moon) //
+    ///////////////////////////////
+    const times = SunCalc.getTimes(time, lat, long);
+    const position = SunCalc.getPosition(time, lat, long);
+
+    console.log(`Sunrise time: ${times.sunrise.toLocaleString()}`);
+
+    //Moon
+    const moonTimes = SunCalc.getMoonTimes(time, lat, long);
+    console.log("MOONRISE", moonTimes);
+    const moonIllumination = SunCalc.getMoonIllumination(new Date());
+    const phaseNames = [
+        "New Moon",
+        "Waxing Crescent",
+        "First Quarter",
+        "Waxing Gibbous",
+        "Full Moon",
+        "Waning Gibbous",
+        "Last Quarter",
+        "Waning Crescent",
+    ];
+    const { phase } = SunCalc.getMoonIllumination(time);
+    const phaseName = phaseNames[Math.round(phase * 8) % 8];
+    const moonPosition = SunCalc.getMoonPosition(time, lat, long);
+
+    const formattedAstronomical = {
+        sun: {
+            sunrise: formatSuncalc(times.sunrise),
+            sunset: formatSuncalc(times.sunset),
+            noon: formatSuncalc(times.solarNoon),
+            goldenHour: formatSuncalc(times.goldenHour),
+            morningGoldenHour: formatSuncalc(times.goldenHourEnd),
+            altitude: Math.round(position.altitude),
+        },
+        moon: {
+            moonrise: formatSuncalc(moonTimes.rise),
+            moonset: formatSuncalc(moonTimes.set),
+            phase: phaseName,
+            distance: Math.round(moonPosition.distance),
+            altitude: Math.round(moonPosition.altitude),
+            illumination: Math.round(moonIllumination.fraction * 100) + "%",
+        },
+    };
+    return formattedAstronomical;
+}
+
 export async function fetchWeather(coordinates) {
     // Coordinates: [lat, long]
     try {

@@ -40,7 +40,12 @@ import {
     SeparatorHorizontal,
 } from "lucide-react";
 import * as SunCalc from "suncalc";
-import { fetchWeather, fetchAlerts, fetchLocation } from "./fetch.js";
+import {
+    fetchWeather,
+    fetchAlerts,
+    fetchLocation,
+    calcAstro,
+} from "./fetch.js";
 import "./styles.css";
 import Bridge from "/src/icons/bridge.svg";
 import Island from "/src/icons/island.svg";
@@ -230,6 +235,9 @@ function Alerts({ alerts }) {
 }
 
 function SunCard({ data }) {
+    const [time, setTime] = useState(new Date());
+    const [astro, setAstro] = useState(data?.astronomical);
+
     return (
         <Card
             title="Sun"
@@ -241,12 +249,31 @@ function SunCard({ data }) {
                     <Detail
                         title="Morning Golden Hour"
                         titleIcon={<Sparkles />}
-                        text={data?.astronomical?.sun?.morningGoldenHour}
+                        text={astro?.sun?.morningGoldenHour}
                     />
                     <Detail
                         title="Altitude"
                         titleIcon={<SeparatorHorizontal />}
-                        text={data?.astronomical?.sun?.altitude + "°"}
+                        text={astro?.sun?.altitude + "°"}
+                    />
+                </div>
+            }
+            titleAction={
+                <div>
+                    <input
+                        type="datetime-local"
+                        id="time"
+                        value={time}
+                        onChange={async (e) => {
+                            setTime(e.target.value);
+                            setAstro(
+                                await calcAstro(
+                                    data.info.location.lat,
+                                    data.info.location.long,
+                                    new Date(e.target.value),
+                                ),
+                            );
+                        }}
                     />
                 </div>
             }
@@ -256,24 +283,24 @@ function SunCard({ data }) {
                     <Detail
                         title="Sunrise"
                         titleIcon={<Sunrise />}
-                        text={data?.astronomical?.sun?.sunrise}
+                        text={astro?.sun?.sunrise}
                     />
                     <Detail
                         title="Sunset"
                         titleIcon={<Sunset />}
-                        text={data?.astronomical?.sun?.sunset}
+                        text={astro?.sun?.sunset}
                     />
                 </div>
                 <div className="flex space-evenly w-full">
                     <Detail
                         title="Solar Noon"
                         titleIcon={<Sun />}
-                        text={data?.astronomical?.sun?.noon}
+                        text={astro?.sun?.noon}
                     />
                     <Detail
                         title="Golden Hour"
                         titleIcon={<Sparkles />}
-                        text={data?.astronomical?.sun?.goldenHour}
+                        text={astro?.sun?.goldenHour}
                     />
                 </div>
             </div>
