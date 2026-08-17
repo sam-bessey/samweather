@@ -600,7 +600,7 @@ function Card({
             }}
             className="flex flex-col bg-gray-200/10 dark:bg-gray-900/10 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-[10px] m-3"
         >
-            <div className="flex w-full text-gray-700 dark:text-gray-300 pt-3 px-3 justify-between">
+            <div className="flex w-full text-gray-800 dark:text-gray-300 pt-3 px-3 justify-between">
                 <div className="flex">
                     <div className="scale-80 mt-0.5">{titleIcon}</div>
                     <h2 className="text-[1px] ml-2">{title}</h2>
