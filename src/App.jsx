@@ -38,6 +38,8 @@ import {
     ArrowDownFromLine,
     SunMoon,
     SeparatorHorizontal,
+    X,
+    Ellipsis,
 } from "lucide-react";
 import * as SunCalc from "suncalc";
 import {
@@ -62,7 +64,7 @@ function DetailRow({ children }) {
     return <div className="flex space-evenly w-full">{children}</div>;
 }
 
-function SearchBar({ setData, setAlerts, setLoading }) {
+function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
     const [text, setText] = useState("");
     const [locations, setLocations] = useState([]);
 
@@ -92,6 +94,7 @@ function SearchBar({ setData, setAlerts, setLoading }) {
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     className="w-full focus:outline-none"
+                    onFocus={() => setSearching(true)}
                 />
             </div>
             <div className="w-full absolute">
@@ -202,13 +205,23 @@ function SearchBar({ setData, setAlerts, setLoading }) {
 }
 
 function TitleBar({ setData, setAlerts, setLoading }) {
+    const [searching, setSearching] = useState(false);
+
     return (
         <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-3xl z-50 fixed">
             <SearchBar
                 setData={setData}
                 setAlerts={setAlerts}
                 setLoading={setLoading}
+                setSearching={setSearching}
             />
+            <div className="px-2">
+                {searching ? (
+                    <X onClick={() => setSearching(false)} />
+                ) : (
+                    <Ellipsis />
+                )}
+            </div>
         </div>
     );
 }
