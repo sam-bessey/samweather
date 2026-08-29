@@ -407,7 +407,7 @@ function Day({ data, dayIndex, Dayicon }) {
                 <p>
                     <span>{data?.days?.[dayIndex]?.highTemp + "° / "}</span>
                     <span className="text-gray-500">
-                        {data?.days?.[dayIndex]?.lowTemp}
+                        {data?.days?.[dayIndex]?.lowTemp + "°"}
                     </span>
                 </p>
             </div>
