@@ -86,7 +86,7 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
     }, [text]);
 
     return (
-        <div className="w-full relative" onBlur={() => setText("")}>
+        <div className="w-full relative" onBlur={() => {setText(""); setSearching(false);}}>
             <div className="border rounded-lg w-full flex">
                 <Search className="m-1.5" />
                 <input
