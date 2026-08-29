@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
     Search,
     Building2,
@@ -67,6 +67,7 @@ function DetailRow({ children }) {
 function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
     const [text, setText] = useState("");
     const [locations, setLocations] = useState([]);
+    const inputRef = useRef(null);
 
     useEffect(() => {
         if (text.trim() === "") {
@@ -85,7 +86,7 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
     }, [text]);
 
     return (
-        <div className="w-full relative">
+        <div className="w-full relative" onBlur={() => setText("")}>
             <div className="border rounded-lg w-full flex">
                 <Search className="m-1.5" />
                 <input
@@ -95,6 +96,7 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
                     onChange={(e) => setText(e.target.value)}
                     className="w-full focus:outline-none"
                     onFocus={() => setSearching(true)}
+                    ref={inputRef}
                 />
             </div>
             <div className="w-full absolute">
@@ -102,6 +104,7 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
                     initial="hidden"
                     key={locations.length}
                     animate="visible"
+                    onMouseDown={(e) => e.preventDefault()}
                     variants={{
                         hidden: { opacity: 0, height: 0 },
                         visible: {
@@ -113,7 +116,7 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
                             },
                         },
                     }}
-                    className="w-full backdrop-blur-md z-50 rounded-3xl mt-1 bg-gray-300 dark:bg-gray-500 overflow-hidden"
+                    className="w-full mt-1 bg-transparent overflow-hidden"
                 >
                     {locations?.map((item) => (
                         <motion.li
@@ -147,6 +150,8 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
                                 // Clear search bar
                                 setText("");
                                 setLocations([]);
+                                inputRef.current.blur();
+                                setSearching(false);
                             }}
                             className="flex my-2"
                         >
@@ -208,7 +213,9 @@ function TitleBar({ setData, setAlerts, setLoading }) {
     const [searching, setSearching] = useState(false);
 
     return (
-        <div className="transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-3xl z-50 fixed">
+        <div
+            className={`transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-3xl z-50 fixed ${searching ? "h-full items-start" : ""}`}
+        >
             <SearchBar
                 setData={setData}
                 setAlerts={setAlerts}
@@ -217,11 +224,12 @@ function TitleBar({ setData, setAlerts, setLoading }) {
             />
             <div className="px-2">
                 {searching ? (
-                    <X onClick={() => setSearching(false)} />
+                    <X className="mt-2" onClick={() => setSearching(false)} />
                 ) : (
                     <Ellipsis />
                 )}
             </div>
+            {searching && <div className="w-full h-full" hidden></div>}
         </div>
     );
 }
