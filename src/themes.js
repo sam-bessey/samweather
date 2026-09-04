@@ -120,7 +120,7 @@ export function getBg(description, isDaytime, astronomical) {
                 : (bg = "/samweather/images/partlyCloudyDay.JPEG");
         } else {
             bg_top = "#4e5c8a";
-            bg = "/samweather/images/clearNight.JPEG";
+            bg = "/samweather/images/secondClearNight.JPEG";
             darkMode = true;
         }
     } else if (
