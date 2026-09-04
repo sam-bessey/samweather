@@ -710,7 +710,9 @@ export default function App() {
 
         // this runs if no permission
         function errorCallback(error) {
-            alert("Allow SamWeather location access for the best experience.");
+            alert(
+                "Allow SamWeather to have location access for the best experience.",
+            );
             console.log("NO LOCATION ACCESS!", error);
             setLoading(false);
         }
