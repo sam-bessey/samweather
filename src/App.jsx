@@ -127,7 +127,13 @@ function SearchItem({ item, onClick }) {
     );
 }
 
-function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
+function SearchBar({
+    setData,
+    setAlerts,
+    setLoading,
+    searching,
+    setSearching,
+}) {
     const [text, setText] = useState("");
     const [locations, setLocations] = useState([]);
     const inputRef = useRef(null);
@@ -135,7 +141,11 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
 
     useEffect(() => {
         if (text.trim() === "") {
-            setLocations([]);
+            if (searching) {
+                setLocations(recents);
+            } else {
+                setLocations([]);
+            }
             return;
         }
 
@@ -147,7 +157,7 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
         }, 500);
 
         return () => clearTimeout(timer);
-    }, [text]);
+    }, [text, searching]);
 
     return (
         <div
@@ -210,7 +220,12 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
                                 );
 
                                 // add to recent locations
-                                setRecents(...recents, item);
+                                setRecents((prev) => {
+                                    const filtered = prev.filter(
+                                        (r) => r.place_id !== item.place_id,
+                                    );
+                                    return [item, ...filtered];
+                                });
 
                                 // Clear search bar
                                 setText("");
@@ -238,6 +253,7 @@ function TitleBar({ setData, setAlerts, setLoading }) {
                 setData={setData}
                 setAlerts={setAlerts}
                 setLoading={setLoading}
+                searching={searching}
                 setSearching={setSearching}
             />
             <div className="px-2">
