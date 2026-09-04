@@ -115,7 +115,6 @@ export function getBg(description, isDaytime, astronomical) {
         if (isDaytime) {
             bg_top = "#a6c0ed";
 
-            // TODO: Find new pic for mostly cloudy
             bg = description.includes("Mostly Cloudy")
                 ? "/samweather/images/mostlyCloudyDay.JPEG"
                 : (bg = "/samweather/images/partlyCloudyDay.JPEG");
