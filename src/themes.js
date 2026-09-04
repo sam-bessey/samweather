@@ -116,11 +116,9 @@ export function getBg(description, isDaytime, astronomical) {
             bg_top = "#a6c0ed";
 
             // TODO: Find new pic for mostly cloudy
-            //bg = description.includes("Mostly Cloudy")
-            //  ? "/samweather/images/mostlyCloudyDayT.JPEG"
-            //           :
-            //
-            bg = "/samweather/images/partlyCloudyDay.JPEG";
+            bg = description.includes("Mostly Cloudy")
+                ? "/samweather/images/mostlyCloudyDay.JPEG"
+                : (bg = "/samweather/images/partlyCloudyDay.JPEG");
         } else {
             bg_top = "#4e5c8a";
             bg = "/samweather/images/clearNight.JPEG";
