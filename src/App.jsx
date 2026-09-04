@@ -64,10 +64,74 @@ function DetailRow({ children }) {
     return <div className="flex space-evenly w-full">{children}</div>;
 }
 
+function SearchItem({ item, onClick }) {
+    return (
+        <motion.li
+            variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.5 },
+                },
+            }}
+            key={item?.place_id}
+            className="flex my-2"
+            onClick={onClick}
+        >
+            {" "}
+            <>
+                {item.addresstype === "town" ||
+                item.addresstype === "village" ||
+                item.addresstype === "hamlet" ||
+                item.addresstype === "neighbourhood" ||
+                item.type === "house" ? (
+                    <House />
+                ) : item.addresstype === "city" ? (
+                    <Building2 />
+                ) : item.addresstype === "state" ||
+                  item.addresstype === "country" ? (
+                    <Earth />
+                ) : item.addresstype === "bay" ||
+                  item.addresstype === "sea" ||
+                  item.addresstype === "ocean" ? (
+                    <WavesHorizontal />
+                ) : item.addresstype === "road" ? (
+                    <Road />
+                ) : item.addresstype === "aeroway" ? (
+                    <PlaneTakeoff />
+                ) : item.addresstype === "bridge" ? (
+                    <img src={Bridge} />
+                ) : item.addresstype === "shop" ? (
+                    <Store />
+                ) : item.addresstype === "building" ? (
+                    <Building />
+                ) : item.type === "school" ? (
+                    <GraduationCap />
+                ) : item.type === "place_of_worship" ? (
+                    <Church />
+                ) : item.addresstype === "beach" ? (
+                    <img src={Island} />
+                ) : item.addresstype === "peak" ? (
+                    <MountainSnow />
+                ) : item.type === "restaurant" || item.type === "pub" ? (
+                    <Utensils />
+                ) : item.addresstype === "nature_reserve" ? (
+                    <TreePine />
+                ) : (
+                    <MapPin />
+                )}
+            </>
+            <p className="ml-2 w-full cutoff">{item.display_name}</p>
+        </motion.li>
+    );
+}
+
 function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
     const [text, setText] = useState("");
     const [locations, setLocations] = useState([]);
     const inputRef = useRef(null);
+    const [recents, setRecents] = useState([]);
 
     useEffect(() => {
         if (text.trim() === "") {
@@ -125,16 +189,8 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
                     className="w-full mt-1 bg-transparent overflow-hidden"
                 >
                     {locations?.map((item) => (
-                        <motion.li
-                            variants={{
-                                hidden: { opacity: 0, y: 20 },
-                                visible: {
-                                    opacity: 1,
-                                    y: 0,
-                                    transition: { duration: 0.5 },
-                                },
-                            }}
-                            key={item?.place_id}
+                        <SearchItem
+                            item={item}
                             onClick={() => {
                                 // Log to console
                                 console.log(
@@ -153,6 +209,9 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
                                     setAlerts,
                                 );
 
+                                // add to recent locations
+                                setRecents(...recents, item);
+
                                 // Clear search bar
                                 setText("");
                                 setLocations([]);
@@ -160,54 +219,7 @@ function SearchBar({ setData, setAlerts, setLoading, setSearching }) {
                                 setSearching(false);
                             }}
                             className="flex my-2"
-                        >
-                            <>
-                                {item.addresstype === "town" ||
-                                item.addresstype === "village" ||
-                                item.addresstype === "hamlet" ||
-                                item.addresstype === "neighbourhood" ||
-                                item.type === "house" ? (
-                                    <House />
-                                ) : item.addresstype === "city" ? (
-                                    <Building2 />
-                                ) : item.addresstype === "state" ||
-                                  item.addresstype === "country" ? (
-                                    <Earth />
-                                ) : item.addresstype === "bay" ||
-                                  item.addresstype === "sea" ||
-                                  item.addresstype === "ocean" ? (
-                                    <WavesHorizontal />
-                                ) : item.addresstype === "road" ? (
-                                    <Road />
-                                ) : item.addresstype === "aeroway" ? (
-                                    <PlaneTakeoff />
-                                ) : item.addresstype === "bridge" ? (
-                                    <img src={Bridge} />
-                                ) : item.addresstype === "shop" ? (
-                                    <Store />
-                                ) : item.addresstype === "building" ? (
-                                    <Building />
-                                ) : item.type === "school" ? (
-                                    <GraduationCap />
-                                ) : item.type === "place_of_worship" ? (
-                                    <Church />
-                                ) : item.addresstype === "beach" ? (
-                                    <img src={Island} />
-                                ) : item.addresstype === "peak" ? (
-                                    <MountainSnow />
-                                ) : item.type === "restaurant" ||
-                                  item.type === "pub" ? (
-                                    <Utensils />
-                                ) : item.addresstype === "nature_reserve" ? (
-                                    <TreePine />
-                                ) : (
-                                    <MapPin />
-                                )}
-                            </>
-                            <p className="ml-2 w-full cutoff">
-                                {item.display_name}
-                            </p>
-                        </motion.li>
+                        />
                     ))}
                 </motion.ul>
             </div>
