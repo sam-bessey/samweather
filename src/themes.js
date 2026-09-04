@@ -168,14 +168,16 @@ export function getBg(description, isDaytime, astronomical) {
         description.includes("Sun") ||
         description.includes("Clear")
     ) {
-        if (isDaytime) {
+        if (isSunset) {
+            bg = "/samweather/images/clearSunset.JPEG";
             bg_top = "#a6c0ed";
-            bg = "/samweather/images/clearDayT.JPEG";
         } else {
-            bg_top = "#041d47";
-            if (isSunset) {
-                bg = "/samweather/images/clearSunset.JPEG";
+            if (isDaytime) {
+                bg_top = "#a6c0ed";
+
+                bg = "/samweather/images/clearDayT.JPEG";
             } else {
+                bg_top = "#041d47";
                 bg = "/samweather/images/clearNight.JPEG";
                 darkMode = true;
             }
