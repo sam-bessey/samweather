@@ -54,6 +54,39 @@ import Island from "/src/icons/island.svg";
 import { getBg } from "./themes.js";
 import { formatDate } from "./formatting.js";
 
+function MenuItem({ icon, name, onClick }) {
+    // Item to put in menu
+    // icon: icon next to the name
+    // name: its the name
+    // onClick: what do do when clicking this
+    return (
+        <div className="flex" onClick={onClick}>
+            <div className="scale-80 mt-0.5">{icon}</div>
+            <h2 className="text-[1px] ml-2">{name}</h2>
+        </div>
+    );
+}
+
+function Menu({ children }) {
+    // This is the menu that opens when you click the three dots
+
+    return (
+        <motion.div
+            variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.5 },
+                },
+            }}
+            className="fixed z-51 bg-transparent backdrop-blur-3xl top-11 right-0 m-5 p-2 rounded-3xl"
+        >
+            {children}
+        </motion.div>
+    );
+}
+
 function DetailColumn({ children }) {
     // Multiple DetailRows.
     return <div className="flex flex-col w-full">{children}</div>;
@@ -244,6 +277,7 @@ function SearchBar({
 
 function TitleBar({ setData, setAlerts, setLoading }) {
     const [searching, setSearching] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     return (
         <div
@@ -260,10 +294,15 @@ function TitleBar({ setData, setAlerts, setLoading }) {
                 {searching ? (
                     <X className="mt-2" onClick={() => setSearching(false)} />
                 ) : (
-                    <Ellipsis />
+                    <Ellipsis onClick={() => setMenuOpen(true)} />
                 )}
             </div>
             {searching && <div className="w-full h-full" hidden></div>}
+            {menuOpen && (
+                <Menu hidden>
+                    <MenuItem icon={<Earth />} name="test"></MenuItem>
+                </Menu>
+            )}
         </div>
     );
 }
