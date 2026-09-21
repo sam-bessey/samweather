@@ -515,6 +515,9 @@ function Day({ data, dayIndex, Dayicon }) {
             <div>
                 {expanded ? (
                     <div className="bg-gray-500/40">
+                        <p className="pt-3 px-3">
+                            {data?.days?.[dayIndex]?.detailedForecast}
+                        </p>
                         <p className="text-xl pt-3 pl-3 pb-1">Hourly</p>
                         <HourlyForecast data={data} dayIndex={dayIndex} />
                     </div>
