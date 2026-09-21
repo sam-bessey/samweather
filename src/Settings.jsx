@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useState, useEffect, useRef } from "react";
 import Card from "./Ui.jsx";
-import { User } from "lucide-react";
+import { User, X } from "lucide-react";
 
 function PersonalityCard() {
     // Get initial value from localstorage
@@ -32,10 +32,15 @@ function PersonalityCard() {
     );
 }
 
-export default function SettingsPage() {
+export default function SettingsPage({ setSettingsOpen }) {
+    // This is the settings page
+    // setSettingsOpen: To change state, used to close page
     return (
         <div className="w-full h-full backdrop-blur-3xl z-999 absolute">
-            <h1 className="p-5">Settings</h1>
+            <div className="w-full flex items-center justify-between">
+                <h1 className="p-5">Settings</h1>
+                <X onClick={() => setSettingsOpen(false)} className="m-3" />
+            </div>
             <PersonalityCard />{" "}
         </div>
     );
