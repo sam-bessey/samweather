@@ -120,6 +120,7 @@ async function formatData(infoData, mainData, hourlyData) {
                     direction: thisPeriod.windDirection,
                 },
                 shortForecast: thisPeriod.shortForecast,
+                // change detailedForecast based on settings
                 detailedForecast:
                     localStorage.getItem("personality") === "Default"
                         ? thisPeriod.detailedForecast
