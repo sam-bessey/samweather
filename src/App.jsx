@@ -795,7 +795,7 @@ export default function App() {
     return (
         <div className="relative m-0 p-0 flex flex-col overflow-hidden text-black dark:text-white">
             <Loading hidden={loading}></Loading>
-            <SettingsPage />
+            {settingsOpen && <SettingsPage />}
             <TitleBar
                 setData={setData}
                 setAlerts={setAlerts}
