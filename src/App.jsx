@@ -55,7 +55,7 @@ import Bridge from "/src/icons/bridge.svg";
 import Island from "/src/icons/island.svg";
 import { getBg } from "./themes.js";
 import { formatDate } from "./formatting.js";
-import Card from "./Ui.jsx"
+import Card from "./Ui.jsx";
 
 function MenuItem({ icon, name, onClick }) {
     // Item to put in menu
@@ -326,7 +326,7 @@ function Alerts({ alerts }) {
                             key={index}
                             title={item.title}
                             titleIcon={<TriangleAlert />}
-                            cardClass="whitespace-pre-wrap"
+                            contentClass="whitespace-pre-wrap"
                             allowExpand={true}
                             expandedContent={
                                 <p>
@@ -353,7 +353,7 @@ function SunCard({ data }) {
         <Card
             title="Sun"
             titleIcon={<Sun />}
-            cardClass="flex space-evenly w-full"
+            contentClass="flex space-evenly w-full"
             allowExpand={true}
             expandedContent={
                 <DetailRow>
@@ -427,7 +427,7 @@ function MoonCard({ data }) {
         <Card
             title="Moon"
             titleIcon={<Moon />}
-            cardClass="flex space-evenly w-full"
+            contentClass="flex space-evenly w-full"
             allowExpand={true}
             expandedContent={
                 <DetailRow>
@@ -532,7 +532,7 @@ function DailyForecast({ data }) {
             title="Daily"
             titleIcon={<CalendarDays />}
             className={"flex w-full h-auto overflow-y-scroll min-h-0"}
-            cardClass="p-0!"
+            contentClass="p-0!"
         >
             <ul className="p-0!">
                 {data?.days?.map((item, index) => (
@@ -670,7 +670,6 @@ function Detail({ title, titleIcon, text }) {
         </div>
     );
 }
-
 
 export default function App() {
     const [data, setData] = useState(null);

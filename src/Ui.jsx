@@ -2,16 +2,13 @@
 
 import { motion } from "motion/react";
 import { useState } from "react";
-import {
-    ChevronRight,
-    ChevronUp,
-} from "lucide-react";
+import { ChevronRight, ChevronUp } from "lucide-react";
 import "./styles.css";
-
 
 export default function Card({
     title,
     titleIcon,
+    contentClass = "",
     cardClass = "",
     allowExpand = false,
     expandedContent = "",
@@ -21,7 +18,8 @@ export default function Card({
     /* Use this for cards in the UI
     title: Title of the card. For example, "Hourly"
     titleIcon: Icon for the title bar next to the card.
-    cardClass: Optional, use to add a class to the content of the card itself (not card title). Consider adding ! to the end of the tailwind className if needed.
+    contentClass: Optional, use to add a class to the content of the card itself (not card title). Consider adding ! to the end of the tailwind className if needed.
+    cardClass: Optional, use to add a class to the entire card. (again, consider adding ! to tailwind class)
     allowExpand: Should there be more content in the card that can be expanded?
     expandedContent: If allowing expand, what content should be shown when card is expanded?
     titleAction: Optional, something like dropdown menu to put in the title of the Card, all the way to the right side.
@@ -37,7 +35,10 @@ export default function Card({
                     transition: { duration: 0.5 },
                 },
             }}
-            className="flex flex-col bg-gray-200/10 dark:bg-gray-900/10 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-[10px] m-3"
+            className={
+                "flex flex-col bg-gray-200/10 dark:bg-gray-900/10 w-auto h-auto overflow-y-scroll rounded-3xl backdrop-blur-[10px] m-3 " +
+                cardClass
+            }
         >
             <div className="flex w-full text-gray-800 dark:text-gray-300 pt-3 px-3 justify-between">
                 <div className="flex">
@@ -46,7 +47,7 @@ export default function Card({
                 </div>
                 <div>{titleAction}</div>
             </div>
-            <div className={"mt-2 px-5 pb-5 " + cardClass}>{children}</div>
+            <div className={"mt-2 px-5 pb-5 " + contentClass}>{children}</div>
             <>
                 {allowExpand && (
                     <div>
