@@ -120,7 +120,10 @@ async function formatData(infoData, mainData, hourlyData) {
                     direction: thisPeriod.windDirection,
                 },
                 shortForecast: thisPeriod.shortForecast,
-                detailedForecast: thisPeriod.detailedForecast,
+                detailedForecast:
+                    localStorage.getItem("personality") === "Default"
+                        ? thisPeriod.detailedForecast
+                        : thisPeriod.shortForecast,
                 icon: getIcon(thisPeriod.shortForecast, thisPeriod.isDaytime),
                 highTemp: high,
                 lowTemp: low,
