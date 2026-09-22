@@ -32,6 +32,35 @@ function PersonalityCard() {
     );
 }
 
+function ProCard() {
+    // Get initial value from localstorage
+    const [selectedValue, setSelectedValue] = useState(() => {
+        const saved = localStorage.getItem("pro");
+        return saved !== null ? saved : "false";
+    });
+
+    // Save to localStorage whenever selectedValue changes
+    useEffect(() => {
+        localStorage.setItem("pro", selectedValue);
+    }, [selectedValue]);
+
+    return (
+        <Card
+            title="SamWeather Pro"
+            titleIcon={<User />}
+            cardClass="backdrop-blur-3xl!"
+        >
+            <select
+                onChange={(e) => setSelectedValue(e.target.value)}
+                value={selectedValue}
+            >
+                <option>Default</option>
+                <option>Conscise</option>
+            </select>
+        </Card>
+    );
+}
+
 export default function SettingsPage({ setSettingsOpen }) {
     // This is the settings page
     // setSettingsOpen: To change state, used to close page
@@ -41,7 +70,8 @@ export default function SettingsPage({ setSettingsOpen }) {
                 <h1 className="p-5">Settings</h1>
                 <X onClick={() => setSettingsOpen(false)} className="m-3" />
             </div>
-            <PersonalityCard />{" "}
+            <PersonalityCard />
+            <ProCard/>
         </div>
     );
 }
