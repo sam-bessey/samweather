@@ -70,11 +70,13 @@ function MenuItem({ icon, name, onClick }) {
     );
 }
 
-function Menu({ children }) {
+function Menu({ menuRef = { menuRef }, children }) {
     // This is the menu that opens when you click the three dots
 
     return (
         <motion.div
+            initial="hidden"
+            animate="visible"
             variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: {
@@ -83,6 +85,7 @@ function Menu({ children }) {
                     transition: { duration: 0.5 },
                 },
             }}
+            ref={menuRef}
             className="fixed z-51 bg-transparent backdrop-blur-xl top-11 right-0 m-5 p-2 rounded-3xl"
         >
             {children}
@@ -306,7 +309,10 @@ function TitleBar({ setData, setAlerts, setLoading, setSettingsOpen }) {
                     <MenuItem
                         icon={<Settings />}
                         name="Settings"
-                        onClick={() => setSettingsOpen(true)}
+                        onClick={() => {
+                            setSettingsOpen(true);
+                            setMenuOpen(false);
+                        }}
                     ></MenuItem>
                 </Menu>
             )}
