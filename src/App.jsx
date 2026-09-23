@@ -70,7 +70,7 @@ function MenuItem({ icon, name, onClick }) {
     );
 }
 
-function Menu({ menuRef = { menuRef }, children }) {
+function Menu({ ref, children }) {
     // This is the menu that opens when you click the three dots
 
     return (
@@ -85,7 +85,7 @@ function Menu({ menuRef = { menuRef }, children }) {
                     transition: { duration: 0.5 },
                 },
             }}
-            ref={menuRef}
+            ref={ref}
             className="fixed z-51 bg-transparent backdrop-blur-xl top-11 right-0 m-5 p-2 rounded-3xl"
         >
             {children}
@@ -285,6 +285,23 @@ function TitleBar({ setData, setAlerts, setLoading, setSettingsOpen }) {
     const [searching, setSearching] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
+    const menuRef = useRef(null); // ref for actual menu
+    const menuButtonRef = useRef(null); // for the ... button to open menu
+
+    useEffect(() => {
+        // dont do anything if menu is closed
+        if (!menuOpen) return;
+
+        // if it's open prepare to close if needed
+        function onPointerDown(e) {
+            const inMenu = menuRef.current?.contains(e.target);
+            const inButton = menuButtonRef.current?.contains(e.target);
+            if (!inMenu && !inButton) setMenuOpen(false);
+        }
+        document.addEventListener("pointerdown", onPointerDown);
+        return () => document.removeEventListener("pointerdown", onPointerDown);
+    }, [menuOpen]);
+
     return (
         <div
             className={`transparent w-full m-0 p-3 flex text-center justify-between items-center backdrop-blur-3xl z-50 fixed ${searching ? "h-full items-start" : ""}`}
@@ -300,12 +317,17 @@ function TitleBar({ setData, setAlerts, setLoading, setSettingsOpen }) {
                 {searching ? (
                     <X className="mt-2" onClick={() => setSearching(false)} />
                 ) : (
-                    <Ellipsis onClick={() => setMenuOpen(true)} />
+                    <button
+                        onClick={() => setMenuOpen((wasOpen) => !wasOpen)}
+                        ref={menuButtonRef}
+                    >
+                        <Ellipsis />{" "}
+                    </button>
                 )}
             </div>
             {searching && <div className="w-full h-full" hidden></div>}
             {menuOpen && (
-                <Menu hidden>
+                <Menu ref={menuRef} hidden>
                     <MenuItem
                         icon={<Settings />}
                         name="Settings"
