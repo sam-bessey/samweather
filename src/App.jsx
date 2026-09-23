@@ -648,7 +648,7 @@ function Loading({ hidden }) {
         return (
             <div className="fixed z-999 w-screen h-screen bg-transparent backdrop-blur-lg">
                 <h1 className="flex items-center justify-center w-screen h-screen text-[50px]">
-                    SamWeather
+                   { localStorage.getItem("pro") === "true" ? "SamWeather Pro" : "SamWeather" } 
                 </h1>
             </div>
         );
@@ -677,7 +677,6 @@ function Detail({ title, titleIcon, text }) {
 export default function App() {
     const [data, setData] = useState(null);
     const [alerts, setAlerts] = useState(null);
-    const [selectedDay, setSelectedDay] = useState(0);
     const [loading, setLoading] = useState(true);
     const [settingsOpen, setSettingsOpen] = useState(false);
 
