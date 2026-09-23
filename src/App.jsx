@@ -648,7 +648,9 @@ function Loading({ hidden }) {
         return (
             <div className="fixed z-999 w-screen h-screen bg-transparent backdrop-blur-lg">
                 <h1 className="flex items-center justify-center w-screen h-screen text-[50px]">
-                   { localStorage.getItem("pro") === "true" ? "SamWeather Pro" : "SamWeather" } 
+                    {localStorage.getItem("pro") === "true"
+                        ? "SamWeather Pro"
+                        : "SamWeather"}
                 </h1>
             </div>
         );
@@ -679,6 +681,12 @@ export default function App() {
     const [alerts, setAlerts] = useState(null);
     const [loading, setLoading] = useState(true);
     const [settingsOpen, setSettingsOpen] = useState(false);
+
+    // Set page title
+    document.title =
+        localStorage.getItem("pro") === "true"
+            ? "SamWeather Pro"
+            : "SamWeather";
 
     useEffect(() => {
         // Get weather on startup
