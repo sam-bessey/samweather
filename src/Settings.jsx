@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useState, useEffect, useRef } from "react";
 import Card from "./Ui.jsx";
-import { User, X } from "lucide-react";
+import { User, X, Sparkles } from "lucide-react";
 
 function PersonalityCard() {
     // Get initial value from localstorage
@@ -47,7 +47,7 @@ function ProCard() {
     return (
         <Card
             title="SamWeather Pro"
-            titleIcon={<User />}
+            titleIcon={<Sparkles />}
             cardClass="backdrop-blur-3xl!"
         >
             <p>Upgrade to SamWeather Pro for the best experience.</p>
