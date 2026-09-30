@@ -235,7 +235,7 @@ export async function calcAstro(lat, long, time = new Date()) {
     const formattedAstronomical = {
         sun: {
             sunrise: formatSuncalc(times.sunrise),
-            sunset: formatSuncalc(times.sunset
+            sunset: formatSuncalc(times.sunset),
             sunsetDate: times.sunset,
             noon: formatSuncalc(times.solarNoon),
             goldenHour: formatSuncalc(times.goldenHour),
