@@ -104,8 +104,10 @@ export function getBg(description, isDaytime, astronomical) {
     // Format dates and calculate sunset
     const now = new Date();
     const sunset = astronomical.sunsetDate ?? new Date(astronomical.sunset);
+    const sunrise = astronomical.sunriseDate ?? new Date(astronomical.sunrise);
     const isSunset =
-        !isNaN(sunset) && Math.abs(sunset - now) <= 30 * 60 * 1000;
+        (!isNaN(sunset) && Math.abs(sunset - now) <= 30 * 60 * 1000) ||
+        (!isNaN(sunrise) && Math.abs(sunrise - now) <= 30 * 60 * 1000);
     console.log("Is sunset", isSunset);
 
     // For some things, time of day doesn't matter.

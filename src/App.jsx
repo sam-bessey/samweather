@@ -729,6 +729,7 @@ export default function App() {
             // this means browser doesnt support geolocation
             console.log("Geolocation not supported");
             errorCallback("unsupported");
+            return;
         }
 
         // request location
