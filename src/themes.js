@@ -94,9 +94,6 @@ export function getBg(description, isDaytime, astronomical) {
     // isDaytime: true or false, whether its daytime
     // astronomical: the astronomical data for sunset and stuff. Only needed if getBgInstead is true.
     // TODO: Find better pictures for thunder
-    let bg_top;
-    let bg;
-    let darkMode = false;
 
     // Check if data is loaded
     if (!astronomical?.sunset) return "";
