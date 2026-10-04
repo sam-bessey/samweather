@@ -98,14 +98,15 @@ export function getBg(description, isDaytime, astronomical) {
     // Check if data is loaded
     if (!astronomical?.sunset) return "";
 
-    // Format dates and calculate sunset
+    // Format dates and calculate sunset/sunrise
     const now = new Date();
     const sunset = astronomical.sunsetDate ?? new Date(astronomical.sunset);
     const sunrise = astronomical.sunriseDate ?? new Date(astronomical.sunrise);
-    const isSunset =
-        (!isNaN(sunset) && Math.abs(sunset - now) <= 30 * 60 * 1000) ||
-        (!isNaN(sunrise) && Math.abs(sunrise - now) <= 30 * 60 * 1000);
+    const isSunset = !isNaN(sunset) && Math.abs(sunset - now) <= 30 * 60 * 1000;
+    const isSunrise =
+        !isNaN(sunrise) && Math.abs(sunrise - now) <= 30 * 60 * 1000;
     console.log("Is sunset", isSunset);
+    console.log("Is sunrise", isSunrise);
 
     // For some things, time of day doesn't matter.
     // like snow
@@ -128,15 +129,14 @@ export function getBg(description, isDaytime, astronomical) {
         return "/samweather/images/cloudyNightT.JPEG";
     }
 
-    // Do sunset backgrounds next
+    // Do sunset/sunrise backgrounds next
     // If there aren't any good pictures, it will go on to find a day/night background
-    if (isSunset) {
+    if (isSunset || isSunrise) {
         // Set dark mode to false
         setDarkMode(false);
 
         // If there are clouds
         if (
-            description.includes("Mostly Sunny") ||
             description.includes("Partly Cloudy") ||
             description.includes("Mostly Cloudy") ||
             description.includes("Partly Sunny")

@@ -237,6 +237,7 @@ export async function calcAstro(lat, long, time = new Date()) {
             sunrise: formatSuncalc(times.sunrise),
             sunset: formatSuncalc(times.sunset),
             sunsetDate: times.sunset,
+            sunriseDate: times.sunrise,
             noon: formatSuncalc(times.solarNoon),
             goldenHour: formatSuncalc(times.goldenHour),
             morningGoldenHour: formatSuncalc(times.goldenHourEnd),
