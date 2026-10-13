@@ -49,7 +49,7 @@ async function formatData(infoData, mainData, hourlyData) {
                 thisHour.temperature,
                 thisHour.relativeHumidity.value,
                 thisHour.windSpeed,
-                true,
+                false,
             ),
         };
 
