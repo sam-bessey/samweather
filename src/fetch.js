@@ -18,7 +18,6 @@ import { getIcon } from "./themes";
 import { formatDate, getFeelsLike, formatSuncalc } from "./formatting";
 
 // Fetch weather data and return it (And some other stuff)
-// Split to a separate file just to make things easier
 
 async function formatData(infoData, mainData, hourlyData) {
     /////////////////
