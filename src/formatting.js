@@ -24,80 +24,10 @@ export function formatDate(originalDate, returnTime) {
     }
 }
 
-export function OLDgetFeelsLike(
-    temperature,
-    humidity,
-    wind,
-    dontPrintInfo = false,
-) {
-    const T = temperature;
-    const RH = humidity;
-    let feelsLike = 0;
-    if (!dontPrintInfo) {
-        console.log("t", T, "rh", RH);
-    }
-
-    if (T <= 50 && wind >= 3) {
-        feelsLike = `${Math.round(35.74 + 0.6215 * T - 35.75 * wind ** 0.16 + 0.4275 * T * wind ** 0.16)}°`;
-        return feelsLike;
-    } else {
-        // Heat index
-        let simple = 0.5 * (T + 61.0 + (T - 68.0) * 1.2 + RH * 0.094);
-        if (!dontPrintInfo) {
-            console.log("simple", simple);
-        }
-        let HI;
-        let HI_rothfusz;
-        if (simple < 80) {
-            HI = (simple + T) / 2;
-        } else {
-            HI_rothfusz =
-                -42.379 +
-                2.04901523 * T +
-                10.14333127 * RH -
-                0.22475541 * T * RH -
-                0.00683783 * T * T -
-                0.05481717 * RH * RH +
-                0.00122874 * T * T * RH +
-                0.00085282 * T * RH * RH -
-                0.00000199 * T * T * RH * RH;
-            HI = HI_rothfusz;
-        }
-        // Adjust temp
-        if (HI >= 80) {
-            if (RH < 13 && T >= 80 && T <= 112) {
-                let ADJUSTMENT_low =
-                    ((13 - RH) / 4) *
-                    Math.sqrt(Math.abs(17 - Math.abs(T - 95.0)) / 17);
-                HI = HI_rothfusz - ADJUSTMENT_low;
-                if (!dontPrintInfo) {
-                    console.log("0", HI);
-                }
-            } else if (RH > 85 && T >= 80 && T <= 87) {
-                let ADJUSTMENT_high = ((RH - 85) / 10) * ((87 - T) / 5);
-                HI = HI_rothfusz + ADJUSTMENT_high;
-                if (!dontPrintInfo) {
-                    console.log("1", HI);
-                    console.log("rothfuz", HI_rothfusz);
-                }
-            } else {
-                HI = HI_rothfusz;
-                if (!dontPrintInfo) {
-                    console.log("2", HI);
-                }
-            }
-        }
-        if (!dontPrintInfo) {
-            console.log("Returning feels like:", HI);
-        }
-        return Math.round(HI);
-    }
-}
-
 export function getFeelsLike(
     temperature,
     humidity,
-    wind,
+    windSpeed,
     dontPrintInfo = false,
 ) {
     /*Get the feels like temperature
@@ -106,15 +36,34 @@ export function getFeelsLike(
       If it is between 50 and 80 degrees, just return actual temperature.
      */
 
-    // use wind chill if <=50
-    // see https://www.weather.gov/safety/cold-wind-chill-chart for more
-    if (temperature <= 50) {
-        return (
-            35.74 +
-            0.6215 * temperature -
-            35.75 * wind ** 0.16 +
-            0.4275 * temperature * wind ** 0.16
+    const wind = parseFloat(windSpeed);
+
+    if (!dontPrintInfo) {
+        console.log(
+            "Temp ",
+            temperature,
+            "Humidity",
+            humidity,
+            "Wind speed",
+            windSpeed,
         );
+    }
+
+    // use wind chill if <=50 and wind above 3mph
+    // see https://www.weather.gov/safety/cold-wind-chill-chart for more
+    if (temperature <= 50 && wind >= 3) {
+        const WC = Math.round(
+            35.74 +
+                0.6215 * temperature -
+                35.75 * wind ** 0.16 +
+                0.4275 * temperature * wind ** 0.16,
+        );
+
+        if (!dontPrintInfo) {
+            console.log("Wind chill ", WC);
+        }
+
+        return WC;
     }
     // use heat index if >=80
     else if (temperature >= 80) {
@@ -124,7 +73,10 @@ export function getFeelsLike(
         // Get simple heat index first
         let simple =
             0.5 *
-            (temperature + 61.0 + (temperature - 68.0) * 1.2 + humidity * 0.04);
+            (temperature +
+                61.0 +
+                (temperature - 68.0) * 1.2 +
+                humidity * 0.094);
 
         if (!dontPrintInfo) {
             console.log("simple", simple);
@@ -152,7 +104,7 @@ export function getFeelsLike(
         }
 
         // adjust if necesary
-        if (humidity < 13 && 80 < temperature < 112) {
+        if (humidity < 13 && temperature > 80 && temperature < 112) {
             const ADJUSTMENT =
                 ((13 - humidity) / 4) *
                 Math.sqrt((17 - Math.abs(temperature - 95)) / 17);
@@ -161,10 +113,10 @@ export function getFeelsLike(
             if (!dontPrintInfo) {
                 console.log("adj1 ", HI);
             }
-        } else if (humidity > 85 && 80 < temperature < 87) {
+        } else if (humidity > 85 && temperature > 80 && temperature < 87) {
             const ADJUSTMENT =
                 ((humidity - 85) / 10) * ((87 - temperature) / 5);
-            HI -= ADJUSTMENT;
+            HI += ADJUSTMENT;
 
             if (!dontPrintInfo) {
                 console.log("adj2", HI);
