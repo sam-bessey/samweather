@@ -24,7 +24,7 @@ export function formatDate(originalDate, returnTime) {
     }
 }
 
-export function getFeelsLike(
+export function OLDgetFeelsLike(
     temperature,
     humidity,
     wind,
@@ -91,6 +91,96 @@ export function getFeelsLike(
             console.log("Returning feels like:", HI);
         }
         return Math.round(HI);
+    }
+}
+
+export function getFeelsLike(
+    temperature,
+    humidity,
+    wind,
+    dontPrintInfo = false,
+) {
+    /*Get the feels like temperature
+      If actual temperature is >=80, use the heat index
+      If actual temperature is <=50, use the wind chill
+      If it is between 50 and 80 degrees, just return actual temperature.
+     */
+
+    // use wind chill if <=50
+    // see https://www.weather.gov/safety/cold-wind-chill-chart for more
+    if (temperature <= 50) {
+        return (
+            35.74 +
+            0.6215 * temperature -
+            35.75 * wind ** 0.16 +
+            0.4275 * temperature * wind ** 0.16
+        );
+    }
+    // use heat index if >=80
+    else if (temperature >= 80) {
+        /*Heat index is a little more complicated.
+    See https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml for more*/
+
+        // Get simple heat index first
+        let simple =
+            0.5 *
+            (temperature + 61.0 + (temperature - 68.0) * 1.2 + humidity * 0.04);
+
+        if (!dontPrintInfo) {
+            console.log("simple", simple);
+        }
+
+        // if simple is <80, than it is not a suitable temperature for the heat index.
+        if (simple < 80) {
+            return temperature;
+        }
+
+        // Now find the Rothfusz heat index
+        let HI =
+            -42.379 +
+            2.04901523 * temperature +
+            10.14333127 * humidity -
+            0.22475541 * temperature * humidity -
+            0.00683783 * temperature * temperature -
+            0.05481717 * humidity * humidity +
+            0.00122874 * temperature * temperature * humidity +
+            0.00085282 * temperature * humidity * humidity -
+            0.00000199 * temperature * temperature * humidity * humidity;
+
+        if (!dontPrintInfo) {
+            console.log("unadjusted rothfusz:", HI);
+        }
+
+        // adjust if necesary
+        if (humidity < 13 && 80 < temperature < 112) {
+            const ADJUSTMENT =
+                ((13 - humidity) / 4) *
+                Math.sqrt((17 - Math.abs(temperature - 95)) / 17);
+            HI -= ADJUSTMENT;
+
+            if (!dontPrintInfo) {
+                console.log("adj1 ", HI);
+            }
+        } else if (humidity > 85 && 80 < temperature < 87) {
+            const ADJUSTMENT =
+                ((humidity - 85) / 10) * ((87 - temperature) / 5);
+            HI -= ADJUSTMENT;
+
+            if (!dontPrintInfo) {
+                console.log("adj2", HI);
+            }
+        }
+
+        // make sure it is above original temperature. Otherwise return original temp.
+        if (HI >= temperature) {
+            return Math.round(HI);
+        } else {
+            return temperature;
+        }
+    }
+    // if its not right temp for WC or HI, return normal temp
+    else {
+        return temperature;
     }
 }
 
