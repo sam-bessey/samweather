@@ -93,7 +93,7 @@ export function getBg(description, isDaytime, astronomical) {
     // description: the shortForecast for the hour you would like to use
     // isDaytime: true or false, whether its daytime
     // astronomical: the astronomical data for sunset and stuff. Only needed if getBgInstead is true.
-    // TODO: Find better pictures for thunder
+    // TODO: Find better pictures for thunder, cloudy sunset
 
     // Check if data is loaded
     if (!astronomical?.sunset) return "";
@@ -139,7 +139,8 @@ export function getBg(description, isDaytime, astronomical) {
         if (
             description.includes("Partly Cloudy") ||
             description.includes("Mostly Cloudy") ||
-            description.includes("Partly Sunny")
+            description.includes("Partly Sunny") ||
+            description.includes("Cloudy")
         ) {
             return "/samweather/images/partlyCloudySunset.JPEG";
         }
@@ -150,7 +151,8 @@ export function getBg(description, isDaytime, astronomical) {
             description.includes("Mostly Sunny") ||
             description.includes("Mostly Clear") ||
             description.includes("Sunny") ||
-            description.includes("Sun")
+            description.includes("Sun") ||
+            description.includes("Clear")
         ) {
             return "/samweather/images/clearSunset.JPEG";
         }
