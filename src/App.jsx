@@ -717,46 +717,39 @@ export default function App() {
             : "SamWeather";
 
     useEffect(() => {
-        // Get weather on startup
-
-        //    fetchWeather([43.8009, -70.1876])
-        //      .then(setData)
-        //    .finally(() => setLoading(false));
-        //fetchAlerts([44, -70]).then(setAlerts);
-        //
-        //
+        // Check if geolocation is available
         if (!navigator.geolocation) {
             // this means browser doesnt support geolocation
             console.log("Geolocation not supported");
             return;
-        }
-
-        // request location
-        navigator.geolocation.getCurrentPosition(
-            successCallback,
-            errorCallback,
-        );
-
-        // this runs if user allows access
-        function successCallback(position) {
-            const lat = position.coords.latitude;
-            const long = position.coords.longitude;
-            console.log("Location success! lat", lat, "long", long);
-
-            // and fetch weather with this
-            fetchWeather([lat, long])
-                .then(setData)
-                .finally(() => setLoading(false));
-            fetchAlerts([lat, long]).then(setAlerts);
-        }
-
-        // this runs if no permission
-        function errorCallback(error) {
-            alert(
-                "Allow SamWeather to have location access for the best experience.",
+        } else {
+            // request location
+            navigator.geolocation.getCurrentPosition(
+                successCallback,
+                errorCallback,
             );
-            console.log("NO LOCATION ACCESS!", error);
-            setLoading(false);
+
+            // this runs if user allows access
+            function successCallback(position) {
+                const lat = position.coords.latitude;
+                const long = position.coords.longitude;
+                console.log("Location success! lat", lat, "long", long);
+
+                // and fetch weather with this
+                fetchWeather([lat, long])
+                    .then(setData)
+                    .finally(() => setLoading(false));
+                fetchAlerts([lat, long]).then(setAlerts);
+            }
+
+            // this runs if no permission
+            function errorCallback(error) {
+                alert(
+                    "Allow SamWeather to have location access for the best experience.",
+                );
+                console.log("NO LOCATION ACCESS!", error);
+                setLoading(false);
+            }
         }
     }, []);
 
