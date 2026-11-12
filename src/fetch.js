@@ -27,6 +27,11 @@ async function formatData(infoData, mainData, hourlyData) {
     // Create array of hours
     let formattedHours = [];
 
+    const astroData = await calcAstro(
+            infoData.geometry.coordinates[1],
+            infoData.geometry.coordinates[0],
+            new Date());
+
     // Put hours in the array sorted by day
     for (let i = 0; i < hourlyData.properties.periods.length; i++) {
         const thisHour = hourlyData.properties.periods[i];
@@ -34,7 +39,8 @@ async function formatData(infoData, mainData, hourlyData) {
         // Format the hour
         const formattedThisHour = {
             time: formatDate(thisHour.startTime, true),
-            isDaytime: thisHour.isDaytime,
+            // isDaytime: thisHour.isDaytime,
+            isDaytime: astroData.isDaytime,
             temperature: thisHour.temperature,
             precipitation: thisHour.probabilityOfPrecipitation.value,
             dewPoint: thisHour.dewpoint.value,
@@ -152,11 +158,7 @@ async function formatData(infoData, mainData, hourlyData) {
         },
         days: formattedDays,
         hours: formattedHours,
-        astronomical: await calcAstro(
-            infoData.geometry.coordinates[1],
-            infoData.geometry.coordinates[0],
-            new Date(),
-        ),
+        astronomical: astroData,
     };
 
     console.log("FORMATTED DATA FiNAL", formattedData);
@@ -250,7 +252,11 @@ export async function calcAstro(lat, long, time = new Date()) {
             altitude: Math.round(moonPosition.altitude),
             illumination: Math.round(moonIllumination.fraction * 100) + "%",
         },
+        isDaytime: time > times.sunset && sunrise < times.sunrise,
     };
+    console.log("Is it daytime ", time > times.sunset && sunrise < times.sunrise)
+    console.log("sunset ", times.sunset, "sunrise", times.sunrise);
+
     return formattedAstronomical;
 }
 
