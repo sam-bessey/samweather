@@ -772,7 +772,7 @@ export default function App() {
                         src={getBg(
                             data?.hours?.[0]?.hours?.[0]?.shortForecast,
                             data?.hours?.[0]?.hours?.[0]?.isDaytime,
-                            data?.astronomical?.sun,
+                            data?.astronomical,
                         )}
                     />
                 )}

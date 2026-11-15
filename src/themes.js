@@ -96,12 +96,14 @@ export function getBg(description, isDaytime, astronomical) {
     // TODO: Find better pictures for thunder, cloudy sunset
 
     // Check if data is loaded
-    if (!astronomical?.sunset) return "";
+    if (!astronomical?.sun?.sunset) return "";
 
     // Format dates and calculate sunset/sunrise
     const now = new Date();
-    const sunset = astronomical.sunsetDate ?? new Date(astronomical.sunset);
-    const sunrise = astronomical.sunriseDate ?? new Date(astronomical.sunrise);
+    const sunset =
+        astronomical.sun.sunsetDate ?? new Date(astronomical.sun.sunset);
+    const sunrise =
+        astronomical.sun.sunriseDate ?? new Date(astronomical.sun.sunrise);
     const isSunset = !isNaN(sunset) && Math.abs(sunset - now) <= 30 * 60 * 1000;
     const isSunrise =
         !isNaN(sunrise) && Math.abs(sunrise - now) <= 30 * 60 * 1000;
