@@ -26,7 +26,7 @@ function PersonalityCard() {
                 value={selectedPersonality}
             >
                 <option>Default</option>
-                <option>Conscise</option>
+                <option>Concise</option>
             </select>
         </Card>
     );

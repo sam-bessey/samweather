@@ -134,9 +134,9 @@ async function formatData(infoData, mainData, hourlyData) {
                 shortForecast: thisPeriod.shortForecast,
                 // change detailedForecast based on settings
                 detailedForecast:
-                    localStorage.getItem("personality") === "Default"
-                        ? thisPeriod.detailedForecast
-                        : thisPeriod.shortForecast,
+                    localStorage.getItem("personality") === "Concise"
+                        ? thisPeriod.shortForecast
+                        : thisPeriod.detailedForecast,
                 icon: getIcon(thisPeriod.shortForecast, thisPeriod.isDaytime),
                 highTemp: high,
                 lowTemp: low,
